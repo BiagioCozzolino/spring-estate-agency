@@ -10,15 +10,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+
 @Entity
 public class Estate {
 	
+	//class properties
+	
 	private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
+	
+	private static final String[] POSSIBLESTATUSES = ["In vendita", "In affitto", "Venduto", "Affittato", "Annullato"];
 	//id dell'immobile incrementale
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +43,10 @@ public class Estate {
 	@Column(nullable = false)
 	private String city;
 	
+	@NotNull
+	@Min(1)
+	private Integer area;
+	
 	//prezzo non nullo o negativo
 	@NotNull
 	@DecimalMin("0.00")
@@ -45,6 +54,9 @@ public class Estate {
 	
 	@NotNull
 	private LocalDate insertionDate;
+	
+	@NotEmpty
+	private String status;
 	
 	@NotEmpty(message = "Tutti gli immobili hanno una classe energetica")
 	@Column(nullable = false)
@@ -74,6 +86,7 @@ public class Estate {
 	
 	//relazione one to many con l'agente immobiliare
 	@ManyToOne
+	@NotNull
 	private Agent agent;
 	
 	@NotNull
@@ -84,6 +97,9 @@ public class Estate {
 	@Min(0)
 	private Integer numLikes;
 
+	
+	//Getters and setters
+	
 	public Integer getId() {
 		return id;
 	}
