@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:replace="fragments :: scr-head"></th:block>
+    <title>Document</title>
+</head>
+<body>
+    <thead> <th:block th:replace="fragments :: navbar"></th:block> </thead>
+    <tbody>
+<div th:if="${#lists.isEmpty(estateList)}">
+    	<h1>Mi dispiace non ci sono ancora giochi nel catalogo.</h1>
+</div>
+<div th:unless="${#lists.isEmpty(estateList)}">
+<table class="table bg-dark rounded " >
+<thead>
+
+<th> Indirizzo </th>
+<th> CAP </th>
+<th> Città </th>
+<th> Superfice </th>
+<th> Prezzi </th>
+<th> Data </th>
+<th> Classe Energetica </th>
+<th> Tipo </th>
+<th> Numero Vani </th>
+<th> Numero di Bagni </th>
+<th> Numero dei Balconi </th>
+<th> Posto Auto </th>
+<th> Id Agente </th>
+<th> Visualizzazione </th>
+<th> Like </th>
+</thead>
+
+
+<tr th:each="e : ${estateList}">
+<td th:text="${e.address}">Indirizzo</td>
+<td th:text="${e.zipCode}">CAP</td>
+<td th:text="${e.city}">Città</td>
+<td th:text="${e.area}">Superfice</td>
+<td th:text="${e.price}">Prezzi</td>
+<td th:text="${e.getFormattedDate()}">Data</td>
+<td th:text="${e.energyClass}">Classe Energetica</td>
+<td th:text="${e.type}">Tipo</td>
+<td th:text="${e.numSpaces}">Numero Vani</td>
+<td th:text="${e.numBathrooms}">Numero di Bagni</td>
+<td th:text="${e.numBalconies}">Numero dei Balconi</td>
+<td th:text="${e.HasCarSpot}">Posto Auto</td>
+<td th:text="${e.hasGarden}">Giardino</td>
+<td th:text="${e.agent.id}">Id Agente</td>
+<td th:text="${e.numViews}">Visualizzazione</td>
+<td th:text="${e.numLikes}">Like</td>
+
+</tr>
+
+</table>
+</div>
+</tbody>
+    
+    <footer> <th:block th:replace="fragments :: footer"></th:block></footer></footer>
+</body>
+</html>
