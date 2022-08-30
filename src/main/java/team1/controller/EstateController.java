@@ -3,12 +3,16 @@ package team1.controller;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import team1.model.Agent;
 import team1.model.Estate;
@@ -65,4 +69,23 @@ public class EstateController {
 		model.addAttribute("agentListAdmin", agentListForAdmin);
 		return "/admin/estateList";
 	}
+	
+	@GetMapping("/{id}")
+	public String estateDetail(@PathVariable ("id") Integer estateId, Model model)
+	{
+		Optional<Estate> result = estateRepo.findById(estateId);
+		if(result.isPresent())
+		{
+			Estate modelEstate = result.get();
+			model.addAttribute("estate", modelEstate);
+			return "/estate/detail";
+		}
+		else
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Immobile non trovato");
+
+		}
+	}
+	
+	
 }
