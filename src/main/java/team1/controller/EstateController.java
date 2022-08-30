@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import team1.model.Agent;
 import team1.model.Estate;
+import team1.repository.AgentRepository;
 import team1.repository.EstateRepository;
 
 @Controller

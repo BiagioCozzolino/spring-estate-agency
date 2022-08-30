@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -23,7 +22,6 @@ public class Estate {
 	
 	private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
-	private static final String[] POSSIBLESTATUSES = ["In vendita", "In affitto", "Venduto", "Affittato", "Annullato"];
 	//id dell'immobile incrementale
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
