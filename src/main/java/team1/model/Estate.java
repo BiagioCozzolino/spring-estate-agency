@@ -1,5 +1,8 @@
 package team1.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +16,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Estate {
+	
+	private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	//id dell'immobile incrementale
 	@Id
@@ -25,10 +30,21 @@ public class Estate {
 	@Column(nullable = false)
 	private String address;
 	
+	@NotEmpty(message = "Non esistono immobili senza CAP")
+	@Column(nullable = false)
+	private String zipCode;
+	
+	@NotEmpty(message = "Non esistono immobili senza CAP")
+	@Column(nullable = false)
+	private String city;
+	
 	//prezzo non nullo o negativo
 	@NotNull
 	@DecimalMin("0.00")
 	private Double price;
+	
+	@NotNull
+	private LocalDate insertionDate;
 	
 	@NotEmpty(message = "Tutti gli immobili hanno una classe energetica")
 	@Column(nullable = false)
@@ -40,11 +56,21 @@ public class Estate {
 	
 	@NotNull
 	@Min(1)
-	private Integer NumSpaces;
+	private Integer numSpaces;
 	
 	@NotNull
-	@Min(1)
-	private Integer NumBathrooms;
+	@Min(0)
+	private Integer numBathrooms;
+	
+	@Min(0)
+	private Integer numBalconies;
+	
+	//da utilizzare in caso un immobile abbia posto auto
+	private Boolean hasCarSpot;
+	
+	//da utilizzare in caso l'immobile abbia giardino
+	private Boolean hasGarden;
+	
 	
 	//relazione one to many con l'agente immobiliare
 	@ManyToOne
@@ -52,11 +78,11 @@ public class Estate {
 	
 	@NotNull
 	@Min(0)
-	private Integer NumViews;
+	private Integer numViews;
 	
 	@NotNull
 	@Min(0)
-	private Integer NumLikes;
+	private Integer numLikes;
 
 	public Integer getId() {
 		return id;
@@ -99,19 +125,19 @@ public class Estate {
 	}
 
 	public Integer getNumSpaces() {
-		return NumSpaces;
+		return numSpaces;
 	}
 
 	public void setNumSpaces(Integer numSpaces) {
-		NumSpaces = numSpaces;
+		this.numSpaces = numSpaces;
 	}
 
 	public Integer getNumBathrooms() {
-		return NumBathrooms;
+		return numBathrooms;
 	}
 
 	public void setNumBathrooms(Integer numBathrooms) {
-		NumBathrooms = numBathrooms;
+		this.numBathrooms = numBathrooms;
 	}
 
 	public Agent getAgent() {
@@ -123,19 +149,70 @@ public class Estate {
 	}
 
 	public Integer getNumViews() {
-		return NumViews;
+		return numViews;
 	}
 
 	public void setNumViews(Integer numViews) {
-		NumViews = numViews;
+		this.numViews = numViews;
 	}
 
 	public Integer getNumLikes() {
-		return NumLikes;
+		return numLikes;
 	}
 
 	public void setNumLikes(Integer numLikes) {
-		NumLikes = numLikes;
+		this.numLikes = numLikes;
+	}
+
+	public Integer getNumBalconies() {
+		return numBalconies;
+	}
+
+	public void setNumBalconies(Integer numBalconies) {
+		this.numBalconies = numBalconies;
+	}
+
+	public Boolean getHasCarSpot() {
+		return hasCarSpot;
+	}
+
+	public void setHasCarSpot(Boolean hasCarSpot) {
+		this.hasCarSpot = hasCarSpot;
+	}
+
+	public Boolean getHasGarden() {
+		return hasGarden;
+	}
+
+	public void setHasGarden(Boolean hasGarden) {
+		this.hasGarden = hasGarden;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public LocalDate getInsertionDate() {
+		return insertionDate;
+	}
+
+	public void setInsertionDate(LocalDate insertionDate) {
+		this.insertionDate = insertionDate;
+	}
+	public String getFormattedInsertionDate() {
+		return insertionDate.format(dateFormatter);
 	}
 	
 	
