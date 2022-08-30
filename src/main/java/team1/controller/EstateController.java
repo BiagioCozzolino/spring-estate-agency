@@ -1,5 +1,7 @@
 package team1.controller;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +25,39 @@ public class EstateController {
 	@Autowired
 	private AgentRepository agentRepo;
 
+	private List<Estate> estateListForUsers;
+
 	// pagina con la lista di tutti gli immobili per gli utenti
 	@GetMapping
 	public String estates(Model model) {
-		List<Estate> estateListForUsers = (List<Estate>) estateRepo.findAll();
+		Period diff;
+		Integer daysDiff = 0;
+		estateListForUsers = null;
+		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
+
+		for (Estate e : estateList) {
+
+			if (e.getStatusValue(e.getStatus()) == 4 || e.getStatusValue(e.getStatus()) == 3) {
+				estateListForUsers.add(e);
+			}
+
+			if (e.getContractStart() != null) {
+				diff = LocalDate.now().until(e.getContractStart());
+				daysDiff = diff.getDays();
+			}
+
+			if (daysDiff <= 7) {
+				estateListForUsers.add(e);
+			}
+		}
+
 		model.addAttribute("estateList", estateListForUsers);
 		return "/home/estateList";
 	}
 
+	// pagina con la lista di tutti gli immobili per l'admin
 	@GetMapping("/admin")
+
 	public String estatesForAdmin(Model model) {
 		List<Estate> estateListForAdmin = (List<Estate>) estateRepo.findAll();
 		List<Agent> agentListForAdmin = (List<Agent>) agentRepo.findAll();
@@ -39,5 +65,4 @@ public class EstateController {
 		model.addAttribute("agentListAdmin", agentListForAdmin);
 		return "/admin/estateList";
 	}
-
 }
