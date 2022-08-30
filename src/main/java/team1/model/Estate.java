@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -22,8 +21,7 @@ public class Estate {
 	//class properties
 	
 	private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
-	private static final String[] POSSIBLESTATUSES = ["In vendita", "In affitto", "Venduto", "Affittato", "Annullato"];
+		
 	//id dell'immobile incrementale
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,8 +53,12 @@ public class Estate {
 	@NotNull
 	private LocalDate insertionDate;
 	
-	@NotEmpty
-	private String status;
+	//la data in cui un immobile viene venduto o affittato
+	private LocalDate contractStart;
+	
+	@NotEmpty(message = "Tutti gli immobili devono avere uno status")
+	@Column(nullable = false)
+	private String status;	
 	
 	@NotEmpty(message = "Tutti gli immobili hanno una classe energetica")
 	@Column(nullable = false)
@@ -230,6 +232,60 @@ public class Estate {
 	public String getFormattedInsertionDate() {
 		return insertionDate.format(dateFormatter);
 	}
+
+	public Integer getArea() {
+		return area;
+	}
+
+	public void setArea(Integer area) {
+		this.area = area;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
+	public LocalDate getContractStart() {
+		return contractStart;
+	}
+
+	public void setContractStart(LocalDate contractStart) {
+		this.contractStart = contractStart;
+	}
 	
+	public String getFormattedContractStart()
+	{
+		return contractStart.format(dateFormatter);
+	}
+
+	public Integer getStatusValue(String status)
+	{
+		Integer res=0;
+		
+		switch(status)
+		{
+			case "In vendita":
+				res=4;
+			break;
+			case "In affitto":
+				res=3;
+			break;
+			case "Venduto":
+				res=2;
+			break;
+			case "Affittato":
+				res=1;
+			break;
+			case "Annullato":
+				res=0;
+			break;
+		}
+		
+		return res;
+		
+	}
 }
