@@ -23,7 +23,7 @@ public class Estate {
 	
 	private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
-	private static final String[] POSSIBLESTATUSES = ["In vendita", "In affitto", "Venduto", "Affittato", "Annullato"];
+	private static final String[] POSSIBLESTATUSES = {"In vendita", "In affitto", "Venduto", "Affittato", "Annullato"};
 	//id dell'immobile incrementale
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
