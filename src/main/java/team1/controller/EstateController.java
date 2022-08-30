@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
-import team1.model.Agent;
 import team1.model.Estate;
 import team1.repository.AgentRepository;
 import team1.repository.EstateRepository;
@@ -60,13 +59,10 @@ public class EstateController {
 	}
 
 	// pagina con la lista di tutti gli immobili per l'admin
-	@GetMapping("/admin")
-
+	@GetMapping("/admin/estateList")
 	public String estatesForAdmin(Model model) {
 		List<Estate> estateListForAdmin = (List<Estate>) estateRepo.findAll();
-		List<Agent> agentListForAdmin = (List<Agent>) agentRepo.findAll();
 		model.addAttribute("estateListAdmin", estateListForAdmin);
-		model.addAttribute("agentListAdmin", agentListForAdmin);
 		return "/admin/estateList";
 	}
 	
@@ -86,6 +82,13 @@ public class EstateController {
 
 		}
 	}
-	
+
+	@GetMapping("/admin/estateList/edit")
+	public String estateForm(Model model)
+	{
+		model.addAttribute("estate", new Estate());
+		model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
+		return "admin/editEstate";
+	}
 	
 }
