@@ -20,16 +20,23 @@ public class Estate {
 	// class properties
 
 	private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
 	// id dell'immobile incrementale
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	// indirizzo che non può essere vuoto o nullo
 	@NotEmpty(message = "Non esistono immobili senza indirizzo")
 	@Column(nullable = false)
 	private String address;
+	
+	private Integer houseNumber;
+	
+	@NotEmpty(message= "Tutti gli immobili sono posizionati su un piano")
+	@Column(nullable = false)
+	private Integer floorNumber;
+	
+	private Integer interior;
 
 	@NotEmpty(message = "Non esistono immobili senza CAP")
 	@Column(nullable = false)
@@ -43,7 +50,6 @@ public class Estate {
 	@Min(1)
 	private Integer area;
 
-	// prezzo non nullo o negativo
 	@NotNull
 	@DecimalMin("0.00")
 	private Double price;
@@ -51,7 +57,6 @@ public class Estate {
 	@NotNull
 	private LocalDate insertionDate;
 
-	// la data in cui un immobile viene venduto o affittato
 	private LocalDate contractStart;
 
 	@NotEmpty(message = "Tutti gli immobili devono avere uno status")
@@ -77,13 +82,13 @@ public class Estate {
 	@Min(0)
 	private Integer numBalconies;
 
-	// da utilizzare in caso un immobile abbia posto auto
+
 	private Boolean hasCarSpot;
 
-	// da utilizzare in caso l'immobile abbia giardino
+
 	private Boolean hasGarden;
 
-	// relazione one to many con l'agente immobiliare
+
 	@ManyToOne
 	@NotNull
 	private Agent agent;
@@ -248,6 +253,30 @@ public class Estate {
 
 	public LocalDate getContractStart() {
 		return contractStart;
+	}
+
+	public Integer getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(Integer houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+
+	public Integer getFloorNumber() {
+		return floorNumber;
+	}
+
+	public void setFloorNumber(Integer floorNumber) {
+		this.floorNumber = floorNumber;
+	}
+
+	public Integer getInterior() {
+		return interior;
+	}
+
+	public void setInterior(Integer interior) {
+		this.interior = interior;
 	}
 
 	public void setContractStart(LocalDate contractStart) {
