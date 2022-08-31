@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <th:block th:replace="fragments :: scr-head"></th:block>
+    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
     <title>Document</title>
 </head>
 <body>
-    <thead> <th:block th:replace="fragments :: navbar"></th:block> </thead>
+    <thead> <th:block th:replace="fragment/fragment :: navbar"></th:block> </thead>
     
     <h1>Benvenuti</h1>
     <tbody>
@@ -42,6 +42,6 @@
 
 
     </tbody>
-    <footer><th:block th:replace="fragments :: footer"></th:block></footer>
+    <footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
 </body>
 </html>
