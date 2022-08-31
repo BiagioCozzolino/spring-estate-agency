@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <th:block th:replace="fragments :: scr-head"></th:block>
-    <title>Document</title>
+    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
+    <title>Lista Immobili</title>
 </head>
 <body>
-    <thead> <th:block th:replace="fragments :: navbar"></th:block> </thead>
+    <thead> <th:block th:replace="fragment/fragment :: navbar"></th:block> </thead>
     <tbody>
 <div th:if="${#lists.isEmpty(estateList)}">
-    	<h1>Mi dispiace non ci sono ancora giochi nel catalogo.</h1>
+    	<h1>Mi dispiace non ci sono ancora immobili nel catalogo.</h1>
 </div>
 <div th:unless="${#lists.isEmpty(estateList)}">
-<table class="table bg-dark rounded " >
+<table class="table bg-dark rounded" >
 <thead>
 
 <th> Indirizzo </th>
@@ -44,7 +44,7 @@
 <td th:text="${e.numSpaces}">Numero Vani</td>
 <td th:text="${e.numBathrooms}">Numero di Bagni</td>
 <td th:text="${e.numBalconies}">Numero dei Balconi</td>
-<td th:text="${e.HasCarSpot}">Posto Auto</td>
+<td th:text="${e.hasCarSpot}">Posto Auto</td>
 <td th:text="${e.hasGarden}">Giardino</td>
 <td th:text="${e.agent.id}">Id Agente</td>
 <td th:text="${e.numViews}">Visualizzazione</td>
