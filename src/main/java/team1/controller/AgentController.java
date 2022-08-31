@@ -19,7 +19,7 @@ public class AgentController {
 	private AgentRepository agentRepo;
 
 	@GetMapping
-	public String catalog(Model model) {
+	public String agentList(Model model) {
 		List<Agent> agentList = (List<Agent>) agentRepo.findAll();
 		model.addAttribute("agentList", agentList);
 		return "admin/agentList";
