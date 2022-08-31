@@ -31,6 +31,14 @@ public class Estate {
 	@NotEmpty(message = "Non esistono immobili senza indirizzo")
 	@Column(nullable = false)
 	private String address;
+	
+	private Integer houseNumber;
+	
+	@NotEmpty(message= "Tutti gli immobili sono posizionati su un piano")
+	@Column(nullable = false)
+	private Integer floorNumber;
+	
+	private Integer interior;
 
 	@NotEmpty(message = "Non esistono immobili senza CAP")
 	@Column(nullable = false)
@@ -249,6 +257,30 @@ public class Estate {
 
 	public LocalDate getContractStart() {
 		return contractStart;
+	}
+
+	public Integer getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(Integer houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+
+	public Integer getFloorNumber() {
+		return floorNumber;
+	}
+
+	public void setFloorNumber(Integer floorNumber) {
+		this.floorNumber = floorNumber;
+	}
+
+	public Integer getInterior() {
+		return interior;
+	}
+
+	public void setInterior(Integer interior) {
+		this.interior = interior;
 	}
 
 	public void setContractStart(LocalDate contractStart) {

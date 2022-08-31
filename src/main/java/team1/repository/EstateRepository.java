@@ -1,6 +1,7 @@
 package team1.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -53,6 +54,8 @@ public interface EstateRepository extends CrudRepository<Estate, Integer> {
 	//ricerca se ha o meno posto il giardino
 	public List<Estate> findByHasGardenOrderByAddressAsc(Boolean hasGarden);
 	
+	//filtro per indirizzo, numero civico, interno e CAP
 	
+	public Optional<Estate> findByAddressAndHouseNumberAndInteriorAndZipCode(String address, Integer houseNumber, Integer interior, String ZipCode);
 
 }
