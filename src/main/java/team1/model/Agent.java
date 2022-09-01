@@ -47,7 +47,7 @@ public class Agent {
 	private Integer serialNumber;
 
 	// Data di assunzione agente
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate hiringDate;
 
 	// Livello di sicurezza per autenticazione

@@ -31,13 +31,13 @@
 				</thead>
 				<tbody>
 					<tr th:each="a : ${agentList} ">
-						<td class="table-secondary" th:text="${a.Name()}"></td>
-						<td class="table-primary" th:text="${a.Surname()}"></td>
-						<td class="table-success" th:text="${a.Email()}"></td>
-						<td class="table-warning" th:text="${a.Password()}"></td>
-						<td class="table-warning" th:text="${a.serialNumber()}"></td>
+						<td class="table-secondary" th:text="${a.Name}"></td>
+						<td class="table-primary" th:text="${a.Surname}"></td>
+						<td class="table-success" th:text="${a.Email}"></td>
+						<td class="table-warning" th:text="${a.Password}"></td>
+						<td class="table-warning" th:text="${a.serialNumber}"></td>
 						<td class="table-warning" th:text="${a.getFormattedHiringDate()}"></td>
-						<td class="table-danger" th:text="${a.SecurityLevel()}"></td>
+						<td class="table-danger" th:text="${a.SecurityLevel}"></td>
 					</tr>
 				</tbody>
 			</table>

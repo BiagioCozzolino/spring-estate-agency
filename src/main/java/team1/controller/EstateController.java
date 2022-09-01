@@ -5,12 +5,18 @@ import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -84,11 +90,65 @@ public class EstateController {
 	}
 
 	@GetMapping("/admin/estateList/edit")
-	public String estateForm(Model model)
+	public String estateEditForm(Model model)
 	{
 		model.addAttribute("estate", new Estate());
 		model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
 		return "admin/editEstate";
 	}
 	
+	@PostMapping("/admin/estateList/edit")
+	public String estateSave(@Valid @ModelAttribute("estate") Estate formEstate, BindingResult br, Model model )
+	{
+		boolean hasErrors = br.hasErrors();
+		boolean validateEstate = true;
+		
+		if(formEstate.getId()!=null) //controllo se sto modificando o meno un immobile
+		{
+			Estate notUpdatedEstate = estateRepo.findById(formEstate.getId()).get();
+			if		(
+						notUpdatedEstate.getAddress().equalsIgnoreCase(formEstate.getAddress()) &&
+						notUpdatedEstate.getHouseNumber()==formEstate.getHouseNumber() &&
+						notUpdatedEstate.getInterior()==formEstate.getInterior() &&
+						notUpdatedEstate.getZipCode().equalsIgnoreCase(formEstate.getZipCode())
+					)
+				validateEstate=false;
+		}
+		
+		if(formEstate.getId()==null)
+		{
+			Optional<Estate> result = estateRepo.findByAddressAndHouseNumberAndInteriorAndZipCode(formEstate.getAddress(), formEstate.getHouseNumber(), formEstate.getInterior(), formEstate.getZipCode());
+			if(!result.isPresent()) //se non è presente alcun immobile con gli stessi dati
+				validateEstate=false; //non richiedo la validazione dell'immobile
+		}
+		
+		if(validateEstate)
+		{
+			br.addError(new FieldError("estate", "address", "Immobile già presente nel database, non è possibile crearlo di nuovo, solo modificarlo"));
+			return "admin/editEstate";
+		}
+		
+		if(hasErrors)
+		{
+			return "admin/editEstate";
+		}
+		else
+		{
+			try
+			{
+				estateRepo.save(formEstate);
+			}
+			catch (Exception e)
+			{
+				model.addAttribute("errorMessage", "Non è stato possibile salvare i dati inseriti");
+				return "admin/editEstate";
+			}
+			return "redirect:/admin/estateList";
+		}
+	}
+
+	
+
+
+
 }
