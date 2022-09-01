@@ -95,7 +95,7 @@ public class EstateController {
 	{
 		model.addAttribute("estate", new Estate());
 		model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
-		return "admin/editEstate";
+		return "admin/estateEdit";
 	}
 	
 	@PostMapping("/admin/estateList/edit")
@@ -126,12 +126,12 @@ public class EstateController {
 		if(validateEstate)
 		{
 			br.addError(new FieldError("estate", "address", "Immobile già presente nel database, non è possibile crearlo di nuovo, solo modificarlo"));
-			return "admin/editEstate";
+			return "admin/estateEdit";
 		}
 		
 		if(hasErrors)
 		{
-			return "admin/editEstate";
+			return "admin/estateEdit";
 		}
 		else
 		{
@@ -142,7 +142,7 @@ public class EstateController {
 			catch (Exception e)
 			{
 				model.addAttribute("errorMessage", "Non è stato possibile salvare i dati inseriti");
-				return "admin/editEstate";
+				return "admin/estateEdit";
 			}
 			return "redirect:/admin/estateList";
 		}
