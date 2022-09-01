@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <div th:replace="fragment :: risorse"></div>
+   <th:block th:replace="fragment/fragment :: scr-head"></th:block>
     <title>Amministrazione</title>
 </head>
 <body>
+<th:block th:replace="fragment/fragment :: navbar"></th:block>
    <div>
-    <h1 style="text-align:center">Benvenuto Amministratore <h1 th:text="${user.name}"></h1></h1>
+    <h1 style="text-align:center">Benvenuto Amministratore </h1></h1>
    </div>
     <div style="text-align:center">
     <button href="/user" type="button" class="btn btn-dark">Lista Utenti <span class="badge badge-light">4</span></button>
     <button href="/agent" type="button" class="btn btn-primary">Lista Agenti <span class="badge badge-light">4</span></button>
     <button href="/estate" type="button" class="btn btn-success">Lista Immobili <span class="badge badge-light">4</span></button></div>
+
 </body>
 </html>
