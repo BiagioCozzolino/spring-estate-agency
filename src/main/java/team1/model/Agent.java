@@ -10,8 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Agent {
@@ -43,12 +47,17 @@ public class Agent {
 	private Integer serialNumber;
 
 	// Data di assunzione agente
-	@NotNull(message = "Questo campo è obbligatorio")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate hiringDate;
 
 	// Livello di sicurezza per autenticazione
 	@NotNull
+	@Min(2)
+	@Max(3)
 	private Integer securityLevel;
+
+	@OneToMany(mappedBy = "agent")
+	private List<AgentImage> agentImage;
 
 	@OneToMany(mappedBy = "agent")
 	private List<Estate> estate;

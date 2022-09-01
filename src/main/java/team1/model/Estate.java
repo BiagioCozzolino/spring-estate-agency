@@ -20,7 +20,8 @@ public class Estate {
 	// class properties
 
 	private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
+	// id dell'immobile incrementale
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

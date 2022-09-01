@@ -124,7 +124,7 @@ public class EstateController {
 		
 		if(validateEstate)
 		{
-			br.addError(new FieldError("estate", "estate", "Immobile già presente nel database, non è possibile crearlo di nuovo, solo modificarlo"));
+			br.addError(new FieldError("estate", "address", "Immobile già presente nel database, non è possibile crearlo di nuovo, solo modificarlo"));
 			return "admin/editEstate";
 		}
 		
@@ -146,4 +146,9 @@ public class EstateController {
 			return "redirect:/admin/estateList";
 		}
 	}
+
+	
+
+
+
 }
