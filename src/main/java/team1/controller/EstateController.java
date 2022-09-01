@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team1.model.Estate;
 import team1.repository.AgentRepository;
@@ -147,7 +148,23 @@ public class EstateController {
 		}
 	}
 
-	
+	@GetMapping("/admin/estate/delete/{id}")
+	public String deleteEstate(@PathVariable("id") Integer estateId, RedirectAttributes ra)
+	{
+		Optional<Estate> result = estateRepo.findById(estateId);
+		if(result.isPresent())
+		{
+			result.get().setStatus("Annullato");
+			estateRepo.save(result.get());
+			ra.addFlashAttribute("successMessage", "L'immobile in " + result.get().getAddress()+ ", "+ result.get().getHouseNumber()+ " " + result.get().getZipCode()+ " è stato inserito nella lista annullati.");
+			return "redirect: /admin/estateList";
+		}
+		else
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+			          "L'immobile " + estateId + " non trovato");
+		}
+	}
 
 
 
