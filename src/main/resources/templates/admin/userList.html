@@ -1,0 +1,44 @@
+à<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<div th:replace="fragments ::src-head"></div>
+	<title>Users</title>
+
+</head>
+
+<body>
+	<div th:if="${#lists.isEmpty(userList)}">
+		<h1>Mi dispiace non ci sono ancora user attivi.</h1>
+	</div>
+	<div th:unless="${#lists.isEmpty(userList)}">
+		<div th:replace="fragments :: navbar('user')"></div>
+		<div class="container">
+			<h1>Ecco tutti i nostri user</h1>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col" class="table-dark">Nome</th>
+						<th scope="col" class="table-dark">Cognome</th>
+						<th scope="col" class="table-dark">E-Mail</th>
+						<th scope="col" class="table-dark">Livello di Sicurezza</th>
+						<th scope="col" class="table-dark">Password</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u : ${userList} ">
+						<td class="table-secondary" th:text="${u.Name()}"></td>
+						<td class="table-primary" th:text="${u.Surname()}"></td>
+						<td class="table-success" th:text="${u.Email()}"></td>
+						<td class="table-danger" th:text="${u.SecurityLevel()}"></td>
+						<td class="table-warning" th:text="${u.Password()}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div th:replace="fragments :: footer"> </div>
+</body>
+
+</html>

@@ -17,6 +17,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * @author biagi
+ *
+ */
 @Entity
 public class Agent {
 
@@ -130,6 +134,22 @@ public class Agent {
 
 	public void setSecurityLevel(Integer securityLevel) {
 		this.securityLevel = securityLevel;
+	}
+
+	public List<AgentImage> getAgentImage() {
+		return agentImage;
+	}
+
+	public void setAgentImage(List<AgentImage> agentImage) {
+		this.agentImage = agentImage;
+	}
+
+	public List<Estate> getEstate() {
+		return estate;
+	}
+
+	public void setEstate(List<Estate> estate) {
+		this.estate = estate;
 	}
 
 }
