@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:replace="fragment :: scr-head"></th:block>
+    <title>Document</title>
+</head>
+<body>
+
+   <thead> <th:block th:replace="fragment :: navbar"></th:block> </thead>
+   <div class="container">
+   <div class="row">
+   <div class="col-6">
+   <img src="https://primaalessandria.it/media/2022/04/agente-immobiliare-420x252.jpg">
+	<div class="container">
+	<h1 th:text="${agent.name}"></h1>
+	<h1 th:text="${agent.surname}"></h1>
+  <div class="row">
+    <div class="col">
+    <h2>Email</h2>
+      <p th:text="${agent.email}"></p>
+    </div>
+    <div class="col">
+      <h2>Password</h2>
+      <p th:text="${agent.password}">
+    </div>
+    <div class="col">
+       <h2>Serial Number</h2>
+      <p th:text="${agent.serialNumber}">
+    </div>
+  </div>
+</div>
+   </div >
+   </div>
+   </div>
+   
+   
+   
+   
+    <footer>
+		<th:block th:fragment="footer"></th:block> <a> copyright team Casa carut </a>
+	</footer>
+</body>
+</html>
