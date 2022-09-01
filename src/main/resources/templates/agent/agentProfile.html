@@ -1,49 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <th:block th:replace="fragment :: scr-head"></th:block>
+    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
     <title>Document</title>
 </head>
 <body>
 
-   <thead> <th:block th:replace="fragment :: navbar"></th:block> </thead>
-   <div class="container">
-   <div class="row">
-   <div class="col-6">
-   <img src="https://primaalessandria.it/media/2022/04/agente-immobiliare-420x252.jpg">
+   <thead> <th:block th:replace="fragment/fragment :: navbar"></th:block> </thead>
+   <div class="container bg-dark mt-4 text-light text-center ">
+   <div class="row justify-content-center">
+   <div class="col-4 mt-3 ">
+   <img src="https://primaalessandria.it/media/2022/04/agente-immobiliare-420x252.jpg" class="w-50">
 	<div class="container">
-	<h1 th:text="${agent.name}"></h1>
-	<h1 th:text="${agent.surname}"></h1>
-  <div class="row">
-    <div class="col">
-    <h2>Email</h2>
+	<div class="row">
+	<div class="col-12 bg-secondary">
+	<h6>Nome</h6>
+	<p th:text="${agent.name}"></p}>
+	</div>
+	<div class="col-12 bg-secondary">
+	<h6>Cognome</h6>
+	<p th:text="${agent.surname}"></p>
+	</div>
+    <div class="col-12 bg-secondary">
+    <h6>Email</h6>
       <p th:text="${agent.email}"></p>
     </div>
-    <div class="col">
-      <h2>Password</h2>
+    <div class="col-12">
+      <h6>Password</h6>
       <p th:text="${agent.password}">
     </div>
-    <div class="col">
-       <h2>Serial Number</h2>
+    <div class="col-12">
+       <h6>Serial Number</h6>
       <p th:text="${agent.serialNumber}">
     </div>
-    <div class="col">
-    <h2>Data</h2>
+    <div class="col-12">
+    <h6>Data</h6>
       <p th:text="${agent.hiringDate}"></p>
     </div>
-    <div class="col">
-      <h2>Livello Di Sicurezza</h2>
-      <p th:text="${agent.securityLevel}">
-    </div>
-    <div class="col">
-       <p>Scegli una password: <input type="password"name="password"></p>
+    <div class="col-12">
+    	<button class="" type="button">Cambia Password</button>
      </div>
-     <div class="col">
-     <div th:if="${#lists.isEmpty(agent.estate)}">
-    	<h1>Questo Agente Non Ha Immobili</h1>
+     <div class="col-12">
+    
+
+    </div>
+   </div>
+  
+  </div>
+  </div>
+ </div>
 </div>
-<div th:unless="${#lists.isEmpty(agent.estate)}">
-    <table class="table bg-dark rounded" >
+   
+   <!--Lista immobili-->
+   <div class="container">
+   <div class="row">
+   <div class="col">
+   <div th:if="${#lists.isEmpty(agent.estate)}">
+    	<h1 class="text-center">Questo Agente Non Ha Immobili</h1>
+   </div>
+   <div th:unless="${#lists.isEmpty(agent.estate)}">
+   <table class="table bg-dark rounded" >
 
 
     <th> Indirizzo </th>
@@ -86,18 +102,12 @@
 
 </table>
     </div> 
-    </div>
    </div>
-  
-  </div>
   </div>
  </div>
    
-   
-   
-   
     <footer>
-		<th:block th:fragment="footer"></th:block> <a> copyright team Casa carut </a>
+		<footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
 	</footer>
 </body>
 </html>

@@ -41,7 +41,7 @@ public class AgentController {
 		if (result.isPresent()) {
 			Agent modelAgent = result.get();
 			model.addAttribute("agent", modelAgent);
-			return "/agent/agentProfile";
+			return "agent/agentProfile";
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Profilo agente non trovato");
 
