@@ -11,51 +11,17 @@
     	<h1>Mi dispiace non ci sono ancora immobili nel catalogo.</h1>
 </div>
 <div th:unless="${#lists.isEmpty(estateList)}">
-<table class="table bg-dark rounded" >
-
-
-<th> Indirizzo </th>
-<th> CAP </th>
-<th> Città </th>
-<th> Superfice </th>
-<th> Prezzi </th>
-<th> Data </th>
-<th> Classe Energetica </th>
-<th> Tipo </th>
-<th> Numero Vani </th>
-<th> Numero di Bagni </th>
-<th> Numero dei Balconi </th>
-<th> Posto Auto </th>
-<th> Id Agente </th>
-<th> Visualizzazione </th>
-<th> Like </th>
-
-
-
-<tr th:each="e : ${estateList}">
-<td th:text="${e.address}">Indirizzo</td>
-<td th:text="${e.zipCode}">CAP</td>
-<td th:text="${e.city}">Città</td>
-<td th:text="${e.area}">Superfice</td>
-<td th:text="${e.price}">Prezzi</td>
-<td th:text="${e.getFormattedDate()}">Data</td>
-<td th:text="${e.energyClass}">Classe Energetica</td>
-<td th:text="${e.type}">Tipo</td>
-<td th:text="${e.numSpaces}">Numero Vani</td>
-<td th:text="${e.numBathrooms}">Numero di Bagni</td>
-<td th:text="${e.numBalconies}">Numero dei Balconi</td>
-<td th:text="${e.hasCarSpot}">Posto Auto</td>
-<td th:text="${e.hasGarden}">Giardino</td>
-<td th:text="${e.agent.id}">Id Agente</td>
-<td th:text="${e.numViews}">Visualizzazione</td>
-<td th:text="${e.numLikes}">Like</td>
-
-</tr>
-
-</table>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 </div>
 
     
-    <footer> <th:block th:replace="fragments :: footer"></th:block></footer></footer>
+    <footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
 </body>
 </html>

@@ -41,7 +41,7 @@ public class AgentController {
 		if (result.isPresent()) {
 			Agent modelAgent = result.get();
 			model.addAttribute("agent", modelAgent);
-			return "/agent/agentProfile";
+			return "agent/agentProfile";
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Profilo agente non trovato");
 
@@ -78,5 +78,18 @@ public class AgentController {
 			return "redirect:/agent";
 
 		}
+	}
+
+	@GetMapping("/edit/{id}")
+	public String update(@PathVariable("id") Integer agentId, Model model) {
+		Optional<Agent> result = agentRepo.findById(agentId);
+		if (result.isPresent()) {
+			model.addAttribute("agent", result.get());
+			agentRepo.save(result.get());
+			return "admin/agentEdit";
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Il agente con id " + agentId + "Non esiste");
+		}
+
 	}
 }

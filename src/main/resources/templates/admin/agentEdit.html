@@ -50,7 +50,7 @@
 </div>
 
 <div class="form-floating mt-3 has-validation">
-  <input type="password" class="form-control" th:field="*{password}" id="password" th:errorClass="is-invalid" placeholder="password">
+  <input type="text" class="form-control" th:field="*{password}" id="password" th:errorClass="is-invalid" placeholder="password">
   <label for="floatingPassword">Password agente</label>
   <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">
   					<ul>
@@ -58,16 +58,6 @@
   					</ul>
   				</div>
   				
-</div>
-<div class="form-floating mb-3 mt-3 has-validation">
-  <input type="number" class="form-control" th:field="*{serialNumber}" id="serialNumber" th:errorClass="is-invalid" placeholder="serialNumber">
-  <label for="floatingInput">Matricola agente</label>
-        <div th:if="${#fields.hasErrors('serialNumber')}" class="invalid-feedback">
-  					<ul>
-  						<li th:each="err : ${#fields.errors('serialNumber')}" th:text="${err}">
-  					</ul>
-  				</div>
-      
 </div>
 
 <div class="form-floating mb-3 mt-3 has-validation">
@@ -93,7 +83,7 @@
 </div>
     	<div>
   				<button type="submit" class="btn btn-primary mt-3">Save</button>
-  				<a class="btn btn-primary mt-3" href="/">Cancel</a>
+  				<a class="btn btn-primary mt-3" href="/agent">Cancel</a>
   			</div>
     	</form>
     </div>
