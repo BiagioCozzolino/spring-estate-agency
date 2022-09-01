@@ -2,6 +2,7 @@ package team1.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -92,6 +94,9 @@ public class Estate {
 	@ManyToOne
 	@NotNull
 	private Agent agent;
+	
+	@OneToMany(mappedBy = "estate")
+	private List<EstateImage> images;
 
 	@NotNull
 	@Min(0)
@@ -281,6 +286,14 @@ public class Estate {
 
 	public void setContractStart(LocalDate contractStart) {
 		this.contractStart = contractStart;
+	}
+
+	public List<EstateImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<EstateImage> images) {
+		this.images = images;
 	}
 
 	public String getFormattedContractStart() {
