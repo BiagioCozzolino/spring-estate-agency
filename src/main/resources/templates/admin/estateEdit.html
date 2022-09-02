@@ -6,7 +6,7 @@
   </head>
   <body>
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
-    <div class="container">
+    <div class="container m-4">
       <h1
         class="text-center"
         th:text="${id != null} ? 'Modifica immobile' : 'Inserisci nuovo immobile'"
@@ -239,29 +239,29 @@
         </div>
 
         <div class="form-floating mb-3 mt-3 has-validation">
-            <span> <label for="status">Stato immobile</label> </span>
-            <select
-              name="status"
-              id="status"
-              th:field="*{status}"
-              th:errorClass="is-invalid"
-            >
-              <option value="">--Scegli un'opzione--</option>
-              <option value="In vendita">In vendita</option>
-              <option value="In affitto">In affitto</option>
-              <option value="Venduto">Venduto</option>
-              <option value="Affittato">Affittato</option>
-              <option value="Annullato">Annullato</option>
-            </select>
-            <div th:if="${#fields.hasErrors('status')}" class="invalid-feedback">
-              <ul>
-                <li
-                  th:each="err : ${#fields.errors('status')}"
-                  th:text="${err}"
-                ></li>
-              </ul>
-            </div>
+          <span> <label for="status">Stato immobile</label> </span>
+          <select
+            name="status"
+            id="status"
+            th:field="*{status}"
+            th:errorClass="is-invalid"
+          >
+            <option value="">--Scegli un'opzione--</option>
+            <option value="In vendita">In vendita</option>
+            <option value="In affitto">In affitto</option>
+            <option value="Venduto">Venduto</option>
+            <option value="Affittato">Affittato</option>
+            <option value="Annullato">Annullato</option>
+          </select>
+          <div th:if="${#fields.hasErrors('status')}" class="invalid-feedback">
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('status')}"
+                th:text="${err}"
+              ></li>
+            </ul>
           </div>
+        </div>
 
         <div class="form-floating mb-3 mt-3 has-validation">
           <span> <label for="energyClass">Classe energetica</label> </span>
@@ -284,7 +284,10 @@
             <option value="F">F</option>
             <option value="G">G</option>
           </select>
-          <div th:if="${#fields.hasErrors('energyClass')}" class="invalid-feedback">
+          <div
+            th:if="${#fields.hasErrors('energyClass')}"
+            class="invalid-feedback"
+          >
             <ul>
               <li
                 th:each="err : ${#fields.errors('energyClass')}"
@@ -295,147 +298,194 @@
         </div>
 
         <div class="form-floating mb-3 mt-3 has-validation">
+          <input
+            type="text"
+            class="form-control"
+            th:field="*{type}"
+            id="type"
+            th:errorClass="is-invalid"
+            placeholder="Tipo"
+          />
+          <label for="floatingInput">Tipo</label>
+          <div th:if="${#fields.hasErrors('type')}" class="invalid-feedback">
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('type')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3 mt-3 has-validation">
+          <input
+            type="number"
+            min="1"
+            class="form-control"
+            th:field="*{numSpaces}"
+            id="numSpaces"
+            th:errorClass="is-invalid"
+            placeholder="Numero vani"
+          />
+          <label for="floatingInput">Numero vani</label>
+          <div
+            th:if="${#fields.hasErrors('numSpaces')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('numSpaces')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3 mt-3 has-validation">
+          <input
+            type="number"
+            min="0"
+            class="form-control"
+            th:field="*{numBathrooms}"
+            id="numBathrooms"
+            th:errorClass="is-invalid"
+            placeholder="Numero bagni"
+          />
+          <label for="floatingInput">Numero bagni</label>
+          <div
+            th:if="${#fields.hasErrors('numBathrooms')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('numBathrooms')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3 mt-3 has-validation">
+          <input
+            type="number"
+            min="0"
+            class="form-control"
+            th:field="*{numBalconies}"
+            id="numBalconies"
+            th:errorClass="is-invalid"
+            placeholder="Numero balconi"
+          />
+          <label for="floatingInput">Numero balconi</label>
+          <div
+            th:if="${#fields.hasErrors('numBalconies')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('numBalconies')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3 mt-3 has-validation">
+          <input
+            type="checkbox"
+            id="hasCarSpot"
+            name="hasCarSpot"
+            th:field="*{hasCarSpot}"
+            value="true"
+          />
+          <span>
+            <label for="hasCarSpot">L'immobile ha il posto auto?</label>
+          </span>
+          <input type="reset" value="Reset" />
+          <div
+            th:if="${#fields.hasErrors('hasCarSpot')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('hasCarSpot)}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3 mt-3 has-validation">
+          <input
+            type="checkbox"
+            id="hasGarden"
+            name="hasGarden"
+            th:field="*{hasGarden}"
+            value="true"
+          />
+          <span>
+            <label for="hasGarden">L'immobile ha il giardino?</label>
+          </span>
+          <input type="reset" value="Reset" />
+          <div
+            th:if="${#fields.hasErrors('hasGarden')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('hasGarden')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <h4>Agenti</h4>
+          <div class="form-check" th:each="a : ${agentList}">
             <input
-              type="text"
-              class="form-control"
-              th:field="*{type}"
-              id="type"
-              th:errorClass="is-invalid"
-              placeholder="Tipo"
+              class="form-check-input"
+              th:field="*{agent}"
+              type="checkbox"
+              th:id="|agent_${a.id}|"
+              th:value="${a.id}"
             />
-            <label for="floatingInput">Tipo</label>
-            <div th:if="${#fields.hasErrors('type')}" class="invalid-feedback">
-              <ul>
-                <li
-                  th:each="err : ${#fields.errors('type')}"
-                  th:text="${err}"
-                ></li>
-              </ul>
-            </div>
+            <label
+              class="form-check-label"
+              th:for="|agent_${a.id}|"
+              th:text="|${a.surname} ${a.name}|"
+            ></label>
           </div>
-
-          <div class="form-floating mb-3 mt-3 has-validation">
-            <input
-              type="number"
-              min="1"
-              class="form-control"
-              th:field="*{numSpaces}"
-              id="numSpaces"
-              th:errorClass="is-invalid"
-              placeholder="Numero vani"
-            />
-            <label for="floatingInput">Numero vani</label>
-            <div th:if="${#fields.hasErrors('numSpaces')}" class="invalid-feedback">
-              <ul>
-                <li
-                  th:each="err : ${#fields.errors('numSpaces')}"
-                  th:text="${err}"
-                ></li>
-              </ul>
-            </div>
+          <div th:if="${#fields.hasErrors('agent')}" class="invalid-feedback">
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('agent')}"
+                th:text="${err}"
+              ></li>
+            </ul>
           </div>
+        </div>
 
-          <div class="form-floating mb-3 mt-3 has-validation">
-            <input
-              type="number"
-              min="0"
-              class="form-control"
-              th:field="*{numBathrooms}"
-              id="numBathrooms"
-              th:errorClass="is-invalid"
-              placeholder="Numero bagni"
-            />
-            <label for="floatingInput">Numero bagni</label>
-            <div th:if="${#fields.hasErrors('numBathrooms')}" class="invalid-feedback">
-              <ul>
-                <li
-                  th:each="err : ${#fields.errors('numBathrooms')}"
-                  th:text="${err}"
-                ></li>
-              </ul>
+        <div class="mb-3 mt-3" th:if="${estate.id != null}">
+          <form
+            id="form-img"
+            th:object="${imageForm}"
+            th:action="|/estate/image/save/${estate.id}|"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <input type="hidden" th:field="${estate.id}" />
+            <div class="m-3">
+              <label for="contentMultipart" class="form-label">Aggiungi una nuova immagine</label>
+              <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
             </div>
-          </div>
+            <button class="btn btn-danger" type="submit">Salva</button>
+          </form>
+        </div>
 
-          <div class="form-floating mb-3 mt-3 has-validation">
-            <input
-              type="number"
-              min="0"
-              class="form-control"
-              th:field="*{numBalconies}"
-              id="numBalconies"
-              th:errorClass="is-invalid"
-              placeholder="Numero balconi"
-            />
-            <label for="floatingInput">Numero balconi</label>
-            <div th:if="${#fields.hasErrors('numBalconies')}" class="invalid-feedback">
-              <ul>
-                <li
-                  th:each="err : ${#fields.errors('numBalconies')}"
-                  th:text="${err}"
-                ></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="form-floating mb-3 mt-3 has-validation">
-            <input 
-                type="checkbox" 
-                id="hasCarSpot" 
-                name="hasCarSpot"
-                th:field="*{hasCarSpot}" 
-                value="true">
-            <span> <label for="hasCarSpot">L'immobile ha il posto auto?</label> </span>
-            <input type="reset" value="Reset">
-            <div th:if="${#fields.hasErrors('hasCarSpot')}" class="invalid-feedback">
-              <ul>
-                <li
-                  th:each="err : ${#fields.errors('hasCarSpot)}"
-                  th:text="${err}"
-                ></li>
-              </ul>
-            </div>
-          </div> 
-
-          <div class="form-floating mb-3 mt-3 has-validation">
-            <input 
-                type="checkbox" 
-                id="hasGarden" 
-                name="hasGarden"
-                th:field="*{hasGarden}" 
-                value="true">
-            <span> <label for="hasGarden">L'immobile ha il giardino?</label> </span>
-            <input type="reset" value="Reset">
-            <div th:if="${#fields.hasErrors('hasGarden')}" class="invalid-feedback">
-              <ul>
-                <li
-                  th:each="err : ${#fields.errors('hasGarden')}"
-                  th:text="${err}"
-                ></li>
-              </ul>
-            </div>
-          </div> 
-
-          <div class="col-4">
-				<h4>Agenti</h4>
-				<div class="form-check" th:each="a : ${agentList}">
-				  <input class="form-check-input" th:field="*{agent}" type="checkbox" th:id="|agent_${a.id}|" th:value="${a.id}">
-				  <label class="form-check-label" th:for="|agent_${a.id}|" th:text="${a.name}"></label>
-				</div>
-            <div th:if="${#fields.hasErrors('agent')}" class="invalid-feedback">
-              <ul>
-                <li
-                  th:each="err : ${#fields.errors('agent')}"
-                  th:text="${err}"
-                ></li>
-              </ul>
-            </div>
-          </div>
-
-			
-			<div>
-  				<button type="submit" class="btn btn-danger">Salva</button>
-  				<a class="btn btn-danger" href="/estate/admin/estateList">Annulla</a>
-  			</div>
+        <div>
+          <button type="submit" class="btn btn-danger">Salva</button>
+          <a class="btn btn-danger" href="/estate/admin/estateList">Annulla</a>
+        </div>
       </form>
     </div>
   </body>

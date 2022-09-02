@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import team1.model.EstateImage;
 import team1.model.EstateImageForm;
 import team1.repository.EstateImageRepository;
+import team1.repository.EstateRepository;
 import team1.service.EstateImageService;
 
 @Controller
@@ -34,25 +35,47 @@ public class EstateImageController {
 	@Autowired
 	private EstateImageRepository imageRepo;
 	
+	@Autowired
+	private EstateRepository estateRepo;
+	
+	/**
+	 * Collegamento alla pagina con la lista di immagini di un determinato immobile
+	 * @param estateId
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/list/{estateId}")
 	public String agentImages(@PathVariable("agentId") Integer estateId, Model model) {
 		List<EstateImage> image = service.getImageByEstateId(estateId);
 		EstateImageForm imageForm = service.createImageForm(estateId);
 		model.addAttribute("imageList", image);
 		model.addAttribute("imageForm", imageForm);
-		return "/image/list";
+		return "/estate/imageList";
 	}	
 	
-	@PostMapping("/save")
-	public String saveImage(@ModelAttribute("ImageForm") EstateImageForm imageForm) {
+	/**
+	 * Metodo di salvataggio delle immagini
+	 * @param estateId
+	 * @param imageForm
+	 * @return
+	 */
+	@PostMapping("/save/{id}")
+	public String saveImage(@PathVariable("id") Integer estateId, @ModelAttribute("ImageForm") EstateImageForm imageForm) {
+		
 		try {
-			EstateImage savedImage = service.createImage(imageForm);
-			return "redirect:/image/list/" + savedImage.getEstate().getId();
+			imageForm.setEstate(estateRepo.findById(estateId).get());
+			service.createImage(imageForm);
+			return "redirect:/estate/admin/estateList/edit"+ estateId;
 		} catch (IOException e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to save image");
 		}
 	}
 
+	/**
+	 * Metodo che collega la stringa di byte del database con l'immagine dell'immobile
+	 * @param estateId
+	 * @return
+	 */
 	@RequestMapping(value = "/{estateId}/content", produces = MediaType.IMAGE_JPEG_VALUE)
 	public ResponseEntity<byte[]> getImageContent(@PathVariable("agentId") Integer estateId) {
 		byte[] content = service.getImageContent(estateId);
@@ -61,6 +84,13 @@ public class EstateImageController {
 		return new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
 	}
 	
+	/**
+	 * Metodo di cancellazione delle immagini
+	 * @param imageId
+	 * @param ra
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer imageId, RedirectAttributes ra, Model model) {
 		Optional<EstateImage> result = imageRepo.findById(imageId);
@@ -70,7 +100,7 @@ public class EstateImageController {
 			return "redirect:/image/list/" + result.get().getEstate().getId();
 
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'immagine con id" + imageId + " non esiste");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Immagine con id " + imageId + " non trovata");
 		}
 
 	}

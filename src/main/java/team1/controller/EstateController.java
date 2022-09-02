@@ -22,8 +22,10 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team1.model.Estate;
+import team1.model.EstateImageForm;
 import team1.repository.AgentRepository;
 import team1.repository.EstateRepository;
+import team1.service.EstateImageService;
 
 @Controller
 @RequestMapping("/estate")
@@ -34,6 +36,9 @@ public class EstateController {
 
 	@Autowired
 	private AgentRepository agentRepo;
+	
+	@Autowired
+	private EstateImageService service;
 
 	private List<Estate> estateListForUsers;
 
@@ -91,11 +96,31 @@ public class EstateController {
 	}
 
 	@GetMapping("/admin/estateList/edit")
-	public String estateEditForm(Model model)
+	public String estateAddForm(Model model)
 	{
 		model.addAttribute("estate", new Estate());
 		model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
+		model.addAttribute("imageForm", new EstateImageForm());
 		return "admin/estateEdit";
+	}
+	
+	@GetMapping("/admin/estateList/edit/{id}")
+	public String estateEdit(@PathVariable ("id") Integer estateId, Model model)
+	{
+		Optional<Estate> result = estateRepo.findById(estateId);
+		
+		if(result.isPresent())
+		{
+			model.addAttribute("estate", result.get());
+			model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
+			model.addAttribute("imageForm", service.createImageForm(estateId));
+			return "admin/estateEdit";
+		}
+		else
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Questo immobile non è presente");
+
+		}
 	}
 	
 	@PostMapping("/admin/estateList/edit")
