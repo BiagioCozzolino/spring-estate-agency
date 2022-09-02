@@ -16,6 +16,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Estate {
 
@@ -34,7 +36,7 @@ public class Estate {
 	
 	private Integer houseNumber;
 	
-	@NotEmpty(message= "Tutti gli immobili sono posizionati su un piano")
+	@NotNull(message= "Tutti gli immobili sono posizionati su un piano")
 	@Column(nullable = false)
 	private Integer floorNumber;
 	
@@ -56,9 +58,11 @@ public class Estate {
 	@DecimalMin("0.00")
 	private Double price;
 
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@NotNull
 	private LocalDate insertionDate;
 
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate contractStart;
 
 	@NotEmpty(message = "Tutti gli immobili devono avere uno status")
