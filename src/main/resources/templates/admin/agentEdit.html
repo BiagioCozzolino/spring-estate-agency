@@ -1,177 +1,92 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
-    <title>Inserisci nuovo agente immobiliare</title>
-  </head>
-  <body>
+<html lang="it">
+<head>
+   <th:block th:replace="fragment/fragment :: scr-head"></th:block>
+   
+    <title>Inserisci nuovo videogioco</title>
+</head>
+<body>
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
+    
     <div class="container">
-      <h1 class="text-center">
-        Inserisci un nuovo agente immobiliare, compila i seguenti dati:
-      </h1>
+    	<h1 class="text-center">Inserisci un nuovo videogioco, compila i seguenti dati:</h1>
+    	
+    	<form
+  			id="form-agent"
+  			th:object="${agent}"
+  			th:action="@{/agent/edit}"
+  			method="POST"
+  		>
+  		<input type="hidden" th:field="*{id}">
+  		<div class="form-floating mb-3 mt-3 has-validation">
+  <input type="text" class="form-control" th:field="*{name}" id="name" th:errorClass="is-invalid" placeholder="nome">
+  <label for="floatingInput">Nome agente</label>
+        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+  					<ul>
+  						<li th:each="err : ${#fields.errors('name')}" th:text="${err}">
+  					</ul>
+  				</div>
+      
+</div>
+<div class="form-floating mb-3 mt-3 has-validation">
+  <input type="text" class="form-control" th:field="*{surname}" id="surname" th:errorClass="is-invalid" placeholder="cognome">
+  <label for="floatingInput">Cognome agente</label>
+        <div th:if="${#fields.hasErrors('surname')}" class="invalid-feedback">
+  					<ul>
+  						<li th:each="err : ${#fields.errors('surname')}" th:text="${err}">
+  					</ul>
+  				</div>
+      
+</div>
+<div class="form-floating mb-3 mt-3 has-validation">
+  <input type="email" class="form-control" th:field="*{email}" id="email" th:errorClass="is-invalid" placeholder="email">
+  <label for="floatingInput">E-Mail agente</label>
+        <div th:if="${#fields.hasErrors('email')}" class="invalid-feedback">
+  					<ul>
+  						<li th:each="err : ${#fields.errors('email')}" th:text="${err}">
+  					</ul>
+  				</div>
+      
+</div>
 
-      <form
-        id="form-agent"
-        th:object="${agent}"
-        th:action="@{/agent/edit}"
-        method="POST"
-      >
-        <input type="hidden" th:field="*{id}" />
-        <div class="form-floating mb-3 mt-3 has-validation">
-          <input
-            type="text"
-            class="form-control"
-            th:field="*{name}"
-            id="name"
-            th:errorClass="is-invalid"
-            placeholder="nome"
-          />
-          <label for="floatingInput">Nome agente</label>
-          <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('name')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-        <div class="form-floating mb-3 mt-3 has-validation">
-          <input
-            type="text"
-            class="form-control"
-            th:field="*{surname}"
-            id="surname"
-            th:errorClass="is-invalid"
-            placeholder="cognome"
-          />
-          <label for="floatingInput">Cognome agente</label>
-          <div th:if="${#fields.hasErrors('surname')}" class="invalid-feedback">
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('surname')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-        <div class="form-floating mb-3 mt-3 has-validation">
-          <input
-            type="email"
-            class="form-control"
-            th:field="*{email}"
-            id="email"
-            th:errorClass="is-invalid"
-            placeholder="email"
-          />
-          <label for="floatingInput">E-Mail agente</label>
-          <div th:if="${#fields.hasErrors('email')}" class="invalid-feedback">
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('email')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
+<div class="form-floating mt-3 has-validation">
+  <input type="text" class="form-control" th:field="*{password}" id="password" th:errorClass="is-invalid" placeholder="password">
+  <label for="floatingPassword">Password agente</label>
+  <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">
+  					<ul>
+  						<li th:each="err : ${#fields.errors('password')}" th:text="${err}">
+  					</ul>
+  				</div>
+  				
+</div>
 
-        <div class="form-floating mt-3 has-validation">
-          <input
-            type="password"
-            class="form-control"
-            th:field="*{password}"
-            id="password"
-            th:errorClass="is-invalid"
-            placeholder="password"
-          />
-          <label for="floatingPassword">Password agente</label>
-          <div
-            th:if="${#fields.hasErrors('password')}"
-            class="invalid-feedback"
-          >
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('password')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-        <div class="form-floating mb-3 mt-3 has-validation">
-          <input
-            type="number"
-            class="form-control"
-            th:field="*{serialNumber}"
-            id="serialNumber"
-            th:errorClass="is-invalid"
-            placeholder="serialNumber"
-          />
-          <label for="floatingInput">Matricola agente</label>
-          <div
-            th:if="${#fields.hasErrors('serialNumber')}"
-            class="invalid-feedback"
-          >
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('serialNumber')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
+<div class="form-floating mb-3 mt-3 has-validation">
+  <input type="date" class="form-control" th:field="*{hiringDate}" id="hiringDate " th:errorClass="is-invalid" placeholder="hiringDate">
+  <label for="floatingInput">Data assunzione agente</label>
+        <div th:if="${#fields.hasErrors('hiringDate')}" class="invalid-feedback">
+  					<ul>
+  						<li th:each="err : ${#fields.errors('hiringDate')}" th:text="${err}">
+  					</ul>
+  				</div>
+      
+</div>
 
-        <div class="form-floating mb-3 mt-3 has-validation">
-          <input
-            type="date"
-            class="form-control"
-            th:field="*{hiringDate}"
-            id="hiringDate "
-            th:errorClass="is-invalid"
-            placeholder="hiringDate"
-          />
-          <label for="floatingInput">Data assunzione agente</label>
-          <div
-            th:if="${#fields.hasErrors('hiringDate')}"
-            class="invalid-feedback"
-          >
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('hiringDate')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="form-floating mb-3 mt-3 has-validation">
-          <input
-            type="number"
-            class="form-control"
-            th:field="*{securityLevel}"
-            id="securityLevel"
-            th:errorClass="is-invalid"
-            placeholder="securityLevel"
-          />
-          <label for="floatingInput">Livello sicurezza agente</label>
-          <div
-            th:if="${#fields.hasErrors('securityLevel')}"
-            class="invalid-feedback"
-          >
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('securityLevel')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <button type="submit" class="btn btn-primary mt-3">Save</button>
-          <a class="btn btn-primary mt-3" href="/">Cancel</a>
-        </div>
-      </form>
+<div class="form-floating mb-3 mt-3 has-validation">
+  <input type="number" class="form-control" th:field="*{securityLevel}" id="securityLevel" th:errorClass="is-invalid" placeholder="securityLevel">
+  <label for="floatingInput">Livello sicurezza agente</label>
+        <div th:if="${#fields.hasErrors('securityLevel')}" class="invalid-feedback">
+  					<ul>
+  						<li th:each="err : ${#fields.errors('securityLevel')}" th:text="${err}">
+  					</ul>
+  				</div>
+      
+</div>
+    	<div>
+  				<button type="submit" class="btn btn-primary mt-3">Save</button>
+  				<a class="btn btn-primary mt-3" href="/agent">Cancel</a>
+  			</div>
+    	</form>
     </div>
-    <div th:replace="fragment/fragment :: footer"></div>
-  </body>
+    <div th:replace="fragment/fragment :: footer"> </div>
+</body>
 </html>

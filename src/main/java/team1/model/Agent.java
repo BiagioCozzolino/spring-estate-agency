@@ -3,6 +3,7 @@ package team1.model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,9 +18,14 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * @author biagi
+ *
+ */
 @Entity
 public class Agent {
 
+	private static final Random ran = new Random();
 	private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	@Id
@@ -43,8 +49,9 @@ public class Agent {
 	private String password;
 
 	// Matricola agente
-	@NotNull
-	private Integer serialNumber;
+
+	@Column(unique = true)
+	private Integer serialNumber = ran.nextInt(10000);
 
 	// Data di assunzione agente
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -55,6 +62,8 @@ public class Agent {
 	@Min(2)
 	@Max(3)
 	private Integer securityLevel;
+
+	private boolean hired = true;
 
 	@OneToMany(mappedBy = "agent")
 	private List<AgentImage> agentImage;
@@ -130,6 +139,30 @@ public class Agent {
 
 	public void setSecurityLevel(Integer securityLevel) {
 		this.securityLevel = securityLevel;
+	}
+
+	public List<AgentImage> getAgentImage() {
+		return agentImage;
+	}
+
+	public void setAgentImage(List<AgentImage> agentImage) {
+		this.agentImage = agentImage;
+	}
+
+	public List<Estate> getEstate() {
+		return estate;
+	}
+
+	public void setEstate(List<Estate> estate) {
+		this.estate = estate;
+	}
+
+	public boolean isHired() {
+		return hired;
+	}
+
+	public void setHired(boolean hired) {
+		this.hired = hired;
 	}
 
 }

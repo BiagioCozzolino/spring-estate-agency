@@ -26,6 +26,7 @@
 						<th scope="col" class="table-dark">Matricola agente</th>
 						<th scope="col" class="table-dark">Data assunzione</th>
 						<th scope="col" class="table-dark">Livello di Sicurezza</th>
+						<th scope="col" class="table-dark">Azioni</th>
 						
 					</tr>
 				</thead>
@@ -38,6 +39,10 @@
 						<td class="table-warning" th:text="${a.serialNumber}"></td>
 						<td class="table-warning" th:text="${a.getFormattedHiringDate()}"></td>
 						<td class="table-danger" th:text="${a.SecurityLevel}"></td>
+						<td class="table-info">
+              <a class="btn btn-dark d-block mb-3" title="Modifica" th:href="@{|/agent/edit/${a.getId()}|}"><i class="fa-solid fa-pencil"></i></a>
+              <a class="btn btn-danger d-block mb-3" width:"100%" title="Cancella"  onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
+              </td>
 					</tr>
 				</tbody>
 			</table>
