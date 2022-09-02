@@ -36,7 +36,7 @@ public class Estate {
 	
 	private Integer houseNumber;
 	
-	@NotEmpty(message= "Tutti gli immobili sono posizionati su un piano")
+	@NotNull(message= "Tutti gli immobili sono posizionati su un piano")
 	@Column(nullable = false)
 	private Integer floorNumber;
 	

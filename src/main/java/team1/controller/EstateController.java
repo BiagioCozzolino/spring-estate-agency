@@ -144,7 +144,7 @@ public class EstateController {
 				model.addAttribute("errorMessage", "Non è stato possibile salvare i dati inseriti");
 				return "admin/estateEdit";
 			}
-			return "redirect:/admin/estateList";
+			return "redirect:/estate/admin/estateList";
 		}
 	}
 
