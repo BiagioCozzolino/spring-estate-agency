@@ -31,9 +31,9 @@
 <div class="form-floating mb-3 mt-3 has-validation">
   <input type="text" class="form-control" th:field="*{surname}" id="surname" th:errorClass="is-invalid" placeholder="cognome">
   <label for="floatingInput">Cognome agente</label>
-        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+        <div th:if="${#fields.hasErrors('surname')}" class="invalid-feedback">
   					<ul>
-  						<li th:each="err : ${#fields.errors('name')}" th:text="${err}">
+  						<li th:each="err : ${#fields.errors('surname')}" th:text="${err}">
   					</ul>
   				</div>
       
@@ -41,33 +41,23 @@
 <div class="form-floating mb-3 mt-3 has-validation">
   <input type="email" class="form-control" th:field="*{email}" id="email" th:errorClass="is-invalid" placeholder="email">
   <label for="floatingInput">E-Mail agente</label>
-        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+        <div th:if="${#fields.hasErrors('email')}" class="invalid-feedback">
   					<ul>
-  						<li th:each="err : ${#fields.errors('name')}" th:text="${err}">
+  						<li th:each="err : ${#fields.errors('email')}" th:text="${err}">
   					</ul>
   				</div>
       
 </div>
 
 <div class="form-floating mt-3 has-validation">
-  <input type="password" class="form-control" th:field="*{password}" id="password" th:errorClass="is-invalid" placeholder="password">
+  <input type="text" class="form-control" th:field="*{password}" id="password" th:errorClass="is-invalid" placeholder="password">
   <label for="floatingPassword">Password agente</label>
-  <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+  <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">
   					<ul>
-  						<li th:each="err : ${#fields.errors('price')}" th:text="${err}">
+  						<li th:each="err : ${#fields.errors('password')}" th:text="${err}">
   					</ul>
   				</div>
   				
-</div>
-<div class="form-floating mb-3 mt-3 has-validation">
-  <input type="number" class="form-control" th:field="*{serialNumber}" id="serialNumber" th:errorClass="is-invalid" placeholder="serialNumber">
-  <label for="floatingInput">Matricola agente</label>
-        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
-  					<ul>
-  						<li th:each="err : ${#fields.errors('name')}" th:text="${err}">
-  					</ul>
-  				</div>
-      
 </div>
 
 <div class="form-floating mb-3 mt-3 has-validation">
@@ -84,16 +74,16 @@
 <div class="form-floating mb-3 mt-3 has-validation">
   <input type="number" class="form-control" th:field="*{securityLevel}" id="securityLevel" th:errorClass="is-invalid" placeholder="securityLevel">
   <label for="floatingInput">Livello sicurezza agente</label>
-        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+        <div th:if="${#fields.hasErrors('securityLevel')}" class="invalid-feedback">
   					<ul>
-  						<li th:each="err : ${#fields.errors('name')}" th:text="${err}">
+  						<li th:each="err : ${#fields.errors('securityLevel')}" th:text="${err}">
   					</ul>
   				</div>
       
 </div>
     	<div>
   				<button type="submit" class="btn btn-primary mt-3">Save</button>
-  				<a class="btn btn-primary mt-3" href="/">Cancel</a>
+  				<a class="btn btn-primary mt-3" href="/agent">Cancel</a>
   			</div>
     	</form>
     </div>
