@@ -63,9 +63,10 @@
 							<td class="table-info" th:text="${e.numBalconies}"></td>
 							<td class="table-info" th:text="${e.hasCarSpot}"></td>
 							<td class="table-info" th:text="${e.hasGarden}"></td>
-							<td class="table-info" th:text="${e.agent}"></td>
+							<td class="table-info" th:text="|${e.agent.surname} ${e.agent.name}|"></td>
 							<td class="table-info" th:text="${e.numViews}"></td>
 							<td class="table-info" th:text="${e.numLikes}"></td>
+							<td><a class="btn btn-danger" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" title="Modifica">Modifica</a></td>
 						</tr>
 					</tbody>
 				</table>

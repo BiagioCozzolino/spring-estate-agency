@@ -15,8 +15,6 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -34,13 +32,13 @@ public class Estate {
 	@NotEmpty(message = "Non esistono immobili senza indirizzo")
 	@Column(nullable = false)
 	private String address;
-	
+
 	private Integer houseNumber;
-	
-	@NotNull(message= "Tutti gli immobili sono posizionati su un piano")
+
+	@NotNull(message = "Tutti gli immobili sono posizionati su un piano")
 	@Column(nullable = false)
 	private Integer floorNumber;
-	
+
 	private Integer interior;
 
 	@NotEmpty(message = "Non esistono immobili senza CAP")
@@ -59,10 +57,10 @@ public class Estate {
 	@DecimalMin("0.00")
 	private Double price;
 
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate insertionDate;
 
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate contractStart;
 
 	@NotEmpty(message = "Tutti gli immobili devono avere uno status")
@@ -88,25 +86,21 @@ public class Estate {
 	@Min(0)
 	private Integer numBalconies;
 
-
 	private Boolean hasCarSpot;
 
-
 	private Boolean hasGarden;
-
 
 	@ManyToOne
 	@NotNull
 	private Agent agent;
-	
+
 	@OneToMany(mappedBy = "estate")
 	private List<EstateImage> images;
 
-	
-	private Integer numViews=0;
+	private Integer numViews = 0;
 
-	//@ColumnDefault("0")
-	private Integer numLikes=0;
+	// @ColumnDefault("0")
+	private Integer numLikes = 0;
 
 	// Getters and setters
 
