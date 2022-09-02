@@ -465,7 +465,15 @@
           </div>
         </div>
 
-        <div class="mb-3 mt-3" th:if="${estate.id != null}">
+        
+
+        <div>
+          <button type="submit" class="btn btn-danger">Salva</button>
+          <a class="btn btn-danger" href="/estate/admin/estateList">Annulla</a>
+        </div>
+      </form>
+      
+      <div class="mb-3 mt-3" th:if="${estate.id != null}">
           <form
             id="form-img"
             th:object="${imageForm}"
@@ -481,12 +489,6 @@
             <button class="btn btn-danger" type="submit">Salva</button>
           </form>
         </div>
-
-        <div>
-          <button type="submit" class="btn btn-danger">Salva</button>
-          <a class="btn btn-danger" href="/estate/admin/estateList">Annulla</a>
-        </div>
-      </form>
     </div>
   </body>
 </html>
