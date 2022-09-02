@@ -377,26 +377,25 @@
             </div>
           </div>
 
-          <div class="form-floating mb-3 mt-3 has-validation">
-            <input 
+          <div class="form-check form-switch">
+            <input class="form-check-input"
                 type="checkbox" 
                 id="hasCarSpot" 
                 name="hasCarSpot"
                 th:field="*{hasCarSpot}" 
                 value="true">
-            <span> <label for="hasCarSpot">L'immobile ha il posto auto?</label> </span>
-            <input type="reset" value="Reset">
+            <span> <label for="hasCarSpot">L'Immobile ha il posto auto?</label> </span>
           </div> 
 
-          <div class="form-floating mb-3 mt-3 has-validation">
+          <div class="form-check form-switch">
             <input 
+            class="form-check-input"
                 type="checkbox" 
                 id="hasGarden" 
                 name="hasGarden"
                 th:field="*{hasGarden}" 
                 value="true">
-            <span> <label for="hasGarden">L'immobile ha il giardino?</label> </span>
-            <input type="reset" value="Reset">
+            <span> <label for="hasGarden">L'Immobile ha il giardino?</label> </span>
           </div> 
 
           <div class="form-floating mb-3 mt-3 has-validation">
@@ -421,8 +420,8 @@
 
 			
 			<div>
-  				<button type="submit" class="btn btn-danger">Salva</button>
-  				<a class="btn btn-danger" href="/estate/admin/estateList">Annulla</a>
+  				<button type="submit" class="btn btn-info">Salva</button>
+  				<a class="btn btn-info" href="/estate/admin/estateList">Annulla</a>
   			</div>
       </form>
     </div>
