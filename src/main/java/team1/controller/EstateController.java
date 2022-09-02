@@ -62,7 +62,7 @@ public class EstateController {
 		}
 
 		model.addAttribute("estateList", estateListForUsers);
-		return "/home/estateList";
+		return "estate/estateList";
 	}
 
 	// pagina con la lista di tutti gli immobili per l'admin
@@ -72,77 +72,64 @@ public class EstateController {
 		model.addAttribute("estateListAdmin", estateListForAdmin);
 		return "/admin/estateList";
 	}
-	
+
 	@GetMapping("/{id}")
-	public String estateDetail(@PathVariable ("id") Integer estateId, Model model)
-	{
+	public String estateDetail(@PathVariable("id") Integer estateId, Model model) {
 		Optional<Estate> result = estateRepo.findById(estateId);
-		if(result.isPresent())
-		{
+		if (result.isPresent()) {
 			Estate modelEstate = result.get();
 			model.addAttribute("estate", modelEstate);
 			return "/estate/detail";
-		}
-		else
-		{
+		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Immobile non trovato");
 
 		}
 	}
 
 	@GetMapping("/admin/estateList/edit")
-	public String estateEditForm(Model model)
-	{
+	public String estateEditForm(Model model) {
 		model.addAttribute("estate", new Estate());
 		model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
 		return "admin/estateEdit";
 	}
-	
+
 	@PostMapping("/admin/estateList/edit")
-	public String estateSave(@Valid @ModelAttribute("estate") Estate formEstate, BindingResult br, Model model )
-	{
+	public String estateSave(@Valid @ModelAttribute("estate") Estate formEstate, BindingResult br, Model model) {
 		boolean hasErrors = br.hasErrors();
 		boolean validateEstate = true;
-		
-		if(formEstate.getId()!=null) //controllo se sto modificando o meno un immobile
+
+		if (formEstate.getId() != null) // controllo se sto modificando o meno un immobile
 		{
 			Estate notUpdatedEstate = estateRepo.findById(formEstate.getId()).get();
-			if		(
-						notUpdatedEstate.getAddress().equalsIgnoreCase(formEstate.getAddress()) &&
-						notUpdatedEstate.getHouseNumber()==formEstate.getHouseNumber() &&
-						notUpdatedEstate.getInterior()==formEstate.getInterior() &&
-						notUpdatedEstate.getZipCode().equalsIgnoreCase(formEstate.getZipCode())
-					)
-				validateEstate=false;
+			if (notUpdatedEstate.getAddress().equalsIgnoreCase(formEstate.getAddress())
+					&& notUpdatedEstate.getHouseNumber() == formEstate.getHouseNumber()
+					&& notUpdatedEstate.getInterior() == formEstate.getInterior()
+					&& notUpdatedEstate.getZipCode().equalsIgnoreCase(formEstate.getZipCode()))
+				validateEstate = false;
 		}
-		
-		if(formEstate.getId()==null)
-		{
-			Optional<Estate> result = estateRepo.findByAddressAndHouseNumberAndInteriorAndZipCode(formEstate.getAddress(), formEstate.getHouseNumber(), formEstate.getInterior(), formEstate.getZipCode());
-			if(!result.isPresent()) //se non è presente alcun immobile con gli stessi dati
-				validateEstate=false; //non richiedo la validazione dell'immobile
+
+		if (formEstate.getId() == null) {
+			Optional<Estate> result = estateRepo.findByAddressAndHouseNumberAndInteriorAndZipCode(
+					formEstate.getAddress(), formEstate.getHouseNumber(), formEstate.getInterior(),
+					formEstate.getZipCode());
+			if (!result.isPresent()) // se non è presente alcun immobile con gli stessi dati
+				validateEstate = false; // non richiedo la validazione dell'immobile
 		}
-		
-		if(validateEstate)
-		{
-			br.addError(new FieldError("estate", "address", "Immobile già presente nel database, non è possibile crearlo di nuovo, solo modificarlo"));
+
+		if (validateEstate) {
+			br.addError(new FieldError("estate", "address",
+					"Immobile già presente nel database, non è possibile crearlo di nuovo, solo modificarlo"));
 			model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
 			return "admin/estateEdit";
 		}
-		
-		if(hasErrors)
-		{
+
+		if (hasErrors) {
 			model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
 			return "admin/estateEdit";
-		}
-		else
-		{
-			try
-			{
+		} else {
+			try {
 				estateRepo.save(formEstate);
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				model.addAttribute("errorMessage", "Non è stato possibile salvare i dati inseriti");
 				model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
 				return "admin/estateEdit";
@@ -152,23 +139,18 @@ public class EstateController {
 	}
 
 	@GetMapping("/admin/estate/delete/{id}")
-	public String deleteEstate(@PathVariable("id") Integer estateId, RedirectAttributes ra)
-	{
+	public String deleteEstate(@PathVariable("id") Integer estateId, RedirectAttributes ra) {
 		Optional<Estate> result = estateRepo.findById(estateId);
-		if(result.isPresent())
-		{
+		if (result.isPresent()) {
 			result.get().setStatus("Annullato");
 			estateRepo.save(result.get());
-			ra.addFlashAttribute("successMessage", "L'immobile in " + result.get().getAddress()+ ", "+ result.get().getHouseNumber()+ " " + result.get().getZipCode()+ " è stato inserito nella lista annullati.");
+			ra.addFlashAttribute("successMessage",
+					"L'immobile in " + result.get().getAddress() + ", " + result.get().getHouseNumber() + " "
+							+ result.get().getZipCode() + " è stato inserito nella lista annullati.");
 			return "redirect: /admin/estateList";
-		}
-		else
-		{
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-			          "L'immobile " + estateId + " non trovato");
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'immobile " + estateId + " non trovato");
 		}
 	}
-
-	
 
 }
