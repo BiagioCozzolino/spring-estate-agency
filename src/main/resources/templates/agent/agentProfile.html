@@ -1,43 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <th:block th:replace="fragment :: scr-head"></th:block>
-    <title>Document</title>
+    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
+    <title>AgentProfile</title>
 </head>
 <body>
 
-   <thead> <th:block th:replace="fragment :: navbar"></th:block> </thead>
-   <div class="container">
+   <thead> <th:block th:replace="fragment/fragment :: navbar"></th:block> </thead>
+   
+   <div class="container bg-dark text-light mt-4 rounded">
    <div class="row">
-   <div class="col-6">
-   <img src="https://primaalessandria.it/media/2022/04/agente-immobiliare-420x252.jpg">
+   
+   <div class="container bg-dark mt-4 text-light text-center rounded col-6">
+   <div class="row justify-content-center ">
+   <div class="col-6 mt-3 ">
+   <img src="https://primaalessandria.it/media/2022/04/agente-immobiliare-420x252.jpg" class="w-50 mb-3" >
 	<div class="container">
-	<h1 th:text="${agent.name}"></h1>
-	<h1 th:text="${agent.surname}"></h1>
-  <div class="row">
-    <div class="col">
-    <h2>Email</h2>
+	<div class="row ">
+	<div class="bg-secondary rounded">
+	<h4 class="text-warning">Dati Personali</h4>
+	<div class="col-12  ">
+	<h6>Nome</h6>
+	<p th:text="${agent.name}"></p}>
+	</div>
+	<div class="col-12 ">
+	<h6>Cognome</h6>
+	<p th:text="${agent.surname}"></p>
+	</div>
+    <div class="col-12 ">
+    <h6>Email</h6>
       <p th:text="${agent.email}"></p>
     </div>
-    <div class="col">
-      <h2>Password</h2>
-      <p th:text="${agent.password}">
-    </div>
-    <div class="col">
-       <h2>Serial Number</h2>
+	</div>
+	<div class="bg-secondary rounded mt-2">
+	<h4 class="text-warning">Dati Aziendali</h4>
+     <div class="col-12">
+       <h6>Numero Di Matricola</h6>
       <p th:text="${agent.serialNumber}">
     </div>
+    <div class="col-12">
+    <h6>Data Di Assunzione</h6>
+      <p th:text="${agent.hiringDate}"></p>
+    </div>
+	</div>
+    <div class="col-12">
+    	<button class="btn btn-primary mb-3 mt-3" type="button">Impostazioni profilo</button>
+     </div>
+    
+   </div>
+   </div>
   </div>
+ </div>
 </div>
-   </div >
+   
+   <!--Lista immobili-->
+   
+   <div class="col-5 m-5 bg-secondary rounded ">
+   <div th:if="${#lists.isEmpty(agent.estate)}">
+    	<h5 class="mt-3 text-center">Questo Agente Non Ha Immobili</h5>
    </div>
+   <div th:unless="${#lists.isEmpty(agent.estate)}">
+   <table class="table bg-dark rounded" >
+
+
+    <th> Indirizzo </th>
+    <th> CAP </th>
+    <th> Città </th>
+    <th> Superfice </th>
+    <th> Prezzi </th>
+    <th> Data </th>
+    <th> Classe Energetica </th>
+    <th> Tipo </th>
+    <th> Numero Vani </th>
+    <th> Numero di Bagni </th>
+    <th> Numero dei Balconi </th>
+    <th> Posto Auto </th>
+    <th> Id Agente </th>
+    <th> Visualizzazione </t>
+    <th> Like </th>
+
+
+
+  <tr th:each="e : ${agent.estate}">
+    <td th:text="${e.address}">Indirizzo</td>
+    <td th:text="${e.zipCode}">CAP</td>
+    <td th:text="${e.city}">Città</td>
+    <td th:text="${e.area}">Superfice</td>
+    <td th:text="${e.price}">Prezzi</td>
+    <td th:text="${e.getFormattedDate()}">Data</td>
+    <td th:text="${e.energyClass}">Classe Energetica</td>
+    <td th:text="${e.type}">Tipo</td>
+    <td th:text="${e.numSpaces}">Numero Vani</td>
+    <td th:text="${e.numBathrooms}">Numero di Bagni</td>
+    <td th:text="${e.numBalconies}">Numero dei Balconi</td>
+    <td th:text="${e.hasCarSpot}">Posto Auto</td>
+    <td th:text="${e.hasGarden}">Giardino</td>
+    <td th:text="${e.agent.id}">Id Agente</td>
+    <td th:text="${e.numViews}">Visualizzazione</td>
+    <td th:text="${e.numLikes}">Like</td>
+
+  </tr>
+
+</table>
+    </div> 
    </div>
+  </div>
+ </div>
+  
+  
+
+ 
    
-   
-   
-   
-    <footer>
-		<th:block th:fragment="footer"></th:block> <a> copyright team Casa carut </a>
+    <footer class="text-center bg-info m-2">
+		<footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
 	</footer>
 </body>
 </html>
