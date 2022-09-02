@@ -16,6 +16,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -59,7 +60,6 @@ public class Estate {
 	private Double price;
 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@NotNull
 	private LocalDate insertionDate;
 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -102,13 +102,11 @@ public class Estate {
 	@OneToMany(mappedBy = "estate")
 	private List<EstateImage> images;
 
-	@NotNull
-	@Min(0)
-	private Integer numViews;
+	
+	private Integer numViews=0;
 
-	@NotNull
-	@Min(0)
-	private Integer numLikes;
+	//@ColumnDefault("0")
+	private Integer numLikes=0;
 
 	// Getters and setters
 
