@@ -23,7 +23,7 @@
 							<th scope="col" class="table-dark">Indirizzo</th>
 							<th scope="col" class="table-dark">Numero Civico</th>
 							<th scope="col" class="table-dark">Piano</th>
-							<th scope="col" class="table-dark">Intero</th>
+							<th scope="col" class="table-dark">Interno</th>
 							<th scope="col" class="table-dark">CAP</th>
 							<th scope="col" class="table-dark">Classe energetica</th>
 							<th scope="col" class="table-dark">Città</th>
@@ -46,8 +46,9 @@
 					<tbody>
 						<tr th:each="e : ${estateListAdmin}">
 							<td class="table-info" th:text="${e.address}"></td>
-							<td class="table-info" th:text="${e.houseNamber}"></td>
+							<td class="table-info" th:text="${e.houseNumber}"></td>
 							<td class="table-info" th:text="${e.floorNumber}"></td>
+							<td class="table-info" th:text="${e.interior}"></td>
 							<td class="table-info" th:text="${e.zipCode}"></td>
 							<td class="table-info" th:text="${e.energyClass}"></td>
 							<td class="table-info" th:text="${e.city}"></td>
