@@ -42,6 +42,7 @@
         <div class="form-floating mb-3 mt-3 has-validation">
           <input
             type="number"
+            min="1"
             class="form-control"
             th:field="*{houseNumber}"
             id="houseNumber"
@@ -88,6 +89,7 @@
         <div class="form-floating mb-3 mt-3 has-validation">
           <input
             type="number"
+            min="1"
             class="form-control"
             th:field="*{interior}"
             id="interior"
@@ -151,6 +153,7 @@
         <div class="form-floating mb-3 mt-3 has-validation">
           <input
             type="number"
+            min="1"
             class="form-control"
             th:field="*{area}"
             id="area"
@@ -171,6 +174,7 @@
         <div class="form-floating mb-3 mt-3 has-validation">
           <input
             type="number"
+            min="1"
             class="form-control"
             th:field="*{price}"
             id="price"
@@ -235,7 +239,7 @@
         </div>
 
         <div class="form-floating mb-3 mt-3 has-validation">
-            <label for="status">Stato immobile</label>  
+            <span> <label for="status">Stato immobile</label> </span>
             <select
               name="status"
               id="status"
@@ -260,7 +264,7 @@
           </div>
 
         <div class="form-floating mb-3 mt-3 has-validation">
-          <label for="energyClass">Classe energetica</label>
+          <span> <label for="energyClass">Classe energetica</label> </span>
 
           <select
             name="energyClass"
@@ -313,6 +317,7 @@
           <div class="form-floating mb-3 mt-3 has-validation">
             <input
               type="number"
+              min="1"
               class="form-control"
               th:field="*{numSpaces}"
               id="numSpaces"
@@ -333,6 +338,7 @@
           <div class="form-floating mb-3 mt-3 has-validation">
             <input
               type="number"
+              min="0"
               class="form-control"
               th:field="*{numBathrooms}"
               id="numBathrooms"
@@ -353,6 +359,7 @@
           <div class="form-floating mb-3 mt-3 has-validation">
             <input
               type="number"
+              min="0"
               class="form-control"
               th:field="*{numBalconies}"
               id="numBalconies"
@@ -377,7 +384,8 @@
                 name="hasCarSpot"
                 th:field="*{hasCarSpot}" 
                 value="true">
-            <label for="hasCarSpot">L'immobile ha il posto auto?</label>
+            <span> <label for="hasCarSpot">L'immobile ha il posto auto?</label> </span>
+            <input type="reset" value="Reset">
           </div> 
 
           <div class="form-floating mb-3 mt-3 has-validation">
@@ -387,17 +395,17 @@
                 name="hasGarden"
                 th:field="*{hasGarden}" 
                 value="true">
-            <label for="hasGarden">L'immobile ha il giardino?</label>
+            <span> <label for="hasGarden">L'immobile ha il giardino?</label> </span>
+            <input type="reset" value="Reset">
           </div> 
 
           <div class="form-floating mb-3 mt-3 has-validation">
-            <label for="agent">Stato immobile</label>  
+            <span> <label for="agent">Agente immobiliare</label> </span>
             <select
               name="agent"
               id="agent"
               th:field="*{agent}"
               th:errorClass="is-invalid"
-              
             >
               <option value="${agent.id}" th:each = "a : ${agentList}" th:text="${a.surname}"></option>
             </select>
