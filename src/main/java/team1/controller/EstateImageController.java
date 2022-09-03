@@ -65,7 +65,7 @@ public class EstateImageController {
 		try {
 			imageForm.setEstate(estateRepo.findById(estateId).get());
 			service.createImage(imageForm);
-			return "redirect:/estate/admin/estateList/edit"+ estateId;
+			return "redirect:/estate/admin/estateList/edit/"+ estateId;
 		} catch (IOException e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to save image");
 		}
