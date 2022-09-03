@@ -67,7 +67,7 @@ public class EstateImageController {
 			service.createImage(imageForm);
 			return "redirect:/estate/admin/estateList/edit/"+ estateId;
 		} catch (IOException e) {
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to save image");
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Non è stato possibile salvare l'immagine");
 		}
 	}
 
@@ -76,9 +76,9 @@ public class EstateImageController {
 	 * @param estateId
 	 * @return
 	 */
-	@RequestMapping(value = "/{estateId}/content", produces = MediaType.IMAGE_JPEG_VALUE)
-	public ResponseEntity<byte[]> getImageContent(@PathVariable("agentId") Integer estateId) {
-		byte[] content = service.getImageContent(estateId);
+	@RequestMapping(value = "/{imageId}/content", produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> getImageContent(@PathVariable("imageId") Integer imageId) {
+		byte[] content = service.getImageContent(imageId);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
 		return new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
