@@ -37,7 +37,7 @@ public class EstateController {
 
 	@Autowired
 	private AgentRepository agentRepo;
-	
+
 	@Autowired
 	private EstateImageService service;
 
@@ -62,13 +62,13 @@ public class EstateController {
 				daysDiff = diff.getDays();
 			}
 
-			if (daysDiff <= 7 && (e.getStatusValue(e.getStatus())==2 || e.getStatusValue(e.getStatus())==1)) {
+			if (daysDiff <= 7 && (e.getStatusValue(e.getStatus()) == 2 || e.getStatusValue(e.getStatus()) == 1)) {
 				estateListForUsers.add(e);
 			}
 		}
 
 		model.addAttribute("estateList", estateListForUsers);
-		return "estate/estateList";
+		return "/estate/estateList";
 	}
 
 	// pagina con la lista di tutti gli immobili per l'admin
@@ -93,8 +93,7 @@ public class EstateController {
 	}
 
 	@GetMapping("/admin/estateList/edit")
-	public String estateAddForm(Model model)
-	{
+	public String estateAddForm(Model model) {
 
 		model.addAttribute("estate", new Estate());
 		model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
@@ -102,26 +101,21 @@ public class EstateController {
 		return "admin/estateEdit";
 	}
 
-	
 	@GetMapping("/admin/estateList/edit/{id}")
-	public String estateEdit(@PathVariable ("id") Integer estateId, Model model)
-	{
+	public String estateEdit(@PathVariable("id") Integer estateId, Model model) {
 		Optional<Estate> result = estateRepo.findById(estateId);
-		
-		if(result.isPresent())
-		{
+
+		if (result.isPresent()) {
 			model.addAttribute("estate", result.get());
 			model.addAttribute("agentList", agentRepo.findAllByOrderBySurname());
 			model.addAttribute("imageForm", service.createImageForm(estateId));
 			return "admin/estateEdit";
-		}
-		else
-		{
+		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Questo immobile non è presente");
 
 		}
 	}
-	
+
 	@PostMapping("/admin/estateList/edit")
 	public String estateSave(@Valid @ModelAttribute("estate") Estate formEstate, BindingResult br, Model model) {
 		boolean hasErrors = br.hasErrors();
