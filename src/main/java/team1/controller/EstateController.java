@@ -2,6 +2,7 @@ package team1.controller;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class EstateController {
 	public String estates(Model model) {
 		Period diff;
 		Integer daysDiff = 0;
-		estateListForUsers = null;
+		estateListForUsers = new ArrayList<>();
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 
 		for (Estate e : estateList) {
@@ -62,7 +63,7 @@ public class EstateController {
 		}
 
 		model.addAttribute("estateList", estateListForUsers);
-		return "estate/estateList";
+		return "/estate/estateList";
 	}
 
 	// pagina con la lista di tutti gli immobili per l'admin
