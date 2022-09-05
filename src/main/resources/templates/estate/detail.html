@@ -3,7 +3,7 @@
 
 <head>
 	<th:block th:replace="fragment/fragment :: scr-head"></th:block>
-	<title>Dettagli proprietà</title>
+	<title>Dettagli propriet&aacute;</title>
 </head>
 <body>
 	<header>
@@ -27,13 +27,26 @@
 						<span class="visually-hidden">Next</span>
 					  </button>
 				</div>
-				<div id="EstateBaseData" class="col-4">
-
+				<div id="EstateBaseData" class="d-flex col-4 p-4">
+					<h3 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city}|"></h3>
+					<h2>Prezzo immobile</h2>
+					<h2 th:text="${estate.price}"></h2>
 				</div>
 			</div>
 			<div class="row">
-				<div id="EstateComplementaryData" class="col-5">
-
+				<div id="EstateComplementaryData" class="col-5 p-4">
+					<ul class="list-group">
+						<li class="list-group-item" th:text="|Tipo di immobile: ${estate.type}"></li>
+						<li class="list-group-item" th:text="|Piano: ${estate.floorNumber}|"></li>
+						<li class="list-group-item" th:text="|Interno: ${estate.interior}|"></li>
+						<li class="list-group-item" th:text="|Superficie totale: ${estate.area}m&#178;|"></li>
+						<li class="list-group-item" th:text="|Classe energetica: ${estate.energyClass}|"></li>
+						<li class="list-group-item" th:text="|Numero vani: ${estate.numSpaces}|"></li>
+						<li class="list-group-item" th:text="|Numero bagni: ${estate.numBathrooms}|"></li>
+						<li class="list-group-item" th:if=" ${estate.numBalconies}>0" th:text="|Numero balconi: ${estate.numBalconies}|" ></li>
+						<li class="list-group-item" th:if="${estate.hasCarSpot==true}">L'immobile è munito di posto auto</li>
+						<li class="list-group-item" th:if="${estate.hasGarden==true}">L'immobile presenta spazio esterno con giardino</li>
+					</ul>
 				</div>
 				<div id="agentCardData" class="col-5"> <!--card con dati dell'agente assegnato-->
 					<div class="container m-2 d-flex justify-content-center">
