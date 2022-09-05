@@ -440,46 +440,26 @@
         </div>
 
         <div class="col-4">
-          <h4>Agenti</h4>
-          <div class="form-check" th:each="a : ${agentList}">
-            <input
-              class="form-check-input"
-              th:field="*{agent}"
-              type="checkbox"
-              th:id="|agent_${a.id}|"
-              th:value="${a.id}"
-            />
-            <label
-              class="form-check-label"
-              th:for="|agent_${a.id}|"
-              th:text="|${a.surname} ${a.name}|"
-            ></label>
-          </div>
-          <div th:if="${#fields.hasErrors('agent')}" class="invalid-feedback">
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('agent')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-      </form>
-      
-      <div class="mb-3 mt-3" th:if="${estate.id != null}">
-          <form
-            id="form-img"
-            th:object="${imageForm}"
-            th:action="|/estate/image/save/${estate.id}|"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-            <input type="hidden" th:field="${estate.id}" />
-            <div class="m-3">
-              <label for="contentMultipart" class="form-label">Aggiungi una nuova immagine</label>
-              <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
+<h4>Agenti</h4>
+				<div class="form-check" th:each="a : ${agentList}">
+				  <input class="form-check-input" th:field="*{agent}" type="checkbox" th:id="|agent_${a.id}|" th:value="${a.id}">
+				  <label class="form-check-label" th:for="|agent_${a.id}|" th:text="${a.name}"></label>
+				</div>
+            <div th:if="${#fields.hasErrors('agent')}" class="invalid-feedback">
+              <ul>
+                <li
+                  th:each="err : ${#fields.errors('agent')}"
+                  th:text="${err}"
+                ></li>
+              </ul>
             </div>
-            <button class="btn btn-danger" type="submit">Salva</button>
+          </div>
+
+			
+			<div>
+  				<button type="submit" class="btn btn-danger">Salva</button>
+  				<a class="btn btn-danger" href="/estate/admin/estateList">Annulla</a>
+  			</div>
           </form>
         </div>
     </div>
