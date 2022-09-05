@@ -19,19 +19,18 @@
   <thead>
   <h3>Dati agenti</h3>
     <tr>
-      <th scope="col">Nome</th>
-      <th scope="col">Cognome</th>
-      <th scope="col">Appuntamenti effettuati</th>
-      <th scope="col">Immobili venduti/affittati</th>
+      <th class="table-dark" scope="col">Nome</th>
+      <th class="table-dark" scope="col">Cognome</th>
+      <th class="table-dark" scope="col">Appuntamenti effettuati</th>
+      <th class="table-dark" scope="col">Immobili venduti/affittati</th>
     </tr>
   </thead>
   <tbody>
-    <tr th:each="a : ${agentList}> 
-      <th scope="row" th:text="${a.name}"></th>
-      <th scope="row" th:text="${a.surname}"></th>
-      <th scope="row" >0</th>
-      <th scope="row" >0</th>
-      <th scope="row" >0</th>
+    <tr th:each="a : ${agentList} "> 
+      <th class="table-primary" scope="row" th:text="${a.name}"></th>
+      <th class="table-success" scope="row" th:text="${a.surname}"></th>
+      <th class="table-danger" scope="row" >0</th>
+      <th class="table-warning" scope="row" >0</th>
     </tr>
     
   </tbody>
