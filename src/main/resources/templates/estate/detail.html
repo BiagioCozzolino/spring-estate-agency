@@ -27,11 +27,10 @@
 						<span class="visually-hidden">Next</span>
 					  </button>
 				</div>
-				<div id="EstateBaseData" class="d-flex col-4 p-4">
+				<div id="EstateBaseData" class="d-flex col-4">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><h5 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city}|"></h5></li>
-						<li class="list-group-item"><h4>Prezzo immobile</h4></li>
-						<li class="list-group-item"><h4 th:text="|${estate.price}&euro;|"></h4></li>
+						<li class="list-group-item"><h5 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city} ${estate.province}|"></h5></li>
+						<li class="list-group-item"><h4>Prezzo immobile</h4> <span><h4 th:text="|${estate.price}&euro;|"></h4></span> </li>
 					</ul>
 				</div>
 			</div>
@@ -50,7 +49,7 @@
 						<li class="list-group-item" th:if="${estate.hasGarden==true}">L'immobile presenta spazio esterno con giardino</li>
 					</ul>
 				</div>
-				<div id="agentCardData" class="col-5 container "> <!--card con dati dell'agente assegnato-->
+				<div id="agentCardData" class="col-5 container" style="width:400px;"> <!--card con dati dell'agente assegnato-->
 					<div class="m-2 d-flex justify-content-center">
 						<div class="card p-3">
 							<div class="d-flex align-items-center">
