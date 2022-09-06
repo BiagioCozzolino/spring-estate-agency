@@ -8,12 +8,13 @@
   <body>
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
 
-    <div class="container" th:each="a : ${appointmentList} ">
-      <h1 class="text-center">Benvenuto nell'area appuntamenti</h1>
+	<h1 class="text-center">Benvenuto nell'area appuntamenti</h1>
       <h2
         class="text-center"
         th:text="'Stai prenotando un appuntamento con : ' + ${a.agent.name}"
       ></h2>
+    <div class="container" th:each="a : ${appointmentList} ">
+      
 <!--
       <form
         id="form-agent"
