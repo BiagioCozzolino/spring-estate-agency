@@ -41,14 +41,15 @@ public class EstateController {
 	@Autowired
 	private EstateImageService service;
 
-	private List<Estate> estateListForUsers;
+	
 
 	// pagina con la lista di tutti gli immobili per gli utenti
 	@GetMapping
 	public String estates(Model model) {
 		Period diff;
 		Integer daysDiff = 0;
-		List<Estate> estateList = new ArrayList<Estate>();
+		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
+		List<Estate> estateListForUsers = new ArrayList<Estate>();
 
 		for (Estate e : estateList) {
 
