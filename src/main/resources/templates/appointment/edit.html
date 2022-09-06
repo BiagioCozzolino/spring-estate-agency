@@ -3,14 +3,15 @@
 <head>
    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
    
-    <title>Inserisci nuovo Agente</title>
+    <title>Inserisci appuntamento</title>
 </head>
 <body>
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
     
-    <div class="container">
-    	<h1 class="text-center">Inserisci un nuovo Agente immobiliare, compila i seguenti dati:</h1>
-    	
+    <div class="container" th:each="a : ${appointmentList} ">
+    	<h1 class="text-center">Benvenuto nell'area appuntamenti</h1>
+    	<h2 class="text-center" th:text="'Stai prenotando un appuntamento con : ' + ${a.agent.name}"> </h2>
+    	<!--
     	<form
   			id="form-agent"
   			th:object="${agent}"
@@ -86,6 +87,7 @@
   				<a class="btn btn-primary mt-3" href="/agent">Cancel</a>
   			</div>
     	</form>
+    	-->
     </div>
     <div th:replace="fragment/fragment :: footer"> </div>
 </body>
