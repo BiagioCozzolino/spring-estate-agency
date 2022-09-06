@@ -34,8 +34,8 @@
 							<th  class="table-dark">Data di vendita/affitto</th>
 							<th  class="table-dark">Stato</th>
 							<th  class="table-dark"></th>
-							<th  class="table-dark"></th>
-							<th  class="table-dark"></th>
+							<th  class="table-dark">Azioni</th>
+							
 							
 						</tr>
 					</thead>
@@ -51,11 +51,10 @@
 							<td class="table-info" th:text="${e.contractStart}"></td>
 							<td class="table-info" th:text="${e.status}"></td>
 							<td class="table-info">
-							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-primary btn-sm">Modifica</a>
-							</td>
-							<td class="table-info">
+							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-primary btn-sm mb-2">Modifica</a>
 							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-light btn-sm">Dettagli</a>
 							</td>
+							
 						</tr>
 					</tbody>
 				</table>
