@@ -171,27 +171,35 @@ public class Agent {
 		this.hired = hired;
 	}
 
-	public Integer getCountSold() {
-		Integer res = 0;
-		for (Estate e : estate) {
-			if (e.getStatusValue(e.getStatus()) == 2) {
+
+	public Integer getCountSold()
+	{
+		Integer res=0;
+		for(Estate e : estate)
+		{
+			if(e.getStatusValue(e.getStatus())==2)
+			{
 				res++;
 			}
 		}
 		return res;
 	}
-
-	public Integer getCountRented() {
-		Integer res = 0;
-		for (Estate e : estate) {
-			if (e.getStatusValue(e.getStatus()) == 1) {
+	
+	public Integer getCountRented()
+	{
+		Integer res=0;
+		for(Estate e : estate)
+		{
+			if(e.getStatusValue(e.getStatus())==1)
+			{
 				res++;
 			}
 		}
 		return res;
 	}
-
-	public Integer getCountSoldAndRented() {
+	
+	public Integer getCountSoldAndRented() 
+	{
 		return getCountRented() + getCountSold();
 	}
 }
