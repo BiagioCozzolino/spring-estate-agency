@@ -1,5 +1,6 @@
 package team1.model;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -359,5 +360,12 @@ public class Estate {
 
 		return res;
 
+	}
+	
+	public String getFormattedPrice(Double price)
+	{
+		DecimalFormat df = new DecimalFormat ("#.00€");
+		
+		return df.format(price);
 	}
 }
