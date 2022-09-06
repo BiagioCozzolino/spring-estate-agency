@@ -9,12 +9,16 @@
 
 <body>
 	<div th:replace="fragment/fragment :: navbar"></div>
-	<div class="container text-center w-75 mt-3">
-		<h1>Immobili</h1>
+	<div class="container">
+		<h1 class="text-center">Gestione Immobili Admin</h1>
 		<hr />
+		
+		<a class="btn btn-primary mb-3" href="/admin">Pannello Admin</a>
+			<a class="btn btn-success mb-3 mx-3" href="/estate/admin/estateList/edit">Crea nuovo Immobile</a>
 		<div th:if="${#lists.isEmpty(estateListAdmin)}">
 			<h1 class="font-family sans-serif">Spiacenti, non è disponibile una lista di immobili</h1>
 		</div>
+		
 		<div th:unless="${#lists.isEmpty(estateListAdmin)}">
 			<div class="text-light">
 				<table class="table">

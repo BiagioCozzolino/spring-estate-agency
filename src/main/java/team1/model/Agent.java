@@ -65,11 +65,17 @@ public class Agent {
 
 	private boolean hired = true;
 
+	// Collegamento con le Immagini
 	@OneToMany(mappedBy = "agent")
 	private List<AgentImage> agentImage;
 
+	// Collegamento con gli Immobili
 	@OneToMany(mappedBy = "agent")
 	private List<Estate> estate;
+
+	// Collegamento con gli appuntamenti
+	@OneToMany(mappedBy = "agent")
+	private List<Appointment> appointment;
 
 	// Getter and Setter
 
@@ -165,4 +171,27 @@ public class Agent {
 		this.hired = hired;
 	}
 
+	public Integer getCountSold() {
+		Integer res = 0;
+		for (Estate e : estate) {
+			if (e.getStatusValue(e.getStatus()) == 2) {
+				res++;
+			}
+		}
+		return res;
+	}
+
+	public Integer getCountRented() {
+		Integer res = 0;
+		for (Estate e : estate) {
+			if (e.getStatusValue(e.getStatus()) == 1) {
+				res++;
+			}
+		}
+		return res;
+	}
+
+	public Integer getCountSoldAndRented() {
+		return getCountRented() + getCountSold();
+	}
 }

@@ -15,6 +15,8 @@
 	<div th:unless="${#lists.isEmpty(agentList)}">
 		<div class="container">
 			<h1>Ecco tutti i nostri user</h1>
+			<a class="btn btn-primary mb-3" href="/admin">Pannello Admin</a>
+			<a class="btn btn-success mb-3 mx-3" href="/agent/edit">Crea nuovo Agente</a>
 
 			<table class="table">
 				<thead>

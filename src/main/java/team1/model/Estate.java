@@ -15,6 +15,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -101,6 +102,9 @@ public class Estate {
 
 	// @ColumnDefault("0")
 	private Integer numLikes = 0;
+
+	@OneToMany(mappedBy = "estate")
+	private List<Appointment> appointment;
 
 	// Getters and setters
 
