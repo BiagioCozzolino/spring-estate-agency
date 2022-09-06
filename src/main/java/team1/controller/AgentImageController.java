@@ -39,7 +39,7 @@ public class AgentImageController {
 		AgentImageForm imageForm = service.createImageForm(agentId);
 		model.addAttribute("imageList", image);
 		model.addAttribute("imageForm", imageForm);
-		return "/image/list";
+		return "/agentImage/list";
 	}
 
 	@PostMapping("/save")
