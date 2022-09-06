@@ -65,11 +65,17 @@ public class Agent {
 
 	private boolean hired = true;
 
+	// Collegamento con le Immagini
 	@OneToMany(mappedBy = "agent")
 	private List<AgentImage> agentImage;
 
+	// Collegamento con gli Immobili
 	@OneToMany(mappedBy = "agent")
 	private List<Estate> estate;
+
+	// Collegamento con gli appuntamenti
+	@OneToMany(mappedBy = "agent")
+	private List<Appointment> appointment;
 
 	// Getter and Setter
 
@@ -164,6 +170,7 @@ public class Agent {
 	public void setHired(boolean hired) {
 		this.hired = hired;
 	}
+
 
 	public Integer getCountSold()
 	{
