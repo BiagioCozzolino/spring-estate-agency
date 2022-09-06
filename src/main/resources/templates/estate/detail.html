@@ -10,7 +10,7 @@
 		<th:block th:replace="fragment/fragment :: navbar"></th:block>
 	</header>
 	<main>
-		<div class="container w-75"> <!-- container più grande, per far venire tutto centrato-->
+		<div class="container w-75 my-5" width="300" height="300"> <!-- container più grande, per far venire tutto centrato-->
 			<div class="row">
 				<div id="carouselForEstateImagesFade" class="carousel slide carousel-fade col-7" data-bs-ride="carousel"> <!-- carosello immagini-->
 					<div class="carousel-inner">
@@ -28,9 +28,11 @@
 					  </button>
 				</div>
 				<div id="EstateBaseData" class="d-flex col-4 p-4">
-					<h3 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city}|"></h3>
-					<h2>Prezzo immobile</h2>
-					<h2 th:text="${estate.price}"></h2>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><h3 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city}|"></h3></li>
+						<li class="list-group-item"><h2>Prezzo immobile</h2></li>
+						<li class="list-group-item"><h2 th:text="|${estate.price}&euro;|"></h2></li>
+					</ul>
 				</div>
 			</div>
 			<div class="row">
@@ -78,3 +80,4 @@
 </body>
 
 </html>
+

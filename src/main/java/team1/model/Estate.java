@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.DecimalMin;
@@ -45,9 +46,13 @@ public class Estate {
 	@Column(nullable = false)
 	private String zipCode;
 
-	@NotEmpty(message = "Non esistono immobili senza CAP")
+	@NotEmpty(message = "Non esistono immobili senza città")
 	@Column(nullable = false)
 	private String city;
+	
+	@NotEmpty(message = "Non esistono immobili senza provincia")
+	@Column(nullable = false)
+	private String province;
 
 	@NotNull
 	@Min(1)
@@ -89,6 +94,13 @@ public class Estate {
 	private Boolean hasCarSpot;
 
 	private Boolean hasGarden;
+	
+	@NotEmpty(message="L'annuncio deve necessariamente avere un titolo")
+	@Column(nullable = false)
+	private String adTitle;
+	
+	@Lob
+	private String description;
 
 	@ManyToOne
 	@NotNull
@@ -290,6 +302,30 @@ public class Estate {
 
 	public void setImages(List<EstateImage> images) {
 		this.images = images;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getAdTitle() {
+		return adTitle;
+	}
+
+	public void setAdTitle(String adTitle) {
+		this.adTitle = adTitle;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getFormattedContractStart() {
