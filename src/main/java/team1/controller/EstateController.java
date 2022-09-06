@@ -2,6 +2,7 @@ package team1.controller;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +48,7 @@ public class EstateController {
 	public String estates(Model model) {
 		Period diff;
 		Integer daysDiff = 0;
-		estateListForUsers = null;
-		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
+		List<Estate> estateList = new ArrayList<Estate>();
 
 		for (Estate e : estateList) {
 
@@ -61,7 +61,7 @@ public class EstateController {
 				daysDiff = diff.getDays();
 			}
 
-			if (daysDiff <= 7) {
+			if (daysDiff <= 7 && (e.getStatusValue(e.getStatus())==2 || e.getStatusValue(e.getStatus())==1)) {
 				estateListForUsers.add(e);
 			}
 		}
