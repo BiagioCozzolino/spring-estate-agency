@@ -8,18 +8,14 @@
   <body>
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
 
-	<h1 class="text-center">Benvenuto nell'area appuntamenti</h1>
-      <h2
-        class="text-center"
-        th:text="'Stai prenotando un appuntamento con : ' + ${a.agent.name}"
-      ></h2>
-    <div class="container" th:each="a : ${appointmentList} ">
+    <div class="container">
+      <h1 class="text-center">Benvenuto nell'area appuntamenti</h1>
       
-<!--
+      <h2> Inserisci i tuoi dati</h2>
       <form
-        id="form-agent"
-        th:object="${agent}"
-        th:action="@{/agent/edit}"
+        id="form-appointment"
+        th:object="${appointment}"
+        th:action="@{/appointment/edit}"
         method="POST"
       >
         <input type="hidden" th:field="*{id}" />
@@ -32,7 +28,7 @@
             th:errorClass="is-invalid"
             placeholder="nome"
           />
-          <label for="floatingInput">Nome agente</label>
+          <label for="floatingInput">Nome</label>
           <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
             <ul>
               <li
@@ -51,11 +47,12 @@
             th:errorClass="is-invalid"
             placeholder="cognome"
           />
-          <label for="floatingInput">Cognome agente</label>
+          <label for="floatingInput">Cognome</label>
           <div th:if="${#fields.hasErrors('surname')}" class="invalid-feedback">
             <ul>
               <li
                 th:each="err : ${#fields.errors('surname')}"
+
                 th:text="${err}"
               ></li>
             </ul>
@@ -70,7 +67,7 @@
             th:errorClass="is-invalid"
             placeholder="email"
           />
-          <label for="floatingInput">E-Mail agente</label>
+          <label for="floatingInput">E-Mail</label>
           <div th:if="${#fields.hasErrors('email')}" class="invalid-feedback">
             <ul>
               <li
@@ -81,69 +78,52 @@
           </div>
         </div>
 
+
         <div class="form-floating mt-3 has-validation">
-          <input
-            type="text"
-            class="form-control"
-            th:field="*{password}"
-            id="password"
-            th:errorClass="is-invalid"
-            placeholder="password"
-          />
-          <label for="floatingPassword">Password agente</label>
-          <div
-            th:if="${#fields.hasErrors('password')}"
-            class="invalid-feedback"
-          >
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('password')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="form-floating mb-3 mt-3 has-validation">
-          <input
-            type="date"
-            class="form-control"
-            th:field="*{hiringDate}"
-            id="hiringDate "
-            th:errorClass="is-invalid"
-            placeholder="hiringDate"
-          />
-          <label for="floatingInput">Data assunzione agente</label>
-          <div
-            th:if="${#fields.hasErrors('hiringDate')}"
-            class="invalid-feedback"
-          >
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('hiringDate')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="form-floating mb-3 mt-3 has-validation">
           <input
             type="number"
             class="form-control"
-            th:field="*{securityLevel}"
-            id="securityLevel"
+            th:field="*{phone}"
+            id="phone"
             th:errorClass="is-invalid"
-            placeholder="securityLevel"
+            placeholder="phone"
           />
-          <label for="floatingInput">Livello sicurezza agente</label>
+          <label for="floatingPassword"> Numero di telefono</label>
           <div
-            th:if="${#fields.hasErrors('securityLevel')}"
+            th:if="${#fields.hasErrors('phone')}"
             class="invalid-feedback"
           >
             <ul>
               <li
-                th:each="err : ${#fields.errors('securityLevel')}"
+
+                th:each="err : ${#fields.errors('phone')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+        <h2> Inserisci data e orario dell'appuntamento:</h2>
+        <h4>Inserire solo l'ora della prenotazione senza i minuti</h4>
+        <div class="form-floating mt-3 has-validation">
+          <input
+            type="datetime-local"
+            class="form-control"
+            th:field="*{date}"
+            id="date"
+            th:errorClass="is-invalid"
+            placeholder="date"
+
+          />
+          <label for="floatingPassword">Data Appuntamento</label>
+          <div
+            th:if="${#fields.hasErrors('date')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('date')}"
                 th:text="${err}"
               ></li>
             </ul>
@@ -153,7 +133,8 @@
           <button type="submit" class="btn btn-primary mt-3">Save</button>
           <a class="btn btn-primary mt-3" href="/agent">Cancel</a>
         </div>
-      </form>-->
+
+      </form>
     </div>
     <div th:replace="fragment/fragment :: footer"></div>
   </body>
