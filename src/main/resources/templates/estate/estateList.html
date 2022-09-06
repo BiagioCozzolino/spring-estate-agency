@@ -13,26 +13,10 @@
 		<div th:unless="${#lists.isEmpty(estateList)}">
 		<div class="container d-flex justify-content-around my-5"> <!--contenitore di tutte le card-->
 		  <div class="d-flex flex-row flex-wrap m-3"> <!--contenitore della row di card-->
-		    <div class="card rounded-3 border border-secondary" th:each="e : ${estateList}">
-		      
-          <div id="carouselForEstateImagesFade" class="carousel slide carousel-fade col-7" data-bs-ride="carousel"> <!-- carosello immagini-->
-            <div class="carousel-inner">
-              <div th:each="img : ${e.images}" class="carousel-item">
-                <img th:src="@{|/estate/image/${img.id}/content|}" class="img-fluid" alt="Immagine immobile">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselForEstateImagesFade" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselForEstateImagesFade" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-              </button>
-          </div>
-
+		    <div class="card rounded-3 border border-secondary m-5" th:each="e : ${estateList}" style="max-width: 300px; max-height:600px;">		      
+                <img th:src="@{|/estate/image/${e.images.get(0).getId()}/content|}" class="img-fluid" alt="Immagine immobile">              
 		      <div class="card-body">
-		        <p class="badge bg-primary rounded-pill" th:text="|${e.price}&euro;|"></p>
+		        <p class="badge bg-primary rounded-pill" th:text="|${e.getFormattedPrice(e.price)}|"></p>
 		        <h5 class="card-title" th:text="${e.type}"></h5>
 		        <p class="card-text" th:text="|${e.address}, ${e.houseNumber} ${e.zipCode} ${e.city}|"></p>
 		        <a th:href="@{|/estate/${e.id}|}" class="btn btn-primary rounded-3">Vedi dettagli</a>

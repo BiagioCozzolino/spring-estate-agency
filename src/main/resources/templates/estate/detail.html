@@ -10,11 +10,13 @@
 		<th:block th:replace="fragment/fragment :: navbar"></th:block>
 	</header>
 	<main>
-		<div class="container w-75 my-5" width="300" height="300"> <!-- container più grande, per far venire tutto centrato-->
+
+		<div class="container w-75 my-5"> <!-- container più grande, per far venire tutto centrato-->
+
 			<div class="row">
-				<div id="carouselForEstateImagesFade" class="carousel slide carousel-fade col-7" data-bs-ride="carousel"> <!-- carosello immagini-->
-					<div class="carousel-inner">
-						<div th:each="img : ${estate.images}" class="carousel-item">
+				<div id="carouselForEstateImagesFade" class="carousel slide carousel-fade rounded-3 col-7" data-bs-ride="carousel"> <!-- carosello immagini-->
+					<div class="carousel-inner rounded-3" style="max-width : 500px; height: 300px">
+						<div th:each="img,iter : ${estate.images}" class="carousel-item" th:classappend="${iter.index == 0 ? 'active' : ''}">
 							<img th:src="@{|/estate/image/${img.id}/content|}" class="img-fluid" alt="Immagine immobile">
 						</div>
 					</div>
@@ -27,11 +29,11 @@
 						<span class="visually-hidden">Next</span>
 					  </button>
 				</div>
-				<div id="EstateBaseData" class="d-flex col-4 p-4">
+				<div id="EstateBaseData" class="d-flex col-4">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><h3 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city}|"></h3></li>
-						<li class="list-group-item"><h2>Prezzo immobile</h2></li>
-						<li class="list-group-item"><h2 th:text="|${estate.price}&euro;|"></h2></li>
+						<li class="list-group-item"><h4 th:text="${estate.adTitle}"></h4></li>
+						<li class="list-group-item"><h5 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city} ${estate.province}|"></h5></li>
+						<li class="list-group-item"><h4>Prezzo immobile</h4> <span><h4 th:text="|${estate.getFormattedPrice(estate.price)}|"></h4></span> </li>
 					</ul>
 				</div>
 			</div>
@@ -50,16 +52,20 @@
 						<li class="list-group-item" th:if="${estate.hasGarden==true}">L'immobile presenta spazio esterno con giardino</li>
 					</ul>
 				</div>
-				<div id="agentCardData" class="col-5"> <!--card con dati dell'agente assegnato-->
-					<div class="container m-2 d-flex justify-content-center">
+				<div id="agentCardData" class="col-5 container" style="width:400px;"> <!--card con dati dell'agente assegnato-->
+					<div>
+						<h5>Descrizione immobile</h5>
+						<p th:text="${estate.description}"></p>
+					</div>
+					<div class="m-2 d-flex justify-content-center">
 						<div class="card p-3">
 							<div class="d-flex align-items-center">
 								<div class="image">	
-									<!--qui va inserita l'immagine dell'agente, non ne conosco il collegamento per il th:src al momento-->						
-									<img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded">
+									<!--"qui va inserita l'immagine dell'agente, non ne conosco il collegamento per il th:src al momento-->						
+									<img th:src="@{|/image/${estate.agent.getId()}/content|}" style="height:100px;width:100px;" class="rounded-3">
 									
 								</div>
-								<div class="p-3 w-100">
+								<div class="p-3">
 										<h4 th:text="|${estate.agent.name} ${estate.agent.surname}|"></h4>
 										<h5 th:text="${estate.agent.email}"></h5>
 								</div>
@@ -80,4 +86,3 @@
 </body>
 
 </html>
-
