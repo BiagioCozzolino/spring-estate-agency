@@ -19,6 +19,12 @@
         method="POST"
       >
         <input type="hidden" th:field="*{id}" />
+        <h3>Stai prenotando un appuntamento per l'immobile:</h3>
+        <label for="cars">Nome annuncio</label>
+
+		<select id="estate">
+  			<option th:value="${estate.adress}"></option>
+		</select>
         <div class="form-floating mb-3 mt-3 has-validation">
           <input
             type="text"

@@ -28,7 +28,10 @@
 						<th scope="col" class="table-dark">Matricola agente</th>
 						<th scope="col" class="table-dark">Data assunzione</th>
 						<th scope="col" class="table-dark">Livello di Sicurezza</th>
-						<th scope="col" class="table-dark">Azioni</th>
+						<th scope="col" class="table-dark">Dettagli</th>
+						<th scope="col" class="table-dark">Modifica</th>
+						<th scope="col" class="table-dark">Elimina</th>
+						<th scope="col" class="table-dark">Lista Immagini</th>
 						
 					</tr>
 				</thead>
@@ -38,12 +41,19 @@
 						<td class="table-primary" th:text="${a.Surname}"></td>
 						<td class="table-success" th:text="${a.Email}"></td>
 						<td class="table-warning" th:text="${a.Password}"></td>
-						<td class="table-warning" th:text="${a.serialNumber}"></td>
-						<td class="table-warning" th:text="${a.getFormattedHiringDate()}"></td>
+						<td class="table-light" th:text="${a.serialNumber}"></td>
+						<td class="table-primary" th:text="${a.getFormattedHiringDate()}"></td>
 						<td class="table-danger" th:text="${a.SecurityLevel}"></td>
-						<td class="table-info">
+						<td class="table-success">
+                            <a class="btn btn-primary d-block mb-3  rounded-pill" title="Dettagli" th:href="@{|/agent/${a.getId()}|}"><i class="fa-solid fa-info"></i></a>
+              </td>
+						<td class="table-secondary">
               <a class="btn btn-dark d-block mb-3 rounded-pill" title="Modifica" th:href="@{|/agent/edit/${a.getId()}|}"><i class="fa-solid fa-pencil"></i></a>
+						</td>
+						<td class="table-danger">
               <a class="btn btn-danger d-block mb-3 rounded-pill" width:"100%" title="Cancella"  onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
+						</td>
+						<td class="table-info">
               <a class="btn btn-warning d-block mb-3  rounded-pill" title="Inserisci immagine" th:href="@{|/image/list/${a.getId()}|}"><i class="fa-solid fa-image"></i></a>
               </td>
 					</tr>
