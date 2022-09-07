@@ -14,7 +14,8 @@
 		<div class="container d-flex justify-content-around my-5"> <!--contenitore di tutte le card-->
 		  <div class="d-flex flex-row flex-wrap m-3"> <!--contenitore della row di card-->
 		    <div class="card rounded-3 border border-secondary m-5" th:each="e : ${estateList}" style="max-width: 300px; max-height:600px;">		      
-                <img th:src="@{|/estate/image/${e.images.get(0).getId()}/content|}" class="img-fluid" alt="Immagine immobile">              
+                <img th:if="${e.images.size()==0}" src="/img/Casa Stilizzata.jpg" alt="template casa">
+				<img th:if="${e.images.size()!=0}" th:src="@{|/estate/image/${e.images.get(0).getId()}/content|}" class="img-fluid" alt="Immagine immobile">              
 		      <div class="card-body">
 		        <p class="badge bg-primary rounded-pill" th:text="|${e.getFormattedPrice(e.price)}|"></p>
 		        <h5 class="card-title" th:text="${e.type}"></h5>

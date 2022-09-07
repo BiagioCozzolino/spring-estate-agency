@@ -21,7 +21,7 @@ public interface EstateRepository extends CrudRepository<Estate, Integer> {
 	public List<Estate> findByTypeIgnoreCase(String type);
 	
 	//ricerca indirizzo
-	public List<Estate> findByAddressContainsIgnoreCase(String string);
+	public List<Estate> findByAddressContainsIgnoreCase(String address);
 	
 	//ricerca per il prezzo
 	public List<Estate> findByPriceGreaterThanEqualOrderByAddressAsc(Double price);
@@ -58,4 +58,22 @@ public interface EstateRepository extends CrudRepository<Estate, Integer> {
 	
 	public Optional<Estate> findByAddressAndHouseNumberAndInteriorAndZipCode(String address, Integer houseNumber, Integer interior, String ZipCode);
 
+	//filtro per pagina di ricerca
+	public List<Estate> findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrderByAddressAsc
+	(
+			String address, 
+			String zipCode, 
+			String city, 
+			String province, 
+			Double priceHigher, 
+			Double priceLower, 
+			String energyClass, 
+			Integer numSpaces, 
+			Integer numBathrooms, 
+			Integer numBalconies, 
+			Boolean hasCarSpot, 
+			Boolean hasGarden, 
+			Integer areaHigher, 
+			Integer areaLower
+	);       
 }
