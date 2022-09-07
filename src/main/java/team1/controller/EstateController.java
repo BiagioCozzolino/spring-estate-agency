@@ -42,8 +42,6 @@ public class EstateController {
 	@Autowired
 	private EstateImageService service;
 
-	
-
 	// pagina con la lista di tutti gli immobili per gli utenti
 	@GetMapping
 	public String estates(Model model) {
@@ -167,6 +165,7 @@ public class EstateController {
 			return "redirect:/estate/admin/estateList";
 		}
 	}
+
 
 	
 			
