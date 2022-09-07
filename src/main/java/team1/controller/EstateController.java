@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -91,6 +92,7 @@ public class EstateController {
 
 		}
 	}
+	
 
 	@GetMapping("/admin/estateList/edit")
 	public String estateAddForm(Model model) {
@@ -161,8 +163,24 @@ public class EstateController {
 		}
 	}
 
-	@PostMapping("/admin/estateList/edit/{id}")
-	public String estatePartUpdate(@PathVariable ("id") Integer estateId, @ModelAttribute Estate estate, )
+	
+			
+	@PostMapping("/admin/estateList/{id}")
+	public String estatePartUpdate(@PathVariable ("id") Integer estateId, @RequestParam(name="status") String status)
+	{
+		Optional<Estate> result = estateRepo.findById(estateId);
+		
+		if(result.isPresent())
+		{
+			result.get().setStatus(status);
+		}
+		try {
+			estateRepo.save(result.get());
+		} catch (Exception e) {
+			return "admin/estateList";
+		}
+		return "redirect:/estate/admin/estateList";
+	}
 	
 	@GetMapping("/admin/estate/delete/{id}")
 	public String deleteEstate(@PathVariable("id") Integer estateId, RedirectAttributes ra) {
@@ -178,5 +196,6 @@ public class EstateController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'immobile " + estateId + " non trovato");
 		}
 	}
+	
 
 }

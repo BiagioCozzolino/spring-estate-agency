@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
+    <title>Ricerca</title>
+</head>
+<body>
+    <th:block th:replace="fragment/fragment :: navbar"></th:block> </thead>
+    
+    <div class="container">
+        <form action="/estate/search">
+            Indirizzo: <input class="form-control" type="text" name="queryAddress">
+            CAP: <input class="form-control" type="text" name="queryZipCode">
+            Citt&aacute;: <input class="form-control" type="text" name="queryCity">
+            Provincia: <input class="form-control" type="text" name="queryProvince">
+            Classe Energetica: <input class="form-control" type="text" name="queryEnergyClass">
+            Superficie maggiore di: <input class="form-control" type="number" name="queryAreaHigher">
+            Superficie minore di: <input class="form-control" type="number" name="queryAreaLower">
+            Prezzo maggiore di: <input class="form-control" type="number" name="queryPriceHigher">
+            Prezzo minore di: <input class="form-control" type="number" name="queryPriceLower">
+            Numero di vani: <input class="form-control" type="number" name="queryNumSpaces">
+            Numero di bagni: <input class="form-control" type="number" name="queryNumBathrooms">
+            Numero di Balconi: <input class="form-control" type="number" name="queryNumBalconies">
+            Posto auto disponibile: <input class="form-check-input" type="checkbox" name="queryHasCarSpot">
+            Giardino: <input class="form-check-input" type="checkbox" name="queryHasGarden">
+            <hr>
+            <button type="submit" class="btn btn-danger">Cerca</button>
+      </form>
+    </div>  
+
+    <footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
+</body>
+</html>
