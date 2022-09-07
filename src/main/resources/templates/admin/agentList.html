@@ -24,6 +24,7 @@
 						<th scope="col" class="table-dark">Nome</th>
 						<th scope="col" class="table-dark">Cognome</th>
 						<th scope="col" class="table-dark">E-Mail</th>
+						<th scope="col" class="table-dark">Numero di telefono</th>
 						<th scope="col" class="table-dark">Password</th>
 						<th scope="col" class="table-dark">Matricola agente</th>
 						<th scope="col" class="table-dark">Data assunzione</th>
@@ -40,6 +41,7 @@
 						<td class="table-secondary" th:text="${a.Name}"></td>
 						<td class="table-primary" th:text="${a.Surname}"></td>
 						<td class="table-success" th:text="${a.Email}"></td>
+						<td class="table-danger" th:text="${a.Phone}"></td>
 						<td class="table-warning" th:text="${a.Password}"></td>
 						<td class="table-light" th:text="${a.serialNumber}"></td>
 						<td class="table-primary" th:text="${a.getFormattedHiringDate()}"></td>
