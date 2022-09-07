@@ -61,21 +61,26 @@
 						<div class="card p-3">
 							<div class="d-flex align-items-center">
 								<div class="image">	
-									<!--"qui va inserita l'immagine dell'agente, non ne conosco il collegamento per il th:src al momento-->						
 									<img th:src="@{|/image/${estate.agent.getId()}/content|}" style="height:100px;width:100px;" class="rounded-3">
 									
 								</div>
+								
 								<div class="p-3">
 										<h4 th:text="|${estate.agent.name} ${estate.agent.surname}|"></h4>
 										<h5 th:text="${estate.agent.email}"></h5>
 								</div>
+								
+								
 							</div>
 						</div>
 
 					</div>
+					<h3 class="mt-5">Vuoi avere più dettagli di questo immobile o vederlo da vicino?</h3>
+					<a class="btn btn-primary mb-3" th:href="@{|/appointment/edit/${estate.id}|}">Prenota un appuntamento</a>
 				</div>
+				
 			</div>
-
+			
 		</div>
 	</main>
 	<footer>

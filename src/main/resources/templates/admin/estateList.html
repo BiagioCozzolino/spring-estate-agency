@@ -36,6 +36,7 @@
 							<th  class="table-dark"></th>
 							<th  class="table-dark"></th>
 							<th  class="table-dark"></th>
+							<th class="table-dark">Cambia stato</th>
 							
 						</tr>
 					</thead>
@@ -56,6 +57,42 @@
 							<td class="table-info">
 							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-light btn-sm">Dettagli</a>
 							</td>
+							<!-- <td>
+								<form
+									id="form-estate"
+									th:object="${}"
+									th:action="@{/estate/admin/estateList/edit/${e.id}}"
+									method="POST"
+								>
+								<div class="form-floating mb-3 mt-3 has-validation col-4 pt-3">
+									<select
+									  name="status"
+									  id="status"
+									  th:field="*{estate.status}"
+									  th:errorClass="is-invalid"
+									>
+									  <option value="">--Scegli un'opzione--</option>
+									  <option value="In vendita">In vendita</option>
+									  <option value="In affitto">In affitto</option>
+									  <option value="Venduto">Venduto</option>
+									  <option value="Affittato">Affittato</option>
+									  <option value="Annullato">Annullato</option>
+									</select>
+									<div
+									  th:if="${#fields.hasErrors('e.status')}"
+									  class="invalid-feedback"
+									>
+									  <ul>
+										<li
+										  th:each="err : ${#fields.errors('e.status')}"
+										  th:text="${err}"
+										></li>
+									  </ul>
+									</div>
+								  </div>
+								</form>
+							</td>
+							-->
 						</tr>
 					</tbody>
 				</table>
