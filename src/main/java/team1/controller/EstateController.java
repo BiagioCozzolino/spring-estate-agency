@@ -83,8 +83,13 @@ public class EstateController {
 	@GetMapping("/{id}")
 	public String estateDetail(@PathVariable("id") Integer estateId, Model model) {
 		Optional<Estate> result = estateRepo.findById(estateId);
+		Integer addView;
 		if (result.isPresent()) {
 			Estate modelEstate = result.get();
+			addView = modelEstate.getNumViews();
+			addView=addView+1;
+			modelEstate.setNumViews(addView);
+			estateRepo.save(modelEstate);
 			model.addAttribute("estate", modelEstate);
 			return "/estate/detail";
 		} else {
