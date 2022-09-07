@@ -41,13 +41,10 @@
 						<td class="table-warning" th:text="${a.serialNumber}"></td>
 						<td class="table-warning" th:text="${a.getFormattedHiringDate()}"></td>
 						<td class="table-danger" th:text="${a.SecurityLevel}"></td>
-						<td class="table-info container">
-							<div class="row d-flex">
-								<a class="btn btn-success d-block mb-3 rounded-pill col-3" title="Profilo" th:href="@{|/agent/${a.getId()}|}"><i class="fa-solid fa-user"></i></a>
+						<td class="table-info">
 								<a class="btn btn-dark d-block mb-3 rounded-pill col-3" title="Modifica" th:href="@{|/agent/edit/${a.getId()}|}"><i class="fa-solid fa-pencil"></i></a>
 								<a class="btn btn-danger d-block mb-3 rounded-pill col-3" width:"100%" title="Cancella"  onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
 								<a class="btn btn-warning d-block mb-3  rounded-pill col-3" title="Inserisci immagine" th:href="@{|/image/list/${a.getId()}|}"><i class="fa-solid fa-image"></i></a>
-							</div> 
 						</td>
 					</tr>
 				</tbody>
