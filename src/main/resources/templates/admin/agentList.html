@@ -46,16 +46,16 @@
 						<td class="table-light" th:text="${a.serialNumber}"></td>
 						<td class="table-primary" th:text="${a.getFormattedHiringDate()}"></td>
 						<td class="table-danger" th:text="${a.SecurityLevel}"></td>
-						<td class="table-success">
+						<td class="table-primary">
                             <a class="btn btn-primary d-block mb-3  rounded-pill" title="Dettagli" th:href="@{|/agent/${a.getId()}|}"><i class="fa-solid fa-info"></i></a>
               </td>
-						<td class="table-secondary">
+						<td class="table-primary">
               <a class="btn btn-dark d-block mb-3 rounded-pill" title="Modifica" th:href="@{|/agent/edit/${a.getId()}|}"><i class="fa-solid fa-pencil"></i></a>
 						</td>
-						<td class="table-danger">
+						<td class="table-primary">
               <a class="btn btn-danger d-block mb-3 rounded-pill" width:"100%" title="Cancella"  onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
 						</td>
-						<td class="table-info">
+						<td class="table-primary">
               <a class="btn btn-warning d-block mb-3  rounded-pill" title="Inserisci immagine" th:href="@{|/image/list/${a.getId()}|}"><i class="fa-solid fa-image"></i></a>
               </td>
 					</tr>
