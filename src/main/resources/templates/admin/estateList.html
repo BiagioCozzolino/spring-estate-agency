@@ -61,7 +61,7 @@
 								<form
 									id="form-estate"
 									th:object="${estateList.e}"
-									th:action="@{/estate/admin/estateList/edit}"
+									th:action="@{/estate/admin/estateList/edit/${e.id}}"
 									method="POST"
 								>
 								<div class="form-floating mb-3 mt-3 has-validation col-4 pt-3">

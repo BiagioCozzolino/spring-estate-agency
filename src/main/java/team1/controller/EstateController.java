@@ -161,6 +161,9 @@ public class EstateController {
 		}
 	}
 
+	@PostMapping("/admin/estateList/edit/{id}")
+	public String estatePartUpdate(@PathVariable ("id") Integer estateId, @ModelAttribute Estate estate, )
+	
 	@GetMapping("/admin/estate/delete/{id}")
 	public String deleteEstate(@PathVariable("id") Integer estateId, RedirectAttributes ra) {
 		Optional<Estate> result = estateRepo.findById(estateId);
