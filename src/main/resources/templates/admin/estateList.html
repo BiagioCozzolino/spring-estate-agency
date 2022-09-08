@@ -37,6 +37,7 @@
 							<th  class="table-dark"></th>
 
 							<th  class="table-dark"></th>
+							<th  class="table-dark"></th>
 							<th class="table-dark">Cambia stato</th>
 							
 						</tr>
@@ -60,8 +61,14 @@
 							<td class="table-info">
 							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-primary btn-sm">Dettagli</a>
 							</td>
+<<<<<<< HEAD
 
 
+=======
+							<td>
+								<a type="button" th:href="@{|/estate/image/list/${e.id}|}" class="btn btn-light btn-sm">Immagini</a>
+							</td>
+>>>>>>> b0ce692ec709691515aee17026e4261e5ead6ba5
 							
 							<td>
 
@@ -84,7 +91,7 @@
 									  <option value="Annullato">Annullato</option>
 									</select>
 								  </div>
-								  <button type="submit" class="btn btn-danger">Cerca</button>
+								  <button type="submit" class="btn btn-danger" title="Conferma"><i class="fa-solid fa-check"></i></button>
 								</form>
 
 
