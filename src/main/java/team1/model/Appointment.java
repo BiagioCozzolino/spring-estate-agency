@@ -111,4 +111,5 @@ public class Appointment {
 	public void setEstate(Estate estate) {
 		this.estate = estate;
 	}
+
 }

@@ -51,7 +51,7 @@ public class Estate {
 	@NotEmpty(message = "Non esistono immobili senza città")
 	@Column(nullable = false)
 	private String city;
-	
+
 	@NotEmpty(message = "Non esistono immobili senza provincia")
 	@Column(nullable = false)
 	private String province;
@@ -96,11 +96,11 @@ public class Estate {
 	private Boolean hasCarSpot;
 
 	private Boolean hasGarden;
-	
-	@NotEmpty(message="L'annuncio deve necessariamente avere un titolo")
+
+	@NotEmpty(message = "L'annuncio deve necessariamente avere un titolo")
 	@Column(nullable = false)
 	private String adTitle;
-	
+
 	@Lob
 	private String description;
 
@@ -297,6 +297,14 @@ public class Estate {
 		this.interior = interior;
 	}
 
+	public List<Appointment> getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(List<Appointment> appointment) {
+		this.appointment = appointment;
+	}
+
 	public void setContractStart(LocalDate contractStart) {
 		this.contractStart = contractStart;
 	}
@@ -361,11 +369,10 @@ public class Estate {
 		return res;
 
 	}
-	
-	public String getFormattedPrice(Double price)
-	{
-		DecimalFormat df = new DecimalFormat ("#.00€");
-		
+
+	public String getFormattedPrice(Double price) {
+		DecimalFormat df = new DecimalFormat("#.00€");
+
 		return df.format(price);
 	}
 }

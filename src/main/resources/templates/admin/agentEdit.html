@@ -49,6 +49,17 @@
       
 </div>
 
+<div class="form-floating mb-3 mt-3 has-validation">
+  <input type="number" class="form-control" th:field="*{phone}" id="phone" th:errorClass="is-invalid" placeholder="phone">
+  <label for="floatingInput">Numero di cellulare Agente</label>
+        <div th:if="${#fields.hasErrors('phone')}" class="invalid-feedback">
+  					<ul>
+  						<li th:each="err : ${#fields.errors('phone')}" th:text="${err}">
+  					</ul>
+  				</div>
+      
+</div>
+
 <div class="form-floating mt-3 has-validation">
   <input type="text" class="form-control" th:field="*{password}" id="password" th:errorClass="is-invalid" placeholder="password">
   <label for="floatingPassword">Password agente</label>

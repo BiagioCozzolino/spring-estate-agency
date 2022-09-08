@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<th:block th:replace="fragment/fragment :: scr-head"></th:block>
+	<title>Dettagli propriet&aacute;</title>
+</head>
+<body>
+	<header>
+		<th:block th:replace="fragment/fragment :: navbar"></th:block>
+	</header>
+	<main>
+
+		<div class="container w-75 my-5"> <!-- container più grande, per far venire tutto centrato-->
+
+			<div class="row">
+				
+				<div id="carouselForEstateImagesFade" class="carousel slide carousel-fade rounded-3" data-bs-ride="carousel"> <!-- carosello immagini-->
+					<div class="carousel-inner rounded-3" >
+						<div th:each="img,iter : ${estate.images}" class="carousel-item" th:classappend="${iter.index == 0 ? 'active' : ''}">
+							<img th:src="@{|/estate/image/${img.id}/content|}" class="img-fluid" alt="Immagine immobile">
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselForEstateImagesFade" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselForEstateImagesFade" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					  </button>
+				</div>
+				
+			</div>
+			<div class="d-flex row">
+
+				<div id="EstateBaseData" class="d-flex col-4 mt-5 pt-5">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><h4 th:text="${estate.adTitle}"></h4></li>
+						<li class="list-group-item"><h5 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city} ${estate.province}|"></h5></li>
+						<li class="list-group-item"><h4>Prezzo immobile</h4> <span><h4 th:text="|${estate.getFormattedPrice(estate.price)}|"></h4></span> </li>
+						<li class="list-group-item"><h5>Descrizione immobile</h5> <span><p th:text="${estate.description}"></p></span></li>
+					</ul>
+				</div>
+
+				<div id="EstateComplementaryData" class="col-5 py-4">
+					<ul class="list-group">
+						<li class="list-group-item" th:text="|Tipo di immobile: ${estate.type}"></li>
+						<li class="list-group-item" th:text="|Piano: ${estate.floorNumber}|"></li>
+						<li class="list-group-item" th:text="|Interno: ${estate.interior}|"></li>
+						<li class="list-group-item" th:text="|Superficie totale: ${estate.area}m&#178;|"></li>
+						<li class="list-group-item" th:text="|Classe energetica: ${estate.energyClass}|"></li>
+						<li class="list-group-item" th:text="|Numero vani: ${estate.numSpaces}|"></li>
+						<li class="list-group-item" th:text="|Numero bagni: ${estate.numBathrooms}|"></li>
+						<li class="list-group-item" th:if=" ${estate.numBalconies}>0" th:text="|Numero balconi: ${estate.numBalconies}|" ></li>
+						<li class="list-group-item" th:if="${estate.hasCarSpot==true}">L'immobile è munito di posto auto</li>
+						<li class="list-group-item" th:if="${estate.hasGarden==true}">L'immobile presenta spazio esterno con giardino</li>
+					</ul>
+				</div>
+				<div id="agentCardData" class="col-3 mt-4"> <!--card con dati dell'agente assegnato-->
+					<div class="m-2 d-flex">
+						<div class="card p-3">
+							<div class="d-flex">
+								<div class="image">	
+									<img th:src="@{|/image/${estate.agent.getId()}/content|}" style="height:100px;width:100px;" class="rounded-3">
+									
+								</div>
+								
+								<div class="p-3">
+										<h4 th:text="|${estate.agent.name} ${estate.agent.surname}|"></h4>
+										<h5 th:text="${estate.agent.email}"></h5>
+								</div>
+								
+								
+							</div>
+						</div>
+					</div>
+					<h3 class="mt-5">Vuoi avere più dettagli di questo immobile o vederlo da vicino?</h3>
+					<a class="btn btn-primary mb-3" th:href="@{|/appointment/edit/${estate.id}|}">Prenota un appuntamento</a>
+				</div>
+				
+			</div>
+			
+		</div>
+	</main>
+	<footer>
+		<footer>
+			<th:block th:replace="fragment/fragment :: footer"></th:block>
+		</footer>
+	</footer>
+</body>
+
+</html>
+
