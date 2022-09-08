@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,7 +20,6 @@ public class Appointment {
 	private Integer id;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	@NotNull(message = "Questo campo è obbligatorio")
 	private LocalDateTime date;
 
 	@NotEmpty(message = "Questo campo è obbligatorio")
@@ -36,15 +34,17 @@ public class Appointment {
 	@Column(nullable = false)
 	private String email;
 
-	@NotNull(message = "Questo campo è obbligatorio")
+	@NotEmpty(message = "Questo campo è obbligatorio")
 	@Column(nullable = false)
-	private Integer phone;
+	private String phone;
 
 	@ManyToOne
 	private Agent agent;
 
 	@ManyToOne
 	private Estate estate;
+
+	private String status;
 
 	// Getter and Setters
 
@@ -88,11 +88,11 @@ public class Appointment {
 		this.email = email;
 	}
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -110,5 +110,31 @@ public class Appointment {
 
 	public void setEstate(Estate estate) {
 		this.estate = estate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getStatusValue(String status) {
+		Integer res = 0;
+
+		switch (status) {
+		case "Effettuato":
+			res = 2;
+			break;
+		case "Annullato":
+			res = 1;
+			break;
+		case "Da effettuare":
+			res = 0;
+			break;
+		}
+
+		return res;
 	}
 }

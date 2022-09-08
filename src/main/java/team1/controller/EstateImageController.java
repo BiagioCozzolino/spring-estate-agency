@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import team1.model.EstateImage;
 import team1.model.EstateImageForm;
 import team1.repository.EstateImageRepository;
-import team1.repository.EstateRepository;
 import team1.service.EstateImageService;
 
 @Controller
@@ -35,9 +34,6 @@ public class EstateImageController {
 	@Autowired
 	private EstateImageRepository imageRepo;
 	
-	@Autowired
-	private EstateRepository estateRepo;
-	
 	/**
 	 * Collegamento alla pagina con la lista di immagini di un determinato immobile
 	 * @param estateId
@@ -45,7 +41,7 @@ public class EstateImageController {
 	 * @return
 	 */
 	@GetMapping("/list/{estateId}")
-	public String agentImages(@PathVariable("agentId") Integer estateId, Model model) {
+	public String estateImages(@PathVariable("estateId") Integer estateId, Model model) {
 		List<EstateImage> image = service.getImageByEstateId(estateId);
 		EstateImageForm imageForm = service.createImageForm(estateId);
 		model.addAttribute("imageList", image);
@@ -59,13 +55,12 @@ public class EstateImageController {
 	 * @param imageForm
 	 * @return
 	 */
-	@PostMapping("/save/{id}")
-	public String saveImage(@PathVariable("id") Integer estateId, @ModelAttribute("ImageForm") EstateImageForm imageForm) {
+	@PostMapping("/save")
+	public String saveImage(@ModelAttribute("ImageForm") EstateImageForm imageForm) {
 		
 		try {
-			imageForm.setEstate(estateRepo.findById(estateId).get());
-			service.createImage(imageForm);
-			return "redirect:/estate/admin/estateList/edit/"+ estateId;
+			EstateImage savedImage = service.createImage(imageForm);
+			return "redirect:/estate/image/list/"+ savedImage.getEstate().getId();
 		} catch (IOException e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Non è stato possibile salvare l'immagine");
 		}
@@ -97,7 +92,7 @@ public class EstateImageController {
 		if (result.isPresent()) {
 			imageRepo.delete(result.get());
 			ra.addFlashAttribute("successMessage", "L'immagine è stata cancellata con successo!");
-			return "redirect:/image/list/" + result.get().getEstate().getId();
+			return "redirect:estate/image/list/" + result.get().getEstate().getId();
 
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Immagine con id " + imageId + " non trovata");

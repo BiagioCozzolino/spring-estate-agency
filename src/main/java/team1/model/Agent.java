@@ -46,6 +46,10 @@ public class Agent {
 
 	@NotEmpty(message = "Questo campo è obbligatorio")
 	@Column(nullable = false)
+	private String phone;
+
+	@NotEmpty(message = "Questo campo è obbligatorio")
+	@Column(nullable = false)
 	private String password;
 
 	// Matricola agente
@@ -111,6 +115,22 @@ public class Agent {
 		this.email = email;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public List<Appointment> getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(List<Appointment> appointment) {
+		this.appointment = appointment;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -171,35 +191,27 @@ public class Agent {
 		this.hired = hired;
 	}
 
+	public Integer getCountSold() {
+		Integer res = 0;
+		for (Estate e : estate) {
+			if (e.getStatusValue(e.getStatus()) == 2) {
+				res++;
+			}
+		}
+		return res;
+	}
 
-	public Integer getCountSold()
-	{
-		Integer res=0;
-		for(Estate e : estate)
-		{
-			if(e.getStatusValue(e.getStatus())==2)
-			{
+	public Integer getCountRented() {
+		Integer res = 0;
+		for (Estate e : estate) {
+			if (e.getStatusValue(e.getStatus()) == 1) {
 				res++;
 			}
 		}
 		return res;
 	}
-	
-	public Integer getCountRented()
-	{
-		Integer res=0;
-		for(Estate e : estate)
-		{
-			if(e.getStatusValue(e.getStatus())==1)
-			{
-				res++;
-			}
-		}
-		return res;
-	}
-	
-	public Integer getCountSoldAndRented() 
-	{
+
+	public Integer getCountSoldAndRented() {
 		return getCountRented() + getCountSold();
 	}
 }
