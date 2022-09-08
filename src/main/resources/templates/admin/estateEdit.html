@@ -4,10 +4,11 @@
     <th:block th:replace="fragment/fragment :: scr-head"></th:block>
     <title>Aggiunta immobile</title>
   </head>
-  <body class="justify-content-md-center">
+  <body >
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
-    <div class="container m-4">
-      <div class="row">
+    <div class="container p-3 ">
+      <div class="row justify-content-center">
+     	<div class="col">
         <h1
           class="text-center"
           th:text="${id != null} ? 'Modifica immobile' : 'Inserisci nuovo immobile'"
@@ -20,7 +21,7 @@
         >
           <input type="hidden" th:field="*{id}" />
 
-          <div class="form-floating mb-3 mt-3 has-validation">
+          <div class="form-floating has-validation">
             <input
               type="text"
               class="form-control"
@@ -717,5 +718,6 @@
         </div>
       </div>
     </div>
+   </div>
   </body>
 </html>
