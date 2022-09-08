@@ -69,11 +69,13 @@ public class AppointmentController {
 		}
 		if (hasErrors) {
 			return "redirect:/appointment/edit/" + result.get().getId();
-		} else {
+
+		} 
+		else 
+		{
 
 			appRepo.save(formAppointment);
 			return "redirect:/appointment/success";
-
 		}
 	}
 }

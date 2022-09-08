@@ -45,6 +45,8 @@ public class Appointment {
 
 	@ManyToOne
 	private Estate estate;
+	
+	private String status;
 
 	// Getter and Setters
 
@@ -112,4 +114,30 @@ public class Appointment {
 		this.estate = estate;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getStatusValue(String status)
+	{
+		Integer res = 0;
+
+		switch (status) {
+		case "Effettuato":
+			res = 2;
+			break;
+		case "Annullato":
+			res = 1;
+			break;
+		case "Da effettuare":
+			res = 0;
+			break;
+		}
+
+		return res;
+	}
 }
