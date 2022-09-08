@@ -57,7 +57,7 @@ public class EstateController {
 			}
 
 			if (e.getContractStart() != null) {
-				diff = LocalDate.now().until(e.getContractStart());
+				diff = e.getContractStart().until(LocalDate.now());
 				daysDiff = diff.getDays();
 			}
 

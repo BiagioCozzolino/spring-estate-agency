@@ -15,6 +15,7 @@
     <a class="btn btn-primary m-3" href="/agent">Lista Agenti</a>
     <a class="btn btn-dark m-3 " href="/estate/admin/estateList/edit">Crea nuovo Immobile</a>
     <a class="btn btn-info m-3" href="/estate/admin/estateList">Lista Immobili Admin</a>
+    <a class="btn btn-info m-3" href="/appointment/appointmentListAdmin">Lista Appuntamenti Agenti</a>
     </div>
     <hr>
         <h2 class="text-center">Riepilogo attività effettuate nell'ultimo mese</h2>
@@ -34,6 +35,28 @@
       <th class="table-success" scope="row" th:text="${a.surname}"></th>
       <th class="table-danger" scope="row"  ></th>
       <th class="table-warning" scope="row" th:text="${a.getCountSoldAndRented()}">0</th>
+    </tr>
+    
+  </tbody>
+</table>
+
+	<h3>Annunci aggiunti di recente (Ultimi 7 giorni)</h3>
+	
+	<table class="table">
+  <thead>
+    <tr>
+      <th class="table-dark" scope="col">Titolo Annuncio</th>
+      <th class="table-dark" scope="col">Indirizzo</th>
+      <th class="table-dark" scope="col">Cap/Città/Provincia</th>
+      <th class="table-dark" scope="col">Data inserimento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="e : ${estateList} "> 
+      <th class="table-primary" scope="row" th:text="${e.adTitle}"></th>
+      <th class="table-success" scope="row" th:text="${e.address}"></th>
+      <th class="table-danger" scope="row"  th:text="|${e.zipCode} ${e.city} ${e.province}|" ></th>
+      <th class="table-warning" scope="row" th:text="${e.getFormattedInsertionDate()}"></th>
     </tr>
     
   </tbody>
