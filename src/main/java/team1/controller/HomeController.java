@@ -35,13 +35,13 @@ public class HomeController {
 	@GetMapping("/admin")
 	public String adminHome(Model model) {
 		List<Agent> agentList = (List<Agent>) agentRepo.findAll();
-		Period diff;
-		Integer daysDiff = 0;
+		Period diff; //creo una variabile periodo
+		Integer daysDiff = 0; //variabile di controllo della differenza di giorni
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 		List<Estate> estateListForAdminHome = new ArrayList<Estate>();
 		for(Estate e: estateList)
 		{
-			diff=e.getInsertionDate().until(LocalDate.now());
+			diff=e.getInsertionDate().until(LocalDate.now()); //differenza di periodo
 			daysDiff = diff.getDays();
 			
 			if(daysDiff<=7)
