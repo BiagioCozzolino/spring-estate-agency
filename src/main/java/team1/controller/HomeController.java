@@ -79,6 +79,7 @@ public class HomeController {
 			@RequestParam(name="queryHasGarden", required = false) Boolean queryHasGarden,
 			@RequestParam(name="queryAreaHigher", required = false) Integer queryAreaHigher,
 			@RequestParam(name="queryAreaLower", required = false) Integer queryAreaLower,
+			@RequestParam(name="queryStatus", required = false) String queryStatus,
 			Model model) 
 	{
 		 if (queryAddress != null && queryAddress.isEmpty()) {
@@ -123,8 +124,11 @@ public class HomeController {
 		 if (queryAreaLower != null) {
 			 queryAreaLower = null;
 			 }
-		 
-		 List<Estate> result =  estateRepo.findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrderByAddressAsc
+		 if (queryStatus != null && queryStatus.isEmpty()) 
+		 	{
+			 queryStatus = null;	
+		 	}
+		 List<Estate> result = estateRepo.findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrStatusIgnoreCaseOrderByAddressAsc
 				 (
 						 queryAddress, 
 						 queryZipCode, 
@@ -139,8 +143,10 @@ public class HomeController {
 						 queryHasCarSpot, 
 						 queryHasGarden, 
 						 queryAreaHigher, 
-						 queryAreaLower
+						 queryAreaLower, 
+						 queryStatus
 				);
+				
 		 model.addAttribute("estateList", result);
 		 return "/estate/estateList";
 	}
