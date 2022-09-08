@@ -33,7 +33,9 @@
 							<th  class="table-dark">Data di Pubblicazione</th>
 							<th  class="table-dark">Data di vendita/affitto</th>
 							<th  class="table-dark">Stato</th>
+
 							<th  class="table-dark"></th>
+
 							<th  class="table-dark"></th>
 							<th  class="table-dark"></th>
 							<th class="table-dark">Cambia stato</th>
@@ -42,7 +44,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="e : ${estateListAdmin}">
-							<td colspan="2" class="table-info" th:text="${e.address}"></td>
+							<td class="table-info" th:text="${e.address}"></td>
 							<td class="table-info" th:text="${e.houseNumber}"></td>
 							<td class="table-info" th:text="${e.floorNumber}"></td>
 							<td class="table-info" th:text="${e.interior}"></td>							
@@ -51,17 +53,21 @@
 							<td class="table-info" th:text="${e.insertionDate}"></td>
 							<td class="table-info" th:text="${e.contractStart}"></td>
 							<td class="table-info" th:text="${e.status}"></td>
+							<td class="table-info" th:text="|${e.agent.name} ${e.agent.surname}|"></td>
 							<td class="table-info">
-							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-primary btn-sm">Modifica</a>
+							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-primary btn-sm ">Modifica</a>
+							
 							</td>
 							<td class="table-info">
-							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-light btn-sm">Dettagli</a>
+							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-primary btn-sm">Dettagli</a>
 							</td>
 							<td>
 								<a type="button" th:href="@{|/estate/image/list/${e.id}|}" class="btn btn-light btn-sm">Immagini</a>
 							</td>
+
 							
 							<td>
+
 								<form
 									id="form-estate"
 									th:action="@{|/estate/admin/estateList/${e.id}|}"
@@ -84,7 +90,9 @@
 								  <button type="submit" class="btn btn-danger" title="Conferma"><i class="fa-solid fa-check"></i></button>
 								</form>
 
+
 							</td> 
+
 
 						</tr>
 					</tbody>
