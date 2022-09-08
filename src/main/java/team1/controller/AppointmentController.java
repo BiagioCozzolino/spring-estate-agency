@@ -59,16 +59,19 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/edit")
-	public String save(@Valid @ModelAttribute("appointment") Appointment formAppointment, BindingResult br) {
+	public String save(Model model, @Valid @ModelAttribute("appointment") Appointment formAppointment,
+			BindingResult br) {
 		boolean hasErrors = br.hasErrors();
 
 		if (hasErrors) {
-			return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
+			model.addAttribute("estate", formAppointment.getEstate());
+			model.addAttribute("appointment", formAppointment);
+			return "appointment/edit";
+			// return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
 		} else {
 			formAppointment.setStatus("Da effettuare");
 			appRepo.save(formAppointment);
 			return "redirect:/appointment/success";
-
 		}
 	}
 

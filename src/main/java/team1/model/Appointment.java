@@ -20,7 +20,6 @@ public class Appointment {
 	private Integer id;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-
 	private LocalDateTime date;
 
 	@NotEmpty(message = "Questo campo è obbligatorio")
@@ -44,7 +43,7 @@ public class Appointment {
 
 	@ManyToOne
 	private Estate estate;
-	
+
 	private String status;
 
 	// Getter and Setters
@@ -121,8 +120,7 @@ public class Appointment {
 		this.status = status;
 	}
 
-	public Integer getStatusValue(String status)
-	{
+	public Integer getStatusValue(String status) {
 		Integer res = 0;
 
 		switch (status) {
