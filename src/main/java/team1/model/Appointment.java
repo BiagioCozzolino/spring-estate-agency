@@ -21,7 +21,7 @@ public class Appointment {
 	private Integer id;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	@NotNull(message = "Questo campo è obbligatorio")
+
 	private LocalDateTime date;
 
 	@NotEmpty(message = "Questo campo è obbligatorio")

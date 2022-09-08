@@ -50,8 +50,10 @@ public class AppointmentController {
 
 	}
 
-	@PostMapping("/edit")
-	public String save(@Valid @ModelAttribute("appointment") Appointment formAppointment, BindingResult br) {
+	@PostMapping("/edit/{id}")
+	public String save(@PathVariable("id") Integer estateId, Model model,
+			@Valid @ModelAttribute("appointment") Appointment formAppointment, BindingResult br) {
+		Optional<Estate> result = estateRepo.findById(estateId);
 		boolean hasErrors = br.hasErrors();
 		boolean validDate = true;
 		if (formAppointment.getId() != null) {
@@ -65,10 +67,9 @@ public class AppointmentController {
 			hasErrors = true;
 
 		}
-		if (hasErrors)
-			return "/appointment/edit";
-
-		else {
+		if (hasErrors) {
+			return "redirect:/appointment/edit/" + result.get().getId();
+		} else {
 
 			appRepo.save(formAppointment);
 			return "redirect:/appointment/success";
