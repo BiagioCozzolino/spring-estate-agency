@@ -1,0 +1,32 @@
+#intro 
+{
+    background-image: url("/img/435117.jpg");
+    height: 100vh;
+    opacity: 0.7;
+  }
+  .bigSentence
+  {
+    color: #2b5497;
+    text-shadow: 3px 3px #000000;
+    font-size: 100px
+  }
+  
+  .nonImportantPart
+  {
+	color: #2b5497;
+    text-shadow: 3px 3px #000000;
+    font-size: 70px
+	}
+
+    .greenWord
+    {
+        color: #2b9753;
+    }
+
+    .greenButton
+    {
+        color: #2b5497;
+        background-color: #2b9753;
+        font-size: 30px;
+        width: 400px;
+    }

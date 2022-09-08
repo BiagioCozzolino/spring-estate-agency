@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<th:block th:replace="fragment/fragment :: scr-head"></th:block>
+	<title>Users</title>
+
+</head>
+
+<body>
+<th:block th:replace="fragment/fragment :: navbar"></th:block>
+	<div th:if="${#lists.isEmpty(agentList)}">
+		<h1>Mi dispiace non ci sono ancora user attivi.</h1>
+	</div>
+	<div th:unless="${#lists.isEmpty(agentList)}">
+		<div class="container">
+			<h1>Ecco tutti i nostri user</h1>
+			<a class="btn btn-primary mb-3" href="/admin">Pannello Admin</a>
+			<a class="btn btn-success mb-3 mx-3" href="/agent/edit">Crea nuovo Agente</a>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col" class="table-dark">Nome</th>
+						<th scope="col" class="table-dark">Cognome</th>
+						<th scope="col" class="table-dark">E-Mail</th>
+						<th scope="col" class="table-dark">Numero di telefono</th>
+						<th scope="col" class="table-dark">Password</th>
+						<th scope="col" class="table-dark">Matricola agente</th>
+						<th scope="col" class="table-dark">Data assunzione</th>
+						<th scope="col" class="table-dark">Livello di Sicurezza</th>
+						<th scope="col" class="table-dark">Dettagli</th>
+						<th scope="col" class="table-dark">Modifica</th>
+						<th scope="col" class="table-dark">Elimina</th>
+						<th scope="col" class="table-dark">Lista Immagini</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="a : ${agentList} ">
+						<td class="table-secondary" th:text="${a.Name}"></td>
+						<td class="table-primary" th:text="${a.Surname}"></td>
+						<td class="table-success" th:text="${a.Email}"></td>
+						<td class="table-danger" th:text="${a.Phone}"></td>
+						<td class="table-warning" th:text="${a.Password}"></td>
+						<td class="table-light" th:text="${a.serialNumber}"></td>
+						<td class="table-primary" th:text="${a.getFormattedHiringDate()}"></td>
+						<td class="table-danger" th:text="${a.SecurityLevel}"></td>
+						<td class="table-primary">
+                            <a class="btn btn-primary d-block mb-3  rounded-pill" title="Dettagli" th:href="@{|/agent/${a.getId()}|}"><i class="fa-solid fa-info"></i></a>
+              			</td>
+						<td class="table-primary">
+             			 	<a class="btn btn-dark d-block mb-3 rounded-pill" title="Modifica" th:href="@{|/agent/edit/${a.getId()}|}"><i class="fa-solid fa-pencil"></i></a>
+						</td>
+						<td class="table-primary">
+              				<a class="btn btn-danger d-block mb-3 rounded-pill" width:"100%" title="Cancella"  onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
+						</td>
+						<td class="table-primary">
+              				<a class="btn btn-warning d-block mb-3  rounded-pill" title="Inserisci immagine" th:href="@{|/image/list/${a.getId()}|}"><i class="fa-solid fa-image"></i></a>
+              			</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
+</body>
+
+</html>

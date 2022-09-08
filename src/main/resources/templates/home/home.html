@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
+    <link rel="stylesheet" href="/homeCSS.css">
+    <title>PartenopHome</title>
+</head>
+<body>
+     <th:block th:replace="fragment/fragment :: navbar"></th:block> </thead>
+
+      <div id="intro" class="bg-image shadow-2-strong">
+        <div class="container flex mt-5 pt-5">
+          <div class="mt-5 pt-5 row d-flex flex-row justify-content-md-center text-center">
+            <h1 class="mt-5 pt-5 text-center bigSentence">Benvenuti</h1>
+            <h2 class="text-center nonImportantPart">in</h2>
+            <h1 class="text-center bigSentence"><span class="greenWord">P</span>artenop<span class="greenWord">H</span>ome</h1>
+            <div>
+              <a href="/estate" class="btn btn-rounded shadow greenButton" role="button">I nostri immobili</a>
+            </div>
+          </div>  
+        </div>
+      </div>
+    <footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
+	
+   
+</body>
+</html>

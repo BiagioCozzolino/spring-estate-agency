@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="it">
+  <head>
+  <th:block th:replace="fragment/fragment :: scr-head"></th:block>
+    <title>Inserisci immagine</title>
+  </head>
+  <body>
+    <th:block th:replace="fragment/fragment :: navbar"></th:block> </thead>
+    
+    <div class="container">
+	<h1>Immagine profilo per l'agente': </h1>
+		<h2 class="text-muted" th:text="|${imageForm.agent.name} ${imageForm.agent.surname}|"></h2>
+		<hr />
+		<div class="col-6">
+		<!-- Inizio Form (mappata su un oggetto di tipo ImageForm, non Image -->
+			<form 
+			th:if="${imageList.size() == 0}"
+				id="form-img" 
+				th:object="${imageForm}"
+				th:action="@{/image/save}" 
+				method="POST"
+				enctype="multipart/form-data"
+				>
+				<input type="hidden" th:field="*{agent}">
+				<div class="mb-3">
+				  <label for="contentMultipart" class="form-label">Aggiungi immagine</label>
+				  <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
+				</div>
+				<button class="btn btn-dark rounded-pill" type="submit">Salva</button>
+			</form>
+			<!--  fine form -->
+			<!--  inizio lista (model attribute imageList) -->
+			<div class="row">
+				<div class="col-5" th:each="img : ${imageList}">
+					<img th:src="@{|/image/${img.id}/content|}" class="img-fluid" alt=""> 
+					<a class="btn btn-danger d-block my-2 rounded-pill" width:"100%" title="Cancella" th:href="@{|/image/delete/${img.getId()}|}" onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
+				</div>
+			</div>
+			<a href="/agent" class="my-4 btn btn-dark rounded-pill">Torna alla lista agenti</a>
+			<!--  fine lista -->
+</div>
+<footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
+    
+  </body>
+</html>
