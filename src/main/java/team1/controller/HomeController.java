@@ -1,7 +1,8 @@
 package team1.controller;
 
+
+import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +36,14 @@ public class HomeController {
 	@GetMapping("/admin")
 	public String adminHome(Model model) {
 		List<Agent> agentList = (List<Agent>) agentRepo.findAll();
-		Period diff;
-		Integer daysDiff = 0;
+		
+		long daysDiff=8;
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 		List<Estate> estateListForAdminHome = new ArrayList<Estate>();
+		
 		for(Estate e: estateList)
 		{
-			diff=e.getInsertionDate().until(LocalDate.now());
-			daysDiff = diff.getDays();
+			daysDiff = Duration.between(e.getInsertionDate().atStartOfDay(),LocalDate.now().atStartOfDay()).toDays();
 			
 			if(daysDiff<=7)
 			{

@@ -64,7 +64,6 @@ public class AppointmentController {
 		boolean hasErrors = br.hasErrors();
 
 		if (hasErrors) {
-
 			model.addAttribute("estate", formAppointment.getEstate());
 			model.addAttribute("appointment", formAppointment);
 			return "appointment/edit";
@@ -72,6 +71,7 @@ public class AppointmentController {
 		} else {
 			formAppointment.setStatus("Da effettuare");
 			appRepo.save(formAppointment);
+			
 			return "redirect:/appointment/success";
 		}
 	}
