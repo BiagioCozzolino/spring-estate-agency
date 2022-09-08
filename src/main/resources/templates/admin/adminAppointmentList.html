@@ -39,12 +39,12 @@
 					<tbody>
 						<tr th:each="e : ${appointmentListAdmin}">
 							<td colspan="2" class="table-info" th:text="|${e.agent.name} ${e.agent.surname}|"></td>
-							<td class="table-info" th:text="|${e.name} ${e.surname}|"></td>
-							<td class="table-info" th:text="${e.email}"></td>
-							<td class="table-info" th:text="${e.phone}"></td>
-							<td class="table-info" th:text="${e.estate.address}"></td>							
-							<td class="table-info" th:text="|${e.estate.zipCode} ${e.estate.city} ${e.estate.province}|"></td>
-							<td class="table-info" th:text="${e.status}"></td>
+							<td class="" th:text="|${e.name} ${e.surname}|"></td>
+							<td class="" th:text="${e.email}"></td>
+							<td class="" th:text="${e.phone}"></td>
+							<td class="" th:text="${e.estate.address}"></td>							
+							<td class="" th:text="|${e.estate.zipCode} ${e.estate.city} ${e.estate.province}|"></td>
+							<td class="" th:text="${e.status}"></td>
 							<td class="table-danger">
 								<form
 									id="form-appointment"
