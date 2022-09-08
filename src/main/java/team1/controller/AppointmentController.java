@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,25 +49,26 @@ public class AppointmentController {
 
 	}
 
-	@PostMapping("/edit/{id}")
-	public String save(@PathVariable("id") Integer estateId, Model model,
-			@Valid @ModelAttribute("appointment") Appointment formAppointment, BindingResult br) {
-		Optional<Estate> result = estateRepo.findById(estateId);
+	@PostMapping("/edit")
+	public String save(@Valid @ModelAttribute("appointment") Appointment formAppointment, BindingResult br) {
 		boolean hasErrors = br.hasErrors();
-		boolean validDate = true;
-		if (formAppointment.getId() != null) {
-			Appointment appointmentOld = appRepo.findById(formAppointment.getId()).get();
-			if (appointmentOld.getDate().equals(formAppointment.getDate()))
-				validDate = false;
-		}
-		if (validDate) {
-
-			br.addError(new FieldError("appointment", "name", "L'orario o data selezionato è già presente"));
-			hasErrors = true;
-
-		}
+		/*
+		 * boolean validDate = true;
+		 * 
+		 * if (formAppointment.getId() != null) { Appointment appointmentOld =
+		 * appRepo.findById(formAppointment.getId()).get(); if
+		 * (appointmentOld.getDate().equals(formAppointment.getDate())) validDate =
+		 * false; }
+		 * 
+		 * if (validDate) {
+		 * 
+		 * br.addError(new FieldError("appointment", "name",
+		 * "L'orario o data selezionato è già presente")); hasErrors = true;
+		 * 
+		 * }
+		 */
 		if (hasErrors) {
-			return "redirect:/appointment/edit/" + result.get().getId();
+			return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
 		} else {
 
 			appRepo.save(formAppointment);

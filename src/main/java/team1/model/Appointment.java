@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,9 +35,9 @@ public class Appointment {
 	@Column(nullable = false)
 	private String email;
 
-	@NotNull(message = "Questo campo è obbligatorio")
+	@NotEmpty(message = "Questo campo è obbligatorio")
 	@Column(nullable = false)
-	private Integer phone;
+	private String phone;
 
 	@ManyToOne
 	private Agent agent;
@@ -88,11 +87,11 @@ public class Appointment {
 		this.email = email;
 	}
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
