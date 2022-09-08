@@ -64,6 +64,7 @@ public class AppointmentController {
 		boolean hasErrors = br.hasErrors();
 
 		if (hasErrors) {
+
 			model.addAttribute("estate", formAppointment.getEstate());
 			model.addAttribute("appointment", formAppointment);
 			return "appointment/edit";
