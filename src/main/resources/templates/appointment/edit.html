@@ -13,7 +13,7 @@
       <form
         id="form-appointment"
         th:object="${appointment}"
-        th:action="@{|/appointment/edit/${id}|}"
+        th:action="@{/appointment/edit}"
         method="POST"
       >
         <input type="hidden" th:field="*{id}" />
@@ -45,7 +45,7 @@
               th:if="${estate.agent.agentImage.size() == 0}"
               src="/img/agentDefault.jpg"
               style="max-width: 300px; max-height: 600px"
-              class="card-img-top rounded-3 p-1 bg-dark"
+              class="rounded-3 p-1 bg-dark"
               alt="Admin"
             />
             <div th:each="img : ${estate.agent.agentImage} ">

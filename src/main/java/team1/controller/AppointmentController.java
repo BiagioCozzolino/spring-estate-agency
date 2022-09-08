@@ -1,5 +1,6 @@
 package team1.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -9,12 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import team1.model.Appointment;
@@ -37,6 +38,13 @@ public class AppointmentController {
 		return "/appointment/successPage";
 	}
 
+	@GetMapping("appointmentListAdmin")
+	public String appointmentListAdmin(Model model) {
+		List<Appointment> appointmentListAdmin = (List<Appointment>) appRepo.findAll();
+		model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+		return "/admin/adminAppointmentList";
+	}
+
 	@GetMapping("/edit/{id}")
 	public String update(@PathVariable("id") Integer estateId, Model model) {
 		Optional<Estate> result = estateRepo.findById(estateId);
@@ -50,32 +58,37 @@ public class AppointmentController {
 
 	}
 
-	@PostMapping("/edit/{id}")
-	public String save(@PathVariable("id") Integer estateId, Model model,
-			@Valid @ModelAttribute("appointment") Appointment formAppointment, BindingResult br) {
-		Optional<Estate> result = estateRepo.findById(estateId);
+	@PostMapping("/edit")
+	public String save(Model model, @Valid @ModelAttribute("appointment") Appointment formAppointment,
+			BindingResult br) {
 		boolean hasErrors = br.hasErrors();
-		boolean validDate = true;
-		if (formAppointment.getId() != null) {
-			Appointment appointmentOld = appRepo.findById(formAppointment.getId()).get();
-			if (appointmentOld.getDate().equals(formAppointment.getDate()))
-				validDate = false;
-		}
-		if (validDate) {
 
-			br.addError(new FieldError("appointment", "name", "L'orario o data selezionato è già presente"));
-			hasErrors = true;
-
-		}
 		if (hasErrors) {
-			return "redirect:/appointment/edit/" + result.get().getId();
 
-		} 
-		else 
-		{
-
+			model.addAttribute("estate", formAppointment.getEstate());
+			model.addAttribute("appointment", formAppointment);
+			return "appointment/edit";
+			// return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
+		} else {
+			formAppointment.setStatus("Da effettuare");
 			appRepo.save(formAppointment);
 			return "redirect:/appointment/success";
 		}
+	}
+
+	@PostMapping("/appointmentListAdmin/{id}")
+	public String appointmentPartUpdate(@PathVariable("id") Integer appointmentId,
+			@RequestParam(name = "status") String status) {
+		Optional<Appointment> result = appRepo.findById(appointmentId);
+
+		if (result.isPresent()) {
+			result.get().setStatus(status);
+		}
+		try {
+			appRepo.save(result.get());
+		} catch (Exception e) {
+			return "/appointmentListAdmin";
+		}
+		return "redirect:/appointment/appointmentListAdmin";
 	}
 }
