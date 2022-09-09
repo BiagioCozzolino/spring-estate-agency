@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
-import jana60.model.Game;
+import team1.model.Agent;
 import team1.model.Appointment;
 import team1.model.Estate;
 import team1.repository.AppointmentRepository;
@@ -63,35 +63,42 @@ public class AppointmentController {
 	@PostMapping("/edit")
 	public String save(Model model, @Valid @ModelAttribute("appointment") Appointment formAppointment,
 			BindingResult br) {
-		boolean hasErrors = br.hasErrors();
-		boolean validDate = true;
-		Appointment appList = appRepo.findAll();
-		model.addAttribute("appointmentList", appointmentList);
+		Agent agent = formAppointment.getAgent();
+		List<Appointment> appList= agent.getAppointment();
 		
-			if (appointmentList.get().equalsIgnoreCase(formGame.getName()))
-				validName = false;
+		boolean validDate=true;
+		boolean hasErrors = br.hasErrors();
+		
+		for(Appointment a : appList)
+		{
+			if((a.getDate()==formAppointment.getDate()) && (a.getHour()== formAppointment.getHour()))
+			{
+				validDate=false;
+			}
 		}
-	/*
-	 * if (validName && gameRepo.countByName(formGame.getName()) > 0) {
-	 * 
-	 * br.addError(new FieldError("game", "name",
-	 * "Hai già un videogioco con questo nome")); hasErrors = true;
-	 */
-	if(hasErrors)
+		
+		if(!validDate)
+		{
+			br.addError(new FieldError("appointment", "hour",
+					"L'orario selezionato per tale data è già occupato."));
+			hasErrors=true;
+		}
+		if(hasErrors)
 
-	{
-		model.addAttribute("estate", formAppointment.getEstate());
-		model.addAttribute("appointment", formAppointment);
-		return "appointment/edit";
-		// return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
-	}else
-	{
-		formAppointment.setStatus("Da effettuare");
-		appRepo.save(formAppointment);
-
-		return "redirect:/appointment/success";
-	}
-	}
+		{
+			model.addAttribute("estate", formAppointment.getEstate());
+			model.addAttribute("appointment", formAppointment);
+			return "appointment/edit";
+			// return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
+		}
+		else
+		{
+			formAppointment.setStatus("Da effettuare");
+			appRepo.save(formAppointment);
+	
+			return "redirect:/appointment/success";
+		}
+		}
 
 	@PostMapping("/appointmentListAdmin/{id}")
 	public String appointmentPartUpdate(@PathVariable("id") Integer appointmentId,

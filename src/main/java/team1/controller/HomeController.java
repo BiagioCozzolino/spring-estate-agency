@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import team1.model.Agent;
+import team1.model.Appointment;
 import team1.model.Estate;
 import team1.repository.AgentRepository;
+import team1.repository.AppointmentRepository;
 import team1.repository.EstateRepository;
 
 @Controller
@@ -27,6 +29,9 @@ public class HomeController {
 	
 	@Autowired
 	private EstateRepository estateRepo;
+	
+	@Autowired
+	private AppointmentRepository appRepo;
 
 	@GetMapping
 	public String index(Model model) {
@@ -40,6 +45,8 @@ public class HomeController {
 		long daysDiff=8;
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 		List<Estate> estateListForAdminHome = new ArrayList<Estate>();
+		List<Appointment> appList= (List<Appointment>) appRepo.findAll();
+		List<Appointment> appListForAdminHome= new ArrayList<Appointment>();
 		
 		for(Estate e: estateList)
 		{
@@ -50,8 +57,17 @@ public class HomeController {
 				estateListForAdminHome.add(e);
 			}
 		}
+		for(Appointment a: appList)
+		{
+			daysDiff = Duration.between(LocalDate.now().atStartOfDay(),a.getDate().atStartOfDay()).toDays();
+			
+			if(daysDiff<=14)
+			{
+				appListForAdminHome.add(a);
+			}
+		}
 		
-		
+		model.addAttribute("appList", appListForAdminHome);
 		model.addAttribute("estateList", estateListForAdminHome);
 		model.addAttribute("agentList", agentList);
 		return "/admin/adminHome";
