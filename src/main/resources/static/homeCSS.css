@@ -6,27 +6,27 @@
   }
   .bigSentence
   {
-    color: #2b5497;
+    color: rgb(255, 255, 255);
     text-shadow: 3px 3px #000000;
     font-size: 100px
   }
   
   .nonImportantPart
   {
-	color: #2b5497;
-    text-shadow: 3px 3px #000000;
+	color: rgb(255, 255, 255);
+    text-shadow: 3px 3px rgb(0, 0, 0);
     font-size: 70px
 	}
 
     .greenWord
     {
-        color: #2b9753;
+        color: rgb(0, 0, 0);
     }
 
     .greenButton
     {
         color: #2b5497;
-        background-color: #2b9753;
+        background-color: rgb(0, 0, 0);
         font-size: 30px;
         width: 400px;
     }
