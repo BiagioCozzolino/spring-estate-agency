@@ -177,12 +177,27 @@
           </div>
         </div>
         <div class="form-floating mt-3 has-validation">
-        <select class="form-select" aria-label="Default select example">
-  <option selected>Seleziona l'orario della prenotazione</option>
-  <option value="09:00">09.00</option>
-  <option value="10:00">10.00</option>
-  <option value="11:00">11.00</option>
+        <select  type="hour" id="hour" th:errorClass="is-invalid" class="form-control" placeholder="hour" aria-label="Default select example" th:field="*{hour}">
+  <option value="" selected>Seleziona l'orario della prenotazione</option>
+  <option value="8">08.00</option>
+  <option value="9">09.00</option>
+  <option value="10">10.00</option>
+  <option value="11">11.00</option>
+  <option value="12">12.00</option>
+  <option value="13">13.00</option>
+  <option value="15">15.00</option>
+  <option value="16">16.00</option>
+  <option value="17">17.00</option>
+  <option value="18">18.00</option>
 </select>
+	<div th:if="${#fields.hasErrors('hour')}" class="invalid-feedback">
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('hour')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
         </div>
         <div>
           <button type="submit" class="btn btn-primary m-3">Conferma appuntamento</button>
