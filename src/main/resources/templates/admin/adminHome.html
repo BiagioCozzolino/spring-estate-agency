@@ -33,7 +33,7 @@
     <tr th:each="a : ${agentList} "> 
       <th class="" scope="row" th:text="${a.name}"></th>
       <th class="" scope="row" th:text="${a.surname}"></th>
-      <th class="" scope="row"  ></th>
+      <th class="" scope="row" th:text="${a.getCountDoneAppointments()}"></th>
       <th class="" scope="row" th:text="${a.getCountSoldAndRented()}">0</th>
     </tr>
     
