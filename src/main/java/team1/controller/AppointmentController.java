@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import jana60.model.Game;
 import team1.model.Appointment;
 import team1.model.Estate;
 import team1.repository.AppointmentRepository;
@@ -62,18 +64,33 @@ public class AppointmentController {
 	public String save(Model model, @Valid @ModelAttribute("appointment") Appointment formAppointment,
 			BindingResult br) {
 		boolean hasErrors = br.hasErrors();
-
-		if (hasErrors) {
-			model.addAttribute("estate", formAppointment.getEstate());
-			model.addAttribute("appointment", formAppointment);
-			return "appointment/edit";
-			// return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
-		} else {
-			formAppointment.setStatus("Da effettuare");
-			appRepo.save(formAppointment);
-			
-			return "redirect:/appointment/success";
+		boolean validDate = true;
+		Appointment appList = appRepo.findAll();
+		model.addAttribute("appointmentList", appointmentList);
+		
+			if (appointmentList.get().equalsIgnoreCase(formGame.getName()))
+				validName = false;
 		}
+	/*
+	 * if (validName && gameRepo.countByName(formGame.getName()) > 0) {
+	 * 
+	 * br.addError(new FieldError("game", "name",
+	 * "Hai già un videogioco con questo nome")); hasErrors = true;
+	 */
+	if(hasErrors)
+
+	{
+		model.addAttribute("estate", formAppointment.getEstate());
+		model.addAttribute("appointment", formAppointment);
+		return "appointment/edit";
+		// return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
+	}else
+	{
+		formAppointment.setStatus("Da effettuare");
+		appRepo.save(formAppointment);
+
+		return "redirect:/appointment/success";
+	}
 	}
 
 	@PostMapping("/appointmentListAdmin/{id}")
