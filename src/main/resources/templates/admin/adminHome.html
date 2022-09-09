@@ -31,10 +31,10 @@
   </thead>
   <tbody>
     <tr th:each="a : ${agentList} "> 
-      <th class="" scope="row" th:text="${a.name}"></th>
-      <th class="" scope="row" th:text="${a.surname}"></th>
-      <th class="" scope="row" th:text="${a.getCountDoneAppointments()}"></th>
-      <th class="" scope="row" th:text="${a.getCountSoldAndRented()}">0</th>
+      <th class="table-info" scope="row" th:text="${a.name}"></th>
+      <th class="table-info" scope="row" th:text="${a.surname}"></th>
+      <th class="table-info" scope="row" th:text="${a.getCountDoneAppointments()}"></th>
+      <th class="table-info" scope="row" th:text="${a.getCountSoldAndRented()}">0</th>
     </tr>
     
   </tbody>
@@ -53,10 +53,31 @@
   </thead>
   <tbody>
     <tr th:each="e : ${estateList} "> 
-      <th class="table-primary" scope="row" th:text="${e.adTitle}"></th>
-      <th class="table-success" scope="row" th:text="${e.address}"></th>
-      <th class="table-danger" scope="row"  th:text="|${e.zipCode} ${e.city} ${e.province}|" ></th>
-      <th class="table-warning" scope="row" th:text="${e.getFormattedInsertionDate()}"></th>
+      <th class="table-info" scope="row" th:text="${e.adTitle}"></th>
+      <th class="table-info" scope="row" th:text="${e.address}"></th>
+      <th class="table-info" scope="row"  th:text="|${e.zipCode} ${e.city} ${e.province}|" ></th>
+      <th class="table-info" scope="row" th:text="${e.getFormattedInsertionDate()}"></th>
+    </tr>
+    
+  </tbody>
+</table>
+
+<h3>Appuntamenti in programma per la prossima settimana</h3>
+	<table class="table">
+  <thead>
+    <tr>
+      <th class="table-dark" scope="col">Nome Agente</th>
+      <th class="table-dark" scope="col">Indirizzo</th>
+      <th class="table-dark" scope="col">Cap/Città/Provincia</th>
+      <th class="table-dark" scope="col">Data inserimento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="e : ${estateList} "> 
+      <th class="table-info" scope="row" th:text="${e.adTitle}"></th>
+      <th class="table-info" scope="row" th:text="${e.address}"></th>
+      <th class="table-info" scope="row"  th:text="|${e.zipCode} ${e.city} ${e.province}|" ></th>
+      <th class="table-info" scope="row" th:text="${e.getFormattedInsertionDate()}"></th>
     </tr>
     
   </tbody>
