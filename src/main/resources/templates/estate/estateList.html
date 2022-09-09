@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
    <head>
-      <th:block th:replace="fragment/fragment :: scr-head"></th:block>
+      <th:block th:replace="fragment/fragment :: scr-head"> </th:block>      
       <link rel="stylesheet" href="/estateListCss.css">
       <title>Lista Immobili</title>
    </head>
@@ -202,7 +202,7 @@
          <h1>Mi dispiace non ci sono ancora immobili nel catalogo.</h1>
       </div>
       <h2 class="text-center fw-bold mt-3">Ecco La Lista degli Immobili</h2>
-      <div class="container d-flex justify-content-center">
+      <div class="container ">
          <div th:unless="${#lists.isEmpty(estateList)}">
             <div class="row" th:each="e : ${estateList}">
                <div class="col-3">
@@ -225,9 +225,23 @@
                </div>
                <div class="col-8">
                   <h3 class="titolo" th:text="${e.adTitle}"></h3>
-                  <div class="row prezzo">
-                     <p th:text="${e.price}"></p>
+                  <div class="row" >
+                  	
+                  	<div class="col-1">
+                  		<span th:text="${e.numBathrooms}"></span>
+                  		<i class="fa-solid fa-bath"></i>
+                  	</div>
+                  	<div class="col-1">
+                  		A
+                  	</div>
+                  	<div class="col-6">
+	                  <h5 >
+	                  	<span  th:text="${e.price}"></span>
+	                  	<i class="fa-solid fa-euro-sign"></i>
+	                  </h5>
+                  	</div>
                   </div>
+                  
                   <p class="descrizione" >
                   </p>
                </div>
