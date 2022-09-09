@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,19 +55,15 @@ public class AgentController {
 
 	@PostMapping("/edit")
 	public String save(@Valid @ModelAttribute("agent") Agent formAgent, BindingResult br) {
+		
 		boolean hasErrors = br.hasErrors();
-		boolean validName = true;
-		if (formAgent.getId() != null) {
-			Agent agentOld = agentRepo.findById(formAgent.getId()).get();
-			if (agentOld.getName().equalsIgnoreCase(formAgent.getName()))
-				validName = false;
+		
+		if(formAgent.getId() == null)
+		{
+			//formAgent.setHiringDate(LocalDate.now());
+			formAgent.setSecurityLevel(2);
 		}
-		if (validName && agentRepo.countByName(formAgent.getName()) > 0) {
-
-			br.addError(new FieldError("agent", "name", "Hai già un agente con questo nome"));
-			hasErrors = true;
-
-		}
+		
 		if (hasErrors)
 			return "/admin/agentEdit";
 
