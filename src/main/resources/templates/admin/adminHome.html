@@ -11,20 +11,19 @@
    <hr>
    <h2 class="text-center"> Pannello di controllo</h2>
     <div class="text-center">
-    <a class="btn btn-success m-3 " href="/agent/edit">Crea nuovo Agente</a>
-    <a class="btn btn-primary m-3" href="/agent">Lista Agenti</a>
-    <a class="btn btn-dark m-3 " href="/estate/admin/estateList/edit">Crea nuovo Immobile</a>
-    <a class="btn btn-info m-3" href="/estate/admin/estateList">Lista Immobili Admin</a>
-    <a class="btn btn-info m-3" href="/appointment/appointmentListAdmin">Lista Appuntamenti Agenti</a>
+    <a class="btn btn-success m-3 " href="/agent/edit">Crea nuovo Agente <i class="fa-solid fa-address-card"></i></a>
+    <a class="btn btn-success m-3 " href="/estate/admin/estateList/edit">Crea nuovo Immobile <i class="fa-solid fa-house-chimney"></i></a>
+    <a class="btn btn-primary m-3" href="/agent">Lista Agenti <i class="fa-solid fa-list-ul"></i></a>
+    <a class="btn btn-primary m-3" href="/estate/admin/estateList">Lista Immobili Admin <i class="fa-solid fa-list-ul"></i></a>
+    <a class="btn btn-primary m-3" href="/appointment/appointmentListAdmin">Lista Appuntamenti Agenti <i class="fa-regular fa-calendar-check"></i></a>
     </div>
     <hr>
         <h2 class="text-center">Riepilogo attività effettuate nell'ultimo mese</h2>
 <table class="table">
   <thead>
-  <h3>Dati agenti</h3>
     <tr>
-      <th class="table-dark" scope="col">Nome</th>
-      <th class="table-dark" scope="col">Cognome</th>
+      <th class="table-dark" scope="col">Nome agente</th>
+      <th class="table-dark" scope="col">Cognome agente</th>
       <th class="table-dark" scope="col">Appuntamenti effettuati</th>
       <th class="table-dark" scope="col">Immobili venduti/affittati</th>
     </tr>
@@ -66,18 +65,20 @@
 	<table class="table">
   <thead>
     <tr>
-      <th class="table-dark" scope="col">Nome Agente</th>
-      <th class="table-dark" scope="col">Indirizzo</th>
-      <th class="table-dark" scope="col">Cap/Città/Provincia</th>
-      <th class="table-dark" scope="col">Data inserimento</th>
+      <th class="table-dark" scope="col">Nome e Cognome Agente</th>
+      <th class="table-dark" scope="col">Nome e Cognome utente</th>
+      <th class="table-dark" scope="col">Data e ora dell' appuntamento</th>
+      <th class="table-dark" scope="col">Indirizzo appuntamento</th>
+      <th class="table-dark">Cap/Città/Provincia</th>
     </tr>
   </thead>
   <tbody>
-    <tr th:each="e : ${estateList} "> 
-      <th class="table-info" scope="row" th:text="${e.adTitle}"></th>
-      <th class="table-info" scope="row" th:text="${e.address}"></th>
-      <th class="table-info" scope="row"  th:text="|${e.zipCode} ${e.city} ${e.province}|" ></th>
-      <th class="table-info" scope="row" th:text="${e.getFormattedInsertionDate()}"></th>
+    <tr th:each="a : ${appList} "> 
+      <th class="table-info" scope="row" th:text="|${a.agent.name} ${a.agent.surname}|"></th>
+      <th class="table-info" scope="row" th:text="|${a.name} ${a.surname}|"></th>
+      <th class="table-info" scope="row"  th:text="|${a.date} ${a.hour}:00|" ></th>
+      <th class="table-info" scope="row" th:text="${a.estate.address}"></th>
+      <td class="table-info" scope="row" th:text="|${a.estate.zipCode} ${a.estate.city} ${a.estate.province}|"></td>
     </tr>
     
   </tbody>
