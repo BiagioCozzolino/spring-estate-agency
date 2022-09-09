@@ -71,7 +71,7 @@ public class AppointmentController {
 		
 		for(Appointment a : appList)
 		{
-			if((a.getDate()==formAppointment.getDate()) && (a.getHour()== formAppointment.getHour()))
+			if((a.getDate().equals(formAppointment.getDate()) && (a.getHour()== formAppointment.getHour())))
 			{
 				validDate=false;
 			}
