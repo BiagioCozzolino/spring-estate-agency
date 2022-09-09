@@ -27,7 +27,7 @@
 				<table class="table">
 					<thead class="bg-dark text-decoration-none fw-bold text-light">
 						<tr> 
-							<th  colspan="2" class=" table-dark">Indirizzo</th>
+							<th  class=" table-dark">Indirizzo                    </th>
 							<th  class="table-dark">Numero Civico</th>
 							<th  class="table-dark">Piano</th>
 							<th  class="table-dark">Interno</th>							
@@ -52,7 +52,7 @@
 							<td class="table-info" th:text="${e.interior}"></td>							
 							<td class="table-info" th:text="|${e.zipCode} ${e.city} ${e.province}|"></td>							
 							<td class="table-info" th:text="${e.price}"></td>
-							<td class="table-info" th:text="${e.insertionDate}"></td>
+							<td class="table-info" th:text="${e.getFormattedInsertionDate()}"></td>
 							<td class="table-info" th:text="${e.contractStart}"></td>
 							<td class="table-info" th:text="${e.status}"></td>
 							<td class="table-info" th:text="|${e.agent.name} ${e.agent.surname}|"></td>
