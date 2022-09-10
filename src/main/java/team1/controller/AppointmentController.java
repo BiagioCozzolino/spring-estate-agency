@@ -70,9 +70,12 @@ public class AppointmentController {
 		boolean validDate = true;
 		boolean hasErrors = br.hasErrors();
 
-		for (Appointment a : appList) {
-			if ((a.getDate() == formAppointment.getDate()) && (a.getHour() == formAppointment.getHour())) {
-				validDate = false;
+		
+		for(Appointment a : appList)
+		{
+			if((a.getDate().equals(formAppointment.getDate()) && (a.getHour()== formAppointment.getHour())))
+			{
+				validDate=false;
 			}
 		}
 

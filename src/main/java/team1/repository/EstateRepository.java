@@ -76,5 +76,8 @@ public interface EstateRepository extends CrudRepository<Estate, Integer> {
 			Integer areaHigher, 
 			Integer areaLower,
 			String status
-	);       
+	);     
+	
+	//filtro top10
+	public List<Estate> findTop10ByNumViewsOrderByNumViewsDesc();
 }
