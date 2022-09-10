@@ -214,4 +214,14 @@ public class Agent {
 	public Integer getCountSoldAndRented() {
 		return getCountRented() + getCountSold();
 	}
+	
+	public Integer getCountDoneAppointments() {
+		Integer res=0;
+		for (Appointment a: appointment)
+		{
+			if(a.getStatusValue(a.getStatus()) == 2)
+				res++;
+		}
+		return res;
+	}
 }

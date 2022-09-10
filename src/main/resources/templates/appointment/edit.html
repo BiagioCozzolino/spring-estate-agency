@@ -45,7 +45,7 @@
               th:if="${estate.agent.agentImage.size() == 0}"
               src="/img/agentDefault.jpg"
               style="max-width: 300px; max-height: 600px"
-              class="rounded-3 p-1 bg-dark"
+              class="rounded-3 p-1 bg-dark mx-auto"
               alt="Admin"
             />
             <div th:each="img : ${estate.agent.agentImage} ">
@@ -157,10 +157,9 @@
 
         <hr />
         <h2>Inserisci data e orario dell'appuntamento:</h2>
-        <h4>Inserire solo l'ora della prenotazione senza i minuti</h4>
         <div class="form-floating mt-3 has-validation">
           <input
-            type="datetime-local"
+            type="date"
             class="form-control"
             th:field="*{date}"
             id="date"
@@ -177,9 +176,32 @@
             </ul>
           </div>
         </div>
+        <div class="form-floating mt-3 has-validation">
+        <select  type="hour" id="hour" th:errorClass="is-invalid" class="form-control" placeholder="hour" aria-label="Default select example" th:field="*{hour}">
+  <option value="" selected>Seleziona l'orario della prenotazione</option>
+  <option value="8">08.00</option>
+  <option value="9">09.00</option>
+  <option value="10">10.00</option>
+  <option value="11">11.00</option>
+  <option value="12">12.00</option>
+  <option value="13">13.00</option>
+  <option value="15">15.00</option>
+  <option value="16">16.00</option>
+  <option value="17">17.00</option>
+  <option value="18">18.00</option>
+</select>
+	<div th:if="${#fields.hasErrors('hour')}" class="invalid-feedback">
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('hour')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
         <div>
-          <button type="submit" class="btn btn-primary mt-3">Save</button>
-          <a class="btn btn-primary mt-3" href="/agent">Cancel</a>
+          <button type="submit" class="btn btn-primary m-3">Conferma appuntamento</button>
+          <a class="btn btn-danger m-3"  href="/agent">Torna Indietro</a>
         </div>
       </form>
     </div>

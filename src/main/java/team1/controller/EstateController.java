@@ -1,7 +1,7 @@
 package team1.controller;
 
+import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,8 +45,7 @@ public class EstateController {
 	// pagina con la lista di tutti gli immobili per gli utenti
 	@GetMapping
 	public String estates(Model model) {
-		Period diff;
-		Integer daysDiff = 0;
+		long daysBetween=8;
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 		List<Estate> estateListForUsers = new ArrayList<Estate>();
 
@@ -57,11 +56,10 @@ public class EstateController {
 			}
 
 			if (e.getContractStart() != null) {
-				diff = e.getContractStart().until(LocalDate.now());
-				daysDiff = diff.getDays();
+				daysBetween = Duration.between(e.getContractStart().atStartOfDay(),LocalDate.now().atStartOfDay()).toDays();
 			}
 
-			if (daysDiff <= 7 && (e.getStatusValue(e.getStatus()) == 2 || e.getStatusValue(e.getStatus()) == 1)) {
+			if (daysBetween <= 7 && (e.getStatusValue(e.getStatus()) == 2 || e.getStatusValue(e.getStatus()) == 1)) {
 				estateListForUsers.add(e);
 			}
 		}
@@ -96,7 +94,6 @@ public class EstateController {
 		}
 	}
 	
-
 	@GetMapping("/admin/estateList/edit")
 	public String estateAddForm(Model model) {
 
@@ -137,6 +134,9 @@ public class EstateController {
 		}
 
 		if (formEstate.getId() == null) {
+			
+			formEstate.setInsertionDate(LocalDate.now());
+			
 			Optional<Estate> result = estateRepo.findByAddressAndHouseNumberAndInteriorAndZipCode(
 					formEstate.getAddress(), formEstate.getHouseNumber(), formEstate.getInterior(),
 					formEstate.getZipCode());
@@ -165,10 +165,7 @@ public class EstateController {
 			return "redirect:/estate/admin/estateList";
 		}
 	}
-
-
-	
-			
+				
 	@PostMapping("/admin/estateList/{id}")
 	public String estatePartUpdate(@PathVariable ("id") Integer estateId, @RequestParam(name="status") String status)
 	{

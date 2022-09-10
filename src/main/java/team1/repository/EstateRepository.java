@@ -59,7 +59,7 @@ public interface EstateRepository extends CrudRepository<Estate, Integer> {
 	public Optional<Estate> findByAddressAndHouseNumberAndInteriorAndZipCode(String address, Integer houseNumber, Integer interior, String ZipCode);
 
 	//filtro per pagina di ricerca
-	public List<Estate> findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrderByAddressAsc
+	public List<Estate> findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrStatusIgnoreCaseOrderByAddressAsc
 	(
 			String address, 
 			String zipCode, 
@@ -74,6 +74,10 @@ public interface EstateRepository extends CrudRepository<Estate, Integer> {
 			Boolean hasCarSpot, 
 			Boolean hasGarden, 
 			Integer areaHigher, 
-			Integer areaLower
-	);       
+			Integer areaLower,
+			String status
+	);     
+	
+	//filtro top10
+	public List<Estate> findTop10ByNumViewsOrderByNumViewsDesc();
 }
