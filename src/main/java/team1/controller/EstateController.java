@@ -134,6 +134,9 @@ public class EstateController {
 		}
 
 		if (formEstate.getId() == null) {
+			
+			formEstate.setInsertionDate(LocalDate.now());
+			
 			Optional<Estate> result = estateRepo.findByAddressAndHouseNumberAndInteriorAndZipCode(
 					formEstate.getAddress(), formEstate.getHouseNumber(), formEstate.getInterior(),
 					formEstate.getZipCode());

@@ -24,7 +24,7 @@
 			<div class="text-light">
 				<table class="table">
 					<thead class="bg-dark text-decoration-none fw-bold text-light">
-						<tr> 
+						<tr> <th  colspan="2" class=" table-dark">Data e orario appuntamento</th>
 							<th  colspan="2" class=" table-dark">Nome e Cognome Agente</th>
 							<th  class="table-dark">Nome e Cognome Utente</th>
 							<th  class="table-dark">E-Mail Utente</th>
@@ -38,6 +38,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="e : ${appointmentListAdmin}">
+							<td colspan="2" class="table-info" th:text="|${e.date} ${e.hour}:00|"></td>
 							<td colspan="2" class="table-info" th:text="|${e.agent.name} ${e.agent.surname}|"></td>
 							<td class="" th:text="|${e.name} ${e.surname}|"></td>
 							<td class="" th:text="${e.email}"></td>
@@ -54,12 +55,11 @@
 								>
 								<div class="form-floating mb-3 mt-3 has-validation col-4 pt-3">
 									<select
-									class="form-select"
 									aria-label="Default select example"
 									  name="status"
 									  id="status"
 									>
-									  <option value="">--Scegli un'opzione--</option>
+									  <option value="" placeholder="Scegli un'opzione">Scegli un'opzione</option>
 									  <option value="Annullato">Annullato</option>
 									  <option value="Effettuato">Effettuato</option>
 									</select>
