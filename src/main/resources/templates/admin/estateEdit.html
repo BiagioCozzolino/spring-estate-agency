@@ -393,10 +393,51 @@
                 </ul>
               </div>
             </div>
+            <div class="form-floating mb-3 mt-3 has-validation col-3">
+              <input
+                type="text"
+                class="form-control"
+                th:field="*{type}"
+                id="type"
+                th:errorClass="is-invalid"
+                placeholder="Tipo"
+              />
+              <label for="floatingInput">Tipo</label>
+              <div th:if="${#fields.hasErrors('type')}" class="invalid-feedback">
+                <ul>
+                  <li
+                    th:each="err : ${#fields.errors('type')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
           </div>  
                
           <div class="row d-flex">
           
+          <div class="form-floating mb-3 mt-3 has-validation col-3">
+              <input
+                type="date"
+                class="form-control"
+                th:field="*{insertionDate}"
+                id="insertionDate"
+                th:errorClass="is-invalid"
+                placeholder="Data inserimento annuncio"
+              />
+              <label for="floatingInput">Data inserimento annuncio</label>
+              <div
+                th:if="${#fields.hasErrors('insertionDate')}"
+                class="invalid-feedback"
+              >
+                <ul>
+                  <li
+                    th:each="err : ${#fields.errors('insertionDate')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
           	<div class="form-floating mb-3 mt-3 has-validation col-3">
               <input
                 type="date"
@@ -419,6 +460,7 @@
                 </ul>
               </div>
             </div>
+            
             <div class="form-floating mb-3 mt-3 has-validation col-3 pt-3">
               <span> <label for="status">Stato immobile</label> </span>
               <select
@@ -479,25 +521,7 @@
                 </ul>
               </div>
             </div>
-             <div class="form-floating mb-3 mt-3 has-validation col-3">
-              <input
-                type="text"
-                class="form-control"
-                th:field="*{type}"
-                id="type"
-                th:errorClass="is-invalid"
-                placeholder="Tipo"
-              />
-              <label for="floatingInput">Tipo</label>
-              <div th:if="${#fields.hasErrors('type')}" class="invalid-feedback">
-                <ul>
-                  <li
-                    th:each="err : ${#fields.errors('type')}"
-                    th:text="${err}"
-                  ></li>
-                </ul>
-              </div>
-            </div>
+             
           </div>
             
   

@@ -208,9 +208,9 @@
                <div class="col-3">
                   <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
                      <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        <div class="carousel-item" th:each="img,iter : ${e.images}" th:classappend="${iter.index == 0 ? 'active' : ''}">
                            <img th:if="${e.images.size()==0}" src="/img/Casa Stilizzata.jpg" alt="template casa" >
-                           <img th:if="${e.images.size()!=0}" th:src="@{|/estate/image/${e.images.get(0).getId()}/content|}" class="w-100 mb-2" alt="Immagine immobile">   
+                           	<img th:if="${e.images.size()!=0}" th:src="@{|/estate/image/${img.getId()}/content|}" class="w-100 mb-2" alt="Immagine immobile">   
                         </div>
                      </div>
                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -254,17 +254,12 @@
                   </h4>
                   </div>
                   </div>
-                 
+                 <div class="col-8">
                   <h5 class="border-top ">Descrizione </h5> 
-                  <p class="descrizione " >   hsshahsadsajdakjsfsssssssssssssssssssssssssssssssssssssssssssssss
-                  sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-                  ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-                  ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-                  
-                  </p>
-                  
+                  <p class="descrizione" th:text="${e.getSubstringedDescription}"></p>
+                 </div>
                   <div class=" d-flex justify-content-center">
-                  <button type="button" class="mb-2 mt-2 btn btn-info">Dettagli</button>
+                  <a th:href="@{|/estate/${e.id}|}" class="mb-2 mt-2 btn btn-info">Dettagli</a>
                   </div>
                </div>
                <hr>
