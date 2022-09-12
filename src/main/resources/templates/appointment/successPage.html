@@ -2,17 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="fragment/fragment :: scr-head"></th:block>
-    <title>Document</title>
+    <link rel="stylesheet" href="/homeCSS.css">
+    <title>PartenopHome</title>
 </head>
 <body>
-     <th:block th:replace="fragment/fragment :: navbar"></th:block> </thead>
-
-    <div class="container ">
-    <h1>Complimenti Hai effettuato correttamente la prenotazione</h1>
-   
- </div>
+       <div id="intro" class="bg-image shadow-2-strong">
+       <th:block th:replace="fragment/fragment :: navbar"></th:block>
+        <div class="container flex mt-5 pt-5">
+          <div class="mt-5 pt-5 row d-flex flex-row justify-content-md-center text-center">
+            <h1 class="mt-5 pt-5 text-center bigSentence">Complimenti la tua prenotazione</h1>
+            <h1 class="text-center bigSentence">E avvenuta con successo!</h1>
+            <div>
+            </div>
+          </div>  
+        </div>
+      </div>
     <footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
-	
-   
-</body>
-</html>
+	</body></html>
