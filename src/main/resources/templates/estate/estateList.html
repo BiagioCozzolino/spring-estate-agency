@@ -12,9 +12,9 @@
       <h2 class="text-center fw-bold mt-3">Ricerca l'immobile per campi</h2>
       <div class="container d-flex justify-content-center p-3">
          <form action="/estate/search">
-            <div class="container  my-5 ">
-               <div class="row d-flex">
-                  <div class="col-4">
+            <div class="row d-flex my-5 ">
+               <div class="row d-flex ">
+                  <div class="col-3">
                      <input class="form-control" type="text" name="queryAddress" placeholder="Indirizzo">
                   </div>
                   <div class="col-2">
@@ -23,7 +23,7 @@
                   <div class="col-2">
                      <input class="form-control col-2" type="text" name="queryCity" placeholder="Citt&aacute;">
                   </div>
-                  <div class="col-2">
+                  <div class="col-2 me-1">
                      <select
                         name="queryProvince"
                         >
@@ -139,8 +139,29 @@
                         <option value="VI">Vicenza</option>
                         <option value="VT">Viterbo</option>
                      </select>
-                  </div>
-                  <div class="col-2">
+                  </div>                  
+                  <div class="d-flex col-2 ms-2">
+	                  Vendita: <input class="form-check-input" type="radio" name="queryStatus" value="In vendita">
+	                  Affitto: <input class="form-check-input" type="radio" name="queryStatus" value="In affitto">
+	               </div>                  
+               </div>
+            </div>
+            <a href="#" class="d-flex justify-content-end mb-5" id="attivaFiltri">Filtri</a> 
+            <div class="filtriAvanzati">
+	            <div class="row d-flex my-5">
+	               <div class="col-2">
+	                  <input class="form-control" type="number" name="queryAreaHigher" placeholder="Superficie maggiore di">
+	               </div>
+	               <div class="col-2">
+	                  <input class="form-control" type="number" name="queryAreaLower" placeholder="Superficie minore di">
+	               </div>
+	               <div class="col-3">
+	                  <input class="form-control" type="number" name="queryPriceHigher" placeholder="Prezzo maggiore di">
+	               </div>
+	               <div class="col-3">
+	                  <input class="form-control" type="number" name="queryPriceLower" placeholder="Prezzo minore di">
+	               </div>
+	               <div class="col-2">
                      <select
                         name="energyClass"
                         >
@@ -157,42 +178,25 @@
                         <option value="G">G</option>
                      </select>
                   </div>
-               </div>
-            </div>
-            <div class="row d-flex my-5">
-               <div class="col-2">
-                  <input class="form-control" type="number" name="queryAreaHigher" placeholder="Superficie maggiore di">
-               </div>
-               <div class="col-2">
-                  <input class="form-control" type="number" name="queryAreaLower" placeholder="Superficie minore di">
-               </div>
-               <div class="col-3">
-                  <input class="form-control" type="number" name="queryPriceHigher" placeholder="Prezzo maggiore di">
-               </div>
-               <div class="col-3">
-                  <input class="form-control" type="number" name="queryPriceLower" placeholder="Prezzo minore di">
-               </div>
-               <div class="col-2">
-                  Vendita: <input class="form-check-input" type="radio" name="queryStatus" value="In vendita">
-                  Affitto: <input class="form-check-input" type="radio" name="queryStatus" value="In affitto">
-               </div>
-            </div>
-            <div class="row d-flex my-5">
-               <div class="col-3">
-                  <input class="form-control" type="number" name="queryNumSpaces" placeholder="Numero di vani">
-               </div>
-               <div class="col-3">
-                  <input class="form-control" type="number" name="queryNumBathrooms" placeholder="Numero di bagni">
-               </div>
-               <div class="col-3">
-                  <input class="form-control" type="number" name="queryNumBalconies" placeholder="Numero di Balconi">
-               </div>
-               <div class="col-3">
-                  Posto auto : <input class="form-check-input" type="checkbox" name="queryHasCarSpot">
-                  Giardino : <input class="form-check-input" type="checkbox" name="queryHasGarden">
-               </div>
-            </div>
-            <div class="container d-flex justify-content-end">
+	               
+	            </div>
+	            <div class="row d-flex my-5">
+	               <div class="col-3">
+	                  <input class="form-control" type="number" name="queryNumSpaces" placeholder="Numero di vani">
+	               </div>
+	               <div class="col-3">
+	                  <input class="form-control" type="number" name="queryNumBathrooms" placeholder="Numero di bagni">
+	               </div>
+	               <div class="col-3">
+	                  <input class="form-control" type="number" name="queryNumBalconies" placeholder="Numero di Balconi">
+	               </div>
+	               <div class="col-3">
+	                  Posto auto : <input class="form-check-input" type="checkbox" name="queryHasCarSpot">
+	                  Giardino : <input class="form-check-input" type="checkbox" name="queryHasGarden">
+	               </div>
+	            </div>
+	           </div>
+            <div class=" d-flex justify-content-end ">
                <button type="submit" class="btn btn-danger">Cerca</button> 
             </div>
          </form>
@@ -275,5 +279,6 @@
       <footer>
          <th:block th:replace="fragment/fragment :: footer"></th:block>
       </footer>
+      <script type="text/javascript" src="/estateList.js"></script>
    </body>
 </html>
