@@ -63,11 +63,13 @@ public class AppointmentController {
 	@PostMapping("/edit")
 	public String save(Model model, @Valid @ModelAttribute("appointment") Appointment formAppointment,
 			BindingResult br) {
+
 		Agent agent = formAppointment.getAgent();
-		List<Appointment> appList= agent.getAppointment();
-		
-		boolean validDate=true;
+		List<Appointment> appList = agent.getAppointment();
+
+		boolean validDate = true;
 		boolean hasErrors = br.hasErrors();
+
 		
 		for(Appointment a : appList)
 		{
@@ -76,29 +78,25 @@ public class AppointmentController {
 				validDate=false;
 			}
 		}
-		
-		if(!validDate)
-		{
-			br.addError(new FieldError("appointment", "hour",
-					"L'orario selezionato per tale data è già occupato."));
-			hasErrors=true;
+
+		if (!validDate) {
+			br.addError(new FieldError("appointment", "hour", "L'orario selezionato per tale data è già occupato."));
+			hasErrors = true;
 		}
-		if(hasErrors)
+		if (hasErrors)
 
 		{
 			model.addAttribute("estate", formAppointment.getEstate());
 			model.addAttribute("appointment", formAppointment);
 			return "appointment/edit";
 			// return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
-		}
-		else
-		{
+		} else {
 			formAppointment.setStatus("Da effettuare");
 			appRepo.save(formAppointment);
-	
+
 			return "redirect:/appointment/success";
 		}
-		}
+	}
 
 	@PostMapping("/appointmentListAdmin/{id}")
 	public String appointmentPartUpdate(@PathVariable("id") Integer appointmentId,
