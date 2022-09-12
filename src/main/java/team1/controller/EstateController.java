@@ -174,6 +174,8 @@ public class EstateController {
 		if(result.isPresent())
 		{
 			result.get().setStatus(status);
+			if(status.equalsIgnoreCase("Venduto") || status.equalsIgnoreCase("Affittato"))
+			result.get().setContractStart(LocalDate.now());
 		}
 		try {
 			estateRepo.save(result.get());
