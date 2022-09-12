@@ -201,7 +201,7 @@
       <div th:if="${#lists.isEmpty(estateList)}">
          <h1>Mi dispiace non ci sono ancora immobili nel catalogo.</h1>
       </div>
-      <h2 class="text-center fw-bold mt-3">Ecco La Lista degli Immobili</h2>
+      <h2 class="text-center mt-3 mb-4">Ecco La Lista degli Immobili</h2>
       <div class="container ">
          <div th:unless="${#lists.isEmpty(estateList)}">
             <div class="row" th:each="e : ${estateList}">
@@ -210,7 +210,7 @@
                      <div class="carousel-inner">
                         <div class="carousel-item active">
                            <img th:if="${e.images.size()==0}" src="/img/Casa Stilizzata.jpg" alt="template casa" >
-                           <img th:if="${e.images.size()!=0}" th:src="@{|/estate/image/${e.images.get(0).getId()}/content|}" class="w-100" alt="Immagine immobile">   
+                           <img th:if="${e.images.size()!=0}" th:src="@{|/estate/image/${e.images.get(0).getId()}/content|}" class="w-100 mb-2" alt="Immagine immobile">   
                         </div>
                      </div>
                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -224,17 +224,22 @@
                   </div>
                </div>
                <div class="col-8">
-                  <h3 class="titolo" th:text="${e.adTitle}"></h3>
+                  <h2 class="titolo fw-bold" th:text="${e.adTitle}"></h2>                  
                   <div class="row" >
                   	
-                  	<div class="col-1">
-                  		<span th:text="${e.numBathrooms}"></span>
+                  	<div class="col-2 border-start">
                   		<i class="fa-solid fa-bath"></i>
+                  		<span th:text="${e.numBathrooms}"></span>                  		
                   	</div>
-                  	<div class="col-1">
-                  		A
+                  	<div class="col-2 border-start">
+                	    <i class="fa-solid fa-chart-area"></i>
+                  		<span th:text="|${e.area} mt|"></span>                  		
                   	</div>
-                  	<div class="col-6">
+                  	<div class="col-2 border-start">
+                  		<i class="fa-solid fa-door-open"></i>
+                  		<span th:text="${e.numSpaces}"></span>                  		
+                  	</div>
+                  	<div class="col-6 border-start">
 	                  <h5 >
 	                  	<span  th:text="${e.price}"></span>
 	                  	<i class="fa-solid fa-euro-sign"></i>
@@ -242,8 +247,25 @@
                   	</div>
                   </div>
                   
-                  <p class="descrizione" >
+                  <div class="row border-top mt-1 ">
+                  <div class="col-10 ">  
+                                
+                  <h4 th:text="|${e.type} Sito in: ${e.address} ${e.zipCode} ${e.city}|">               
+                  </h4>
+                  </div>
+                  </div>
+                 
+                  <h5 class="border-top ">Descrizione </h5> 
+                  <p class="descrizione " >   hsshahsadsajdakjsfsssssssssssssssssssssssssssssssssssssssssssssss
+                  sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                  ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                  ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                  
                   </p>
+                  
+                  <div class=" d-flex justify-content-center">
+                  <button type="button" class="mb-2 mt-2 btn btn-info">Dettagli</button>
+                  </div>
                </div>
                <hr>
             </div>
