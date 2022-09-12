@@ -375,4 +375,9 @@ public class Estate {
 
 		return df.format(price);
 	}
+	
+	public String getSubstringedDescription()
+	{
+		return description.substring(0, 199);
+	}
 }
