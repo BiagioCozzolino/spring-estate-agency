@@ -208,9 +208,11 @@
                <div class="col-3">
                   <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
                      <div class="carousel-inner">
-                        <div class="carousel-item" th:each="img,iter : ${e.images}" th:classappend="${iter.index == 0 ? 'active' : ''}">
-                           <img th:if="${e.images.size()==0}" src="/img/Casa Stilizzata.jpg" alt="template casa" >
-                           	<img th:if="${e.images.size()!=0}" th:src="@{|/estate/image/${img.getId()}/content|}" class="w-100 mb-2" alt="Immagine immobile">   
+                     	<div th:if="${e.images.size()==0}" class="carousel-item mb-2 active">
+                     		<img class="img-fluid"  src="/img/Casa Stilizzata.jpg" alt="template casa" >
+                     	</div>
+                        <div th:if="${e.images.size()!=0}" class="carousel-item mb-2" th:each="img,iter : ${e.images}" th:classappend="${iter.index == 0 ? 'active' : ''}">
+                           	<img  th:src="@{|/estate/image/${img.getId()}/content|}" class="w-100 " alt="Immagine immobile">   
                         </div>
                      </div>
                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
