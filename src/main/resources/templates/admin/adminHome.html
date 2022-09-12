@@ -83,6 +83,28 @@
     
   </tbody>
 </table>
+
+<h3>Top10 degli immobili con più visualizzazioni</h3>
+	<table class="table">
+  <thead>
+    <tr>
+      <th class="table-dark" scope="col">Indirizzo immobile</th>
+      <th class="table-dark" scope="col">Piano e interno</th>
+      <th class="table-dark" scope="col">Dati agente di competenza</th>
+      <th class="table-dark" scope="col">VIsualizzazioni</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="t : ${topTen} "> 
+      
+      <th class="table-info" scope="row" th:text="|${t.address}, ${t.houseNumber} ${t.zipCode}|"></th>
+      <th class="table-info" scope="row" th:text="|${t.floorNumber} - ${t.interior}|"></th>
+      <th class="table-info" scope="row" th:text="|${t.agent.name} ${t.agent.surname}|"></th>
+      <th class="table-info" scope="row"  th:text="|${t.numViews}|" ></th>
+    </tr>
+    
+  </tbody>
+</table>
     </div>
 <footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
 
