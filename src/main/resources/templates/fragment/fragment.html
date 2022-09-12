@@ -29,7 +29,7 @@
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <img  width="50" height="50" class=" mx-3" src="https://static.vecteezy.com/system/resources/previews/000/584/620/original/real-estate-building-logo-template-illustration-design-vector-eps-10.jpg" alt="logo">
+    <a href="/"><img class="logo" src="img/logo-nav.svg" alt="logo"></a>
 
     <!-- Toggle button -->
     <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
@@ -40,6 +40,7 @@
 
     <!-- Collapsible wrapper -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
       <!-- Left links -->
       <ul class="navbar-nav me-auto d-flex flex-row pt-3 mt-3 mt-lg-0">
         <li class="nav-item text-center mx-2 mx-lg-1">
@@ -56,15 +57,22 @@
         </li>
       </ul>
       <!-- Left links -->
-
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row pt-3 mt-3 mt-lg-0">
+       <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" href="/admin">
+            <div>
+            <i class="fas fa-solid fa-user verde"></i>
+            </div>
+           <p class="menu-item">Profilo</p>
+          </a>
+        </li>
       <li class="nav-item text-center mx-2 mx-lg-1">
           <a class="nav-link" href="/admin">
             <div>
               <i class="fas fa-solid fa-screwdriver-wrench verde"></i>
             </div>
-           <p class="prova">Area Admin</p>
+           <p class="menu-item">Area Admin</p>
           </a>
         </li>
         <li class="nav-item text-center mx-2 mx-lg-1">
@@ -72,7 +80,15 @@
             <div>
               <i class="fas fa-solid fa-right-to-bracket verde"></i>
             </div>
-           <p class="prova">Login</p>
+           <p class="menu-item">Login</p>
+          </a>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" href="/login">
+            <div>
+            <i class="fas fa-solid fa-right-from-bracket verde"></i>
+            </div>
+           <p class="menu-item">Logout</p>
           </a>
         </li>
         
@@ -102,7 +118,7 @@
           <!-- Facebook -->
           <a
             class="btn text-white btn-floating m-1"
-            style="background-color: #3b5998;"
+            style="background-color: rgb(0, 0, 0);"
             href="#!"
             role="button"
             ><i class="fab fa-facebook-f"></i
@@ -172,14 +188,14 @@
                 <!-- Email input -->
                 <div class="form-outline form-white mb-4">
                   <input type="email" id="form5Example21" class="form-control bg-light"/>
-                  <label class="form-label text-dark" for="form5Example21">Email address</label>
+                  <label class="form-label text-dark" for="form5Example21">Inserisci la tua E-Mail</label>
                 </div>
               </div>
               <!--Grid column-->
               <div class="col-auto">
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-outline-success mb-4">
-                  Subscribe
+                <button type="submit" class="btn btn-success mb-4">
+                  ISCRIVITI
                 </button>
               </div>
               <!--Grid column-->
@@ -199,8 +215,7 @@
                 <i class="fas fa-gem me-3 text-secondary"></i>PartenopEstate
               </h6>
               <p>
-                Here you can use rows and columns to organize your footer content. Lorem ipsum
-                dolor sit amet, consectetur adipisicing elit.
+                La nostra professionalità al vostro servizio per aiutarvi a trovare i vostri sogni e realizzarli.
               </p>
             </div>
             <!-- Grid column -->
@@ -243,7 +258,7 @@
       <!-- Section: Links  -->
       
       <!-- Copyright -->
-      <div class="text-center p-3 bg-dark">
+      <div class="text-center p-3">
         © 2022 Copyright:
         <a class="text-white" href="#">PartenopEstate.com</a>
       </div>

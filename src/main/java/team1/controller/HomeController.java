@@ -45,6 +45,7 @@ public class HomeController {
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 		List<Estate> estateListForAdminHome = new ArrayList<Estate>();
 
+
 		List<Appointment> appList= (List<Appointment>) appRepo.findAll();
 		List<Appointment> appListForAdminHome= new ArrayList<Appointment>();
 		List<Estate> estateListTopTen= estateRepo.findTop10ByOrderByNumViews();
@@ -57,6 +58,7 @@ public class HomeController {
 			if(daysDiff<=7)
 			{
 
+
 				estateListForAdminHome.add(e);
 			}
 		}
@@ -68,8 +70,7 @@ public class HomeController {
 			}
 		}
 
-		
-		model.addAttribute("topTen", estateListTopTen);
+		// model.addAttribute("topTen", estateListTopTen);
 
 		model.addAttribute("appList", appListForAdminHome);
 		model.addAttribute("estateList", estateListForAdminHome);

@@ -55,9 +55,9 @@ public class AgentController {
 
 	@PostMapping("/edit")
 	public String save(@Valid @ModelAttribute("agent") Agent formAgent, BindingResult br) {
-		
+
 		boolean hasErrors = br.hasErrors();
-		
+
 		if (hasErrors)
 			return "/admin/agentEdit";
 
