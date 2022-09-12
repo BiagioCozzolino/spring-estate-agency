@@ -45,15 +45,19 @@ public class HomeController {
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 		List<Estate> estateListForAdminHome = new ArrayList<Estate>();
 
-		List<Appointment> appList = (List<Appointment>) appRepo.findAll();
-		List<Appointment> appListForAdminHome = new ArrayList<Appointment>();
-		// List<Estate> estateListTopTen=
-		// estateRepo.findTop10ByNumViewsOrderByNumViewsDesc();
 
-		for (Estate e : estateList) {
-			daysDiff = Duration.between(e.getInsertionDate().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
+		List<Appointment> appList= (List<Appointment>) appRepo.findAll();
+		List<Appointment> appListForAdminHome= new ArrayList<Appointment>();
+		List<Estate> estateListTopTen= estateRepo.findTop10ByOrderByNumViews();
+		
+		
+		for(Estate e: estateList)
+		{
+			daysDiff = Duration.between(e.getInsertionDate().atStartOfDay(),LocalDate.now().atStartOfDay()).toDays();
+			
+			if(daysDiff<=7)
+			{
 
-			if (daysDiff <= 7) {
 
 				estateListForAdminHome.add(e);
 			}

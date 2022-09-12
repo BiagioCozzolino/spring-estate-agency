@@ -28,7 +28,8 @@
 				<table class="table">
 					<thead class="bg-dark text-decoration-none fw-bold text-light">
 						<tr> 
-							<th  class=" table-dark">Indirizzo                    </th>
+							<th  class=" table-dark">Indirizzo</th>
+							<th  class="table-dark"></th>
 							<th  class="table-dark">Numero Civico</th>
 							<th  class="table-dark">Piano</th>
 							<th  class="table-dark">Interno</th>							
@@ -37,8 +38,9 @@
 							<th  class="table-dark">Data di vendita/affitto</th>
 							<th  class="table-dark">Stato</th>
 
-							<th  class="table-dark"></th>
+							<th  class="table-dark">Agente</th>
 
+							<th  class="table-dark"></th>
 							<th  class="table-dark"></th>
 							<th  class="table-dark"></th>
 							<th class="table-dark">Cambia stato</th>
@@ -47,36 +49,41 @@
 					</thead>
 					<tbody>
 						<tr th:each="e : ${estateListAdmin}">
-							<td class="table-info" th:text="${e.address}"></td>
+							<td colspan="2" class="table-info" th:text="${e.address}"></td>
 							<td class="table-info" th:text="${e.houseNumber}"></td>
 							<td class="table-info" th:text="${e.floorNumber}"></td>
 							<td class="table-info" th:text="${e.interior}"></td>							
 							<td class="table-info" th:text="|${e.zipCode} ${e.city} ${e.province}|"></td>							
-							<td class="table-info" th:text="${e.price}"></td>
+							<td  class="table-info" th:text="${e.getFormattedPrice(e.price)}"></td>
 							<td class="table-info" th:text="${e.getFormattedInsertionDate()}"></td>
-							<td class="table-info" th:text="${e.contractStart}"></td>
+							<td class="table-info" th:text="${e.contractStart == null} ? '' : ${e.getFormattedContractStart()}"></td>
 							<td class="table-info" th:text="${e.status}"></td>
 							<td class="table-info" th:text="|${e.agent.name} ${e.agent.surname}|"></td>
 							<td class="table-info">
-							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-primary btn-sm ">Modifica</a>
+							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-primary btn-sm ">
+								<i class="fa-solid fa-pencil"></i>
+							</a>
 							
 							</td>
 							<td class="table-info">
-							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-primary btn-sm">Dettagli</a>
+							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-primary btn-sm">
+								<i class="fa-solid fa-info"></i>
+							</a>
 							</td>
 
 							<td class="table-info">
-								<a type="button" th:href="@{|/estate/image/list/${e.id}|}" class="btn btn-light btn-sm">Immagini</a>
+								<a type="button" th:href="@{|/estate/image/list/${e.id}|}" class="btn btn-light btn-sm">
+									<i class="fa-solid fa-image"></i>
+								</a>
 							</td>					
 							<td>
 
 								<form
 									id="form-estate"
 									th:action="@{|/estate/admin/estateList/${e.id}|}"
-
 									method="POST"
 								>
-								<div class="form-floating mb-3 mt-3 has-validation col-4 pt-3">
+								<div class="d-flex form-floating has-validation">
 									<select
 									  name="status"
 									  id="status"
@@ -88,8 +95,9 @@
 									  <option value="Affittato">Affittato</option>
 									  <option value="Annullato">Annullato</option>
 									</select>
+									<span><button type="submit" class="btn btn-danger ms-1" title="Conferma"><i class="fa-solid fa-check"></i></button></span>
 								  </div>
-								  <button type="submit" class="btn btn-danger" title="Conferma"><i class="fa-solid fa-check"></i></button>
+								  
 								</form>
 
 
