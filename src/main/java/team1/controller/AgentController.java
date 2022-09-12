@@ -58,12 +58,6 @@ public class AgentController {
 		
 		boolean hasErrors = br.hasErrors();
 		
-		if(formAgent.getId() == null)
-		{
-			//formAgent.setHiringDate(LocalDate.now());
-			formAgent.setSecurityLevel(2);
-		}
-		
 		if (hasErrors)
 			return "/admin/agentEdit";
 

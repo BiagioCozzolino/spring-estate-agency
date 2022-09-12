@@ -378,6 +378,9 @@ public class Estate {
 	
 	public String getSubstringedDescription()
 	{
-		return description.substring(0, 199);
+		if(description.length()>200)
+			return description.substring(0, 199);
+		else
+			return description;
 	}
 }
