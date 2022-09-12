@@ -8,17 +8,15 @@
 <body>
        <th:block th:replace="fragment/fragment :: navbar"></th:block>
        <div id="intro" class="bg-image shadow-2-strong">
-        <div class="container flex mt-5 pt-5">
-          <div class="mt-5 pt-5 row d-flex flex-row justify-content-md-center text-center">
-            <h1 class="mt-5 pt-5 text-center bigSentence"><span class="greenWord">B</span>envenuti</h1>
-            <h2 class="text-center nonImportantPart">in</h2>
-            <h1 class="text-center bigSentence"><span class="greenWord">P</span>artenop<span class="greenWord">H</span>ome</h1>
-            <div>
-              <a href="/estate" class="btn btn-rounded shadow greenButton" role="button">I nostri immobili</a>
+        <div class="container mt-5 pt-5 ">
+        	<div class="container mt-5 pt-5 ">
+          		<img class=" row d-flex flex-row justify-content-md-center logo-bg" src="img/logo.svg"/>
+          		</div>
+              	<a href="/estate" class="text-center btn btn-rounded greenButton" role="button">I nostri immobili</a>
+            
             </div>
           </div>  
-        </div>
-      </div>
+      
     <footer><th:block th:replace="fragment/fragment :: footer"></th:block></footer>
 	</body>
 </html>

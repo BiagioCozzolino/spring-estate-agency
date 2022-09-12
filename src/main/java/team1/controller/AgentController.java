@@ -55,15 +55,9 @@ public class AgentController {
 
 	@PostMapping("/edit")
 	public String save(@Valid @ModelAttribute("agent") Agent formAgent, BindingResult br) {
-		
+
 		boolean hasErrors = br.hasErrors();
-		
-		if(formAgent.getId() == null)
-		{
-			//formAgent.setHiringDate(LocalDate.now());
-			formAgent.setSecurityLevel(2);
-		}
-		
+
 		if (hasErrors)
 			return "/admin/agentEdit";
 
