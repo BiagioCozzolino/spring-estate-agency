@@ -1,6 +1,6 @@
 package team1.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,8 +20,12 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "Questo campo è obbligatorio")
+	private LocalDate date;
+
+	@NotNull(message = "Questo campo è obbligatorio")
+	private Integer hour;
 
 	@NotEmpty(message = "Questo campo è obbligatorio")
 	@Column(nullable = false)
@@ -56,12 +61,20 @@ public class Appointment {
 		this.id = id;
 	}
 
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	public Integer getHour() {
+		return hour;
+	}
+
+	public void setHour(Integer hour) {
+		this.hour = hour;
 	}
 
 	public String getName() {

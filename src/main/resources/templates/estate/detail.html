@@ -62,8 +62,9 @@
 					<div class="m-2 d-flex">
 						<div class="card p-3">
 							<div class="d-flex">
-								<div class="image">	
-									<img th:src="@{|/image/${estate.agent.getId()}/content|}" style="height:100px;width:100px;" class="rounded-3">
+								<div class="d-flex flex-column align-items-center text-center">	
+								<img th:if="${estate.agent.agentImage.size() == 0}" src="/img/agentDefault.jpg" class="rounded-3 p-1 bg-dark w-100" alt="Admin">
+									<img th:unless="${estate.agent.agentImage.size() == 0}" th:src="@{|/image/${estate.agent.getId()}/content|}" style="height:100px;width:100px;" class="rounded-3">
 								</div>
 								
 								<div class="p-3">

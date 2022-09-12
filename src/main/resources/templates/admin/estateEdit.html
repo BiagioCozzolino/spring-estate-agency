@@ -393,33 +393,11 @@
                 </ul>
               </div>
             </div>
-          </div>
-
-            <div class="row">
-              <div class="form-floating mb-3 mt-3 has-validation col-6">
-                <input
-                  type="date"
-                  class="form-control"
-                  th:field="*{insertionDate}"
-                  id="insertionDate"
-                  th:errorClass="is-invalid"
-                  placeholder="Data inserimento annuncio"
-                />
-                <label for="floatingInput">Data inserimento annuncio</label>
-                <div
-                  th:if="${#fields.hasErrors('insertionDate')}"
-                  class="invalid-feedback"
-                >
-                  <ul>
-                    <li
-                      th:each="err : ${#fields.errors('insertionDate')}"
-                      th:text="${err}"
-                    ></li>
-                  </ul>
-                </div>
-              </div>
-           
-            <div class="form-floating mb-3 mt-3 has-validation col-6">
+          </div>  
+               
+          <div class="row d-flex">
+          
+          	<div class="form-floating mb-3 mt-3 has-validation col-3">
               <input
                 type="date"
                 class="form-control"
@@ -441,10 +419,7 @@
                 </ul>
               </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="form-floating mb-3 mt-3 has-validation col-4 pt-3">
+            <div class="form-floating mb-3 mt-3 has-validation col-3 pt-3">
               <span> <label for="status">Stato immobile</label> </span>
               <select
                 name="status"
@@ -471,8 +446,7 @@
                 </ul>
               </div>
             </div>
-  
-            <div class="form-floating mb-3 mt-3 has-validation col-4 pt-3">
+            <div class="form-floating mb-3 mt-3 has-validation col-3 pt-3">
               <span> <label for="energyClass">Classe energetica</label> </span>
   
               <select
@@ -505,8 +479,7 @@
                 </ul>
               </div>
             </div>
-  
-            <div class="form-floating mb-3 mt-3 has-validation col-4">
+             <div class="form-floating mb-3 mt-3 has-validation col-3">
               <input
                 type="text"
                 class="form-control"
@@ -526,6 +499,12 @@
               </div>
             </div>
           </div>
+            
+  
+            
+  
+           
+         
           
           <div class="row">
             <div class="form-floating mb-3 mt-3 has-validation col-3">
@@ -688,34 +667,6 @@
             >
           </div>
         </form>
-
-
-        <div class="mb-3 mt-3" th:if="${estate.id != null}">
-          <form
-            id="form-img"
-            th:object="${imageForm}"
-            th:action="|/estate/image/save/${estate.id}|"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-            <input type="hidden" th:field="${estate.id}" />
-            <div class="m-3">
-              <label for="contentMultipart" class="form-label"
-                >Aggiungi una nuova immagine</label
-              >
-              <input
-                class="form-control"
-                type="file"
-                id="contentMultipart"
-                th:field="*{contentMultipart}"
-              />
-            </div>
-			  <div>
-  				<button type="submit" class="btn btn-danger">Salva</button>
-  				<a class="btn btn-danger" href="/estate/admin/estateList">Annulla</a>
-        </div>
-          </form>
-        </div>
       </div>
     </div>
    </div>
