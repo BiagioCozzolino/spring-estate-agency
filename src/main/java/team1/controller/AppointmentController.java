@@ -100,8 +100,8 @@ public class AppointmentController {
 					formAppointment.getHour()+
 					":00");
 			appRepo.save(formAppointment);
-
 			return "redirect:/estate/"+ formAppointment.getEstate().getId();
+			
 		}
 	}
 

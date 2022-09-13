@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragment/fragment :: scr-head"></th:block>
+    
+    <title>Errore</title>
+</head>
+<body>
+       <th:block th:replace="fragment/fragment :: navbar"></th:block>
+ 		<div class="container text-center my-5 py-5">
+ 			<h1 class="my-5">
+ 				Si è presentato un errore interno al sito.
+ 			</h1>
+ 			<h2>
+ 				Ci scusiamo per il disagio
+ 			</h2>
+ 			<div sec:authorize="hasAuthority('ADMIN')" class="text-danger" th:text="|${status} ${error} ${message}|"></div>
+ 			<div class="row d-flex justify-content-center">
+	 			<a href="/" class="col-2 m-5 btn btn-success">Torna alla Home</a>
+	 			<a href="/estate" class="col-2 m-5 btn btn-info">Torna alla Lista immobili</a>
+	 		</div> 
+ 		</div>
+ 		
+    <footer>
+    	<th:block th:replace="fragment/fragment :: footer">
+    </th:block></footer>
+	</body>
+</html>
