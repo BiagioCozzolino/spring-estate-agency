@@ -45,6 +45,7 @@
 		</div>
 			<div class="d-flex row">
 
+
 				<div id="EstateBaseData" class="d-flex col-3 pt-3 mx-5 px-5">
 					<ul class="list-group list-group-flush mw-100">
 						<li class="list-group-item"><h5 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city} ${estate.province}|"></h5></li>
@@ -75,24 +76,21 @@
 								<div class="d-flex flex-column text-center">	
 									<img th:if="${estate.agent.agentImage.size() == 0}" src="/img/agentDefault.jpg" class="img-fluid rounded-3 p-1 bg-dark" alt="Admin">
 									<img th:unless="${estate.agent.agentImage.size() == 0}" th:src="@{|/image/${estate.agent.getId()}/content|}" class="img-fluid rounded-3">
+
 								</div>
-								
+						</div>
 								<div class="p-3">
 										<h4 th:text="|${estate.agent.name} ${estate.agent.surname}|"></h4>
-										<h5 th:text="${estate.agent.email}"></h5>
+										<h7 th:text="${estate.agent.email}"></h3>
 								</div>
 								
-								
-							</div>
 						</div>
 					</div>
 					<h3 class="mt-5">Vuoi avere più dettagli di questo immobile o vederlo da vicino?</h3>
 					<a class="btn btn-primary mb-3" th:href="@{|/appointment/edit/${estate.id}|}">Prenota un appuntamento</a>
 				</div>
-				
 			</div>
-			
-		
+
 	</main>
 	<footer>
 		<footer>
