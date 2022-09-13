@@ -9,6 +9,9 @@
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
 
     <div class="container">
+    <th:block th:if="${successMessage != null && successMessage != ''}">
+  		<div  class="alert alert-success" th:text="${successMessage}"></div>
+  	</th:block>
       <h1 class="text-center my-4">Benvenuto nell'area appuntamenti</h1>
       <form
         id="form-appointment"
@@ -200,8 +203,8 @@
           </div>
         </div>
         <div>
-          <button type="submit" class="btn btn-primary m-3">Conferma appuntamento</button>
-          <a class="btn btn-danger m-3"  href="/agent">Torna Indietro</a>
+          <button type="submit" class="btn btn-primary m-3" onclick="return confirm('Vuoi prenotare questo appuntamento?')">Conferma appuntamento</button>
+          <a class="btn btn-danger m-3"  href="/estate">Torna Indietro</a>
         </div>
       </form>
     </div>

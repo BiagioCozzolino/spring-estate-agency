@@ -51,8 +51,19 @@ public class HomeController {
 		List<Appointment> appListForAdminHome = new ArrayList<Appointment>();
 		List<Estate> estateListTopTen = estateRepo.findTop10ByOrderByNumViews();
 
-		for (Estate e : estateList) {
-			daysDiff = Duration.between(e.getInsertionDate().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
+
+		List<Appointment> appList= (List<Appointment>) appRepo.findAll();
+		List<Appointment> appListForAdminHome= new ArrayList<Appointment>();
+		List<Estate> estateListTopTen= estateRepo.findTop10ByOrderByNumViewsDesc();
+		
+		
+		for(Estate e: estateList)
+		{
+			daysDiff = Duration.between(e.getInsertionDate().atStartOfDay(),LocalDate.now().atStartOfDay()).toDays();
+			
+			if(daysDiff<=7)
+			{
+
 
 			if (daysDiff <= 7) {
 

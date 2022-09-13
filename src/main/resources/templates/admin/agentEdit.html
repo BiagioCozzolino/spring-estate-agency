@@ -181,31 +181,6 @@
                 </ul>
               </div>
             </div>
-            <div
-              
-              class="form-floating mb-3 mt-3 has-validation"
-            >
-              <input
-                type="number"
-                class="form-control"
-                th:field="*{securityLevel}"
-                id="securityLevel"
-                th:errorClass="is-invalid"
-                placeholder="securityLevel"
-              />
-              <label for="floatingInput">Livello sicurezza agente</label>
-              <div
-                th:if="${#fields.hasErrors('securityLevel')}"
-                class="invalid-feedback"
-              >
-                <ul>
-                  <li
-                    th:each="err : ${#fields.errors('securityLevel')}"
-                    th:text="${err}"
-                  ></li>
-                </ul>
-              </div>
-            </div>
             <div>
               <button type="submit" class="btn btn-primary mt-3">Save</button>
               <a class="btn btn-primary mt-3" href="/agent">Cancel</a>
