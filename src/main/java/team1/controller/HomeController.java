@@ -80,6 +80,7 @@ public class HomeController {
 
 		model.addAttribute("topTen", estateListTopTen);
 
+
 		model.addAttribute("appList", appListForAdminHome);
 		model.addAttribute("estateList", estateListForAdminHome);
 		model.addAttribute("agentList", agentList);
