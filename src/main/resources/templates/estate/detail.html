@@ -14,6 +14,9 @@
 	<main>
 
 		<div class="container w-75 my-5 text-center"> <!-- container più grande, per far venire tutto centrato-->
+			<th:block th:if="${successMessage != null && successMessage != ''}">
+	  		<div  class="alert alert-success" th:text="${successMessage}"></div>
+	  		</th:block>
 			<h1 id="detailTitle" class="m-3" th:text="${estate.adTitle}"></h1>
 			<div class="row">
 				
