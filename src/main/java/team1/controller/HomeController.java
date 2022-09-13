@@ -48,7 +48,7 @@ public class HomeController {
 
 		List<Appointment> appList= (List<Appointment>) appRepo.findAll();
 		List<Appointment> appListForAdminHome= new ArrayList<Appointment>();
-		List<Estate> estateListTopTen= estateRepo.findTop10ByOrderByNumViews();
+		List<Estate> estateListTopTen= estateRepo.findTop10ByOrderByNumViewsDesc();
 		
 		
 		for(Estate e: estateList)

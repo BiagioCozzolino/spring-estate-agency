@@ -92,7 +92,7 @@ public class EstateImageController {
 		if (result.isPresent()) {
 			imageRepo.delete(result.get());
 			ra.addFlashAttribute("successMessage", "L'immagine è stata cancellata con successo!");
-			return "redirect:estate/image/list/" + result.get().getEstate().getId();
+			return "redirect:/estate/image/list/" + result.get().getEstate().getId();
 
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Immagine con id " + imageId + " non trovata");
