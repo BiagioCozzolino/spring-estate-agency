@@ -33,7 +33,7 @@
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a href="/"><img class="logo" src="img/logo-nav.svg" alt="logo"></a>
+    <a href="/"><img class="logo" src="/img/logo-nav.svg" alt="logo"></a>
 
     <!-- Toggle button -->
     <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
@@ -46,24 +46,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
       <!-- Left links -->
-      <ul class="navbar-nav me-auto d-flex flex-row pt-3 mt-3 mt-lg-0">
-        <li class="nav-item text-center mx-2 mx-lg-1">
-          <a class="nav-link" aria-disabled="true" href="/">
-              <i class="fas fa-solid fa-home verde"></i>
-              <p class="prova">Home</p>
-           </a>
-        </li>
-        <li class="nav-item text-center mx-2 mx-lg-1">
-          <a class="nav-link" aria-disabled="true" href="/estate">
-              <i class="fas fa-solid fa-building verde"></i>
-           <p class="prova"> Lista Immobili </p>
-          </a>
-        </li>
-      </ul>
+
       <!-- Left links -->
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row pt-3 mt-3 mt-lg-0">
-       <li class="nav-item text-center mx-2 mx-lg-1">
+     
+          <p class="mx-2 pt-4 text-light" sec:authorize="isAuthenticated()">Benvenuto <span sec:authentication="name"></span></p>
+        
+       <li class=" nav-item text-center mx-2 mx-lg-1" sec:authorize="isAuthenticated()">
           <a class="nav-link" href="/admin">
             <div>
             <i class="fas fa-solid fa-user verde"></i>
@@ -71,7 +61,7 @@
            <p class="menu-item">Profilo</p>
           </a>
         </li>
-      <li class="nav-item text-center mx-2 mx-lg-1">
+      <li class="nav-item text-center mx-2 mx-lg-1" sec:authorize="hasAuthority('ADMIN')">
           <a class="nav-link" href="/admin">
             <div>
               <i class="fas fa-solid fa-screwdriver-wrench verde"></i>
@@ -79,7 +69,7 @@
            <p class="menu-item">Area Admin</p>
           </a>
         </li>
-        <li class="nav-item text-center mx-2 mx-lg-1">
+        <li ass="nav-item text-center mx-2 mx-lg-1" sec:authorize="isAnonymous()">
           <a class="nav-link" href="/login">
             <div>
               <i class="fas fa-solid fa-right-to-bracket verde"></i>
@@ -87,15 +77,18 @@
            <p class="menu-item">Login</p>
           </a>
         </li>
-        <li class="nav-item text-center mx-2 mx-lg-1">
-          <a class="nav-link" href="/login">
+        <li class="nav-item text-center mx-2 mx-lg-1" sec:authorize="isAuthenticated()">
+           <a class="nav-link" href="#" id="logout">
             <div>
             <i class="fas fa-solid fa-right-from-bracket verde"></i>
             </div>
-           <p class="menu-item">Logout</p>
+           <p class="menu-item" >Logout</p>
           </a>
-        </li>
+          <form class="form-signin" method="post" action="/logout" id="logout-form">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         
+      </form>
+        </li>
       </ul>
       <!-- Right links -->
     </div>
@@ -105,7 +98,6 @@
 </nav>
 <!-- Navbar -->
   </th:block>
-
 
 
 
@@ -268,6 +260,8 @@
       </div>
       <!-- Copyright -->
     </footer>
+    
+    <script src="/logout.js" type="text/javascript"></script>
   </th:block>
 
 </body>
