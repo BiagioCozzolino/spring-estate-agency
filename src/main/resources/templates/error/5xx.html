@@ -1,28 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <th:block th:replace="fragment/fragment :: scr-head"></th:block>
-    
+	<link rel="stylesheet" href="5xxCss.css">
     <title>Errore</title>
-</head>
-<body>
-       <th:block th:replace="fragment/fragment :: navbar"></th:block>
- 		<div class="container text-center my-5 py-5">
- 			<h1 class="my-5">
- 				Si è presentato un errore interno al sito.
- 			</h1>
- 			<h2>
- 				Ci scusiamo per il disagio
- 			</h2>
- 			<div sec:authorize="hasAuthority('ADMIN')" class="text-danger" th:text="|${status} ${error} ${message}|"></div>
- 			<div class="row d-flex justify-content-center">
-	 			<a href="/" class="col-2 m-5 btn btn-success">Torna alla Home</a>
-	 			<a href="/estate" class="col-2 m-5 btn btn-info">Torna alla Lista immobili</a>
-	 		</div> 
- 		</div>
- 		
+  </head>
+  <body>
+    <th:block th:replace="fragment/fragment :: navbar"></th:block>
+    <main>
+      <div id="wrap">
+        <div class="hand hand-left">
+          <span class="hand-part part-top"></span>
+          <span class="hand-part part-middle"></span>
+          <span class="hand-part part-bottom"></span>
+        </div>
+        <div class="hand hand-right">
+          <span class="hand-part part-top"></span>
+          <span class="hand-part part-middle"></span>
+          <span class="hand-part part-bottom"></span>
+        </div>
+        <div class="line line-1">
+          <div class="ball">5</div>
+        </div>
+        <div class="line line-2">
+          <div class="ball">0</div>
+        </div>
+        <div class="line line-3">
+          <div class="ball">0</div>
+        </div>
+        <div id="server">
+          <div class="eye eye-left"><span></span></div>
+          <div class="eye eye-right"><span></span></div>
+          <div class="block">
+            <div class="light"></div>
+          </div>
+          <div class="block">
+            <div class="light"></div>
+          </div>
+          <div class="block">
+            <div class="light"></div>
+          </div>
+          <div class="block">
+            <div class="light"></div>
+          </div>
+          <div class="block">
+            <div class="light"></div>
+          </div>
+          <div id="bottom-block">
+            <div class="bottom-line"></div>
+            <div id="bottom-light"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="code-error">
+        <h1>Errore interno al server</h1>
+      </div>
+      <h2>
+      	Ci scusiamo per il disagio
+      </h2>
+    </main>
+
+    <div class="container text-center">
+      <div
+        sec:authorize="hasAuthority('ADMIN')"
+        class="text-danger"
+        th:text="|${status} ${error} ${message}|"
+      ></div>
+      <div class="row d-flex justify-content-center">
+        <a href="/" class="col-2 m-5 btn btn-success">Torna alla Home</a>
+        <a href="/estate" class="col-2 m-5 btn btn-info"
+          >Torna alla Lista immobili</a
+        >
+      </div>
+    </div>
+
     <footer>
-    	<th:block th:replace="fragment/fragment :: footer">
-    </th:block></footer>
-	</body>
+      <th:block th:replace="fragment/fragment :: footer"> </th:block>
+    </footer>
+  </body>
 </html>
