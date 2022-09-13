@@ -581,16 +581,19 @@
   
             <div class="row col-3">
               <div class="form-floating mb-1 mt-3 has-validation">
-                <input
+<div class="form-check form-switch">
+<input            class="form-check-input"
                   type="checkbox"
+                  role="switch"
                   id="hasCarSpot"
                   name="hasCarSpot"
                   th:field="*{hasCarSpot}"
                   value="true"
+                  checked
                 />
                 <span>
                   <label for="hasCarSpot">L'immobile ha il posto auto?</label>
-                </span>
+                </span></div>
                 <div
                   th:if="${#fields.hasErrors('hasCarSpot')}"
                   class="invalid-feedback"
@@ -605,16 +608,19 @@
               </div>
     
               <div class="form-floating mb-3 mt-1 has-validation">
-                <input
+<div class="form-check form-switch">
+<input            class="form-check-input"
                   type="checkbox"
+                  role="switch"
                   id="hasGarden"
                   name="hasGarden"
                   th:field="*{hasGarden}"
                   value="true"
+                  checked
                 />
                 <span>
                   <label for="hasGarden">L'immobile ha il giardino?</label>
-                </span>
+                </span></div>
                 <div
                   th:if="${#fields.hasErrors('hasGarden')}"
                   class="invalid-feedback"

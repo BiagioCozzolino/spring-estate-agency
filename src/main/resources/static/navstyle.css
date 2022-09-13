@@ -19,6 +19,22 @@ body{
   padding: .55rem 1.5rem .45rem;
 }
 
+.btn-primary {
+	background-color: #01327f !important;
+}
+
+.btn-success {
+	background-color: #03D66B !important;
+}
+
+.table-dark {
+	background-color: #00173B !important;
+}
+
+.table-info {
+	background-color: #DCECEA !important;
+}
+
 .bgcss {
 	background-color:#01327f;
 }
