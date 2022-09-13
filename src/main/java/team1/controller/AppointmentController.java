@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team1.model.Agent;
 import team1.model.Appointment;
@@ -62,7 +63,7 @@ public class AppointmentController {
 
 	@PostMapping("/edit")
 	public String save(Model model, @Valid @ModelAttribute("appointment") Appointment formAppointment,
-			BindingResult br) {
+			BindingResult br, RedirectAttributes ra) {
 
 		Agent agent = formAppointment.getAgent();
 		List<Appointment> appList = agent.getAppointment();
@@ -89,12 +90,18 @@ public class AppointmentController {
 			model.addAttribute("estate", formAppointment.getEstate());
 			model.addAttribute("appointment", formAppointment);
 			return "appointment/edit";
-			// return "redirect:/appointment/edit/" + formAppointment.getEstate().getId();
 		} else {
 			formAppointment.setStatus("Da effettuare");
+			ra.addFlashAttribute(
+					"successMessage", 
+					"Appuntamento prenotato in data " + 
+					formAppointment.getDate() + 
+					" alle ore " +
+					formAppointment.getHour()+
+					":00");
 			appRepo.save(formAppointment);
-
-			return "redirect:/appointment/success";
+			return "redirect:/estate/"+ formAppointment.getEstate().getId();
+			
 		}
 	}
 

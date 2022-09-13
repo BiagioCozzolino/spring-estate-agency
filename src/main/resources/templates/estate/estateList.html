@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
    <head>
       <th:block th:replace="fragment/fragment :: scr-head"> </th:block>      
       <link rel="stylesheet" href="/estateListCss.css">
@@ -146,7 +147,6 @@
 	               </div>                  
                </div>
             </div>
-           <!-- <a href="#" class=" btn d-flex justify-content-end mb-5" ">Filtri</a>  -->
           <div class="d-flex justify-content-end" > <button href="#" type="button" class=" btn btn-info" id="attivaFiltri">Filtri Avanzati</button> </div>
 
             <div id="filtriAvanzati" style="display: none;">
@@ -201,86 +201,235 @@
             <div class=" d-flex justify-content-end ">
                <button type="submit" class="btn btn-danger my-2">Cerca</button> 
             </div>
-         </form>
-      </div>
-      <hr>
-      <div th:if="${#lists.isEmpty(estateList)}">
-         <h1>Mi dispiace non ci sono ancora immobili nel catalogo.</h1>
-      </div>
-      <h2 class="text-center mt-3 mb-4">Ecco La Lista degli Immobili</h2>
-      <div class="container ">
-         <div th:unless="${#lists.isEmpty(estateList)}">
-            <div class="row" th:each="e : ${estateList}">
-               <div class="col-3">
-                  <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
-                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                           <img th:if="${e.images.size()==0}" src="/img/Casa Stilizzata.jpg" alt="template casa" >
-                           <img th:if="${e.images.size()!=0}" th:src="@{|/estate/image/${e.images.get(0).getId()}/content|}" class="w-100 mb-2" alt="Immagine immobile">   
-                        </div>
-                     </div>
-                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                     <span class="visually-hidden">Previous</span>
-                     </button>
-                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                     <span class="visually-hidden">Next</span>
-                     </button>
-                  </div>
-               </div>
-               <div class="col-8">
-                  <h2 class="titolo fw-bold" th:text="${e.adTitle}"></h2>                  
-                  <div class="row" >
-                  	
-                  	<div class="col-2 border-start">
-                  		<i class="fa-solid fa-bath"></i>
-                  		<span th:text="${e.numBathrooms}"></span>                  		
-                  	</div>
-                  	<div class="col-2 border-start">
-                	    <i class="fa-solid fa-chart-area"></i>
-                  		<span th:text="|${e.area} mt|"></span>                  		
-                  	</div>
-                  	<div class="col-2 border-start">
-                  		<i class="fa-solid fa-door-open"></i>
-                  		<span th:text="${e.numSpaces}"></span>                  		
-                  	</div>
-                  	<div class="col-6 border-start">
-	                  <h5 >
-	                  	<span  th:text="${e.price}"></span>
-	                  	<i class="fa-solid fa-euro-sign"></i>
-	                  </h5>
-                  	</div>
-                  </div>
-                  
-                  <div class="row border-top mt-1 ">
-                  <div class="col-10 ">  
-                                
-                  <h4 th:text="|${e.type} Sito in: ${e.address} ${e.zipCode} ${e.city}|">               
-                  </h4>
-                  </div>
-                  </div>
-                 
-                  <h5 class="border-top ">Descrizione </h5> 
-                  <p class="descrizione " >   hsshahsadsajdakjsfsssssssssssssssssssssssssssssssssssssssssssssss
-                  sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-                  ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-                  ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-                  
-                  </p>
-                  
-                  <div class=" d-flex justify-content-center">
-                  <button type="button" class="mb-2 mt-2 btn btn-info">Dettagli</button>
-                  </div>
-               </div>
-               <hr>
+            <div class="col-2">
+              <select name="energyClass">
+                <option value="">--Classe Energetica--</option>
+                <option value="A4">A4</option>
+                <option value="A3">A3</option>
+                <option value="A2">A2</option>
+                <option value="A1">A1</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+              </select>
             </div>
+          </div>
+        </div>
+        <div class="row d-flex my-5">
+          <div class="col-2">
+            <input
+              class="form-control"
+              type="number"
+              name="queryAreaHigher"
+              placeholder="Superficie maggiore di"
+            />
+          </div>
+          <div class="col-2">
+            <input
+              class="form-control"
+              type="number"
+              name="queryAreaLower"
+              placeholder="Superficie minore di"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              class="form-control"
+              type="number"
+              name="queryPriceHigher"
+              placeholder="Prezzo maggiore di"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              class="form-control"
+              type="number"
+              name="queryPriceLower"
+              placeholder="Prezzo minore di"
+            />
+          </div>
+          <div class="col-2">
+            Vendita:
+            <input
+              class="form-check-input"
+              type="radio"
+              name="queryStatus"
+              value="In vendita"
+            />
+            Affitto:
+            <input
+              class="form-check-input"
+              type="radio"
+              name="queryStatus"
+              value="In affitto"
+            />
+          </div>
+        </div>
+        <div class="row d-flex my-5">
+          <div class="col-3">
+            <input
+              class="form-control"
+              type="number"
+              name="queryNumSpaces"
+              placeholder="Numero di vani"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              class="form-control"
+              type="number"
+              name="queryNumBathrooms"
+              placeholder="Numero di bagni"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              class="form-control"
+              type="number"
+              name="queryNumBalconies"
+              placeholder="Numero di Balconi"
+            />
+          </div>
+          <div class="col-3">
+            Posto auto :
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="queryHasCarSpot"
+            />
+            Giardino :
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="queryHasGarden"
+            />
+          </div>
+        </div>
+        <div class="container d-flex justify-content-end">
+          <button type="submit" class="btn btn-danger">Cerca</button>
+        </div>
+      </form>
+    </div>
+    <hr />
+    <div th:if="${#lists.isEmpty(estateList)}" class="text-center">
+      <h1>Mi dispiace non ci sono ancora immobili nel catalogo.</h1>
+    </div>
+    <div class="container">
+      <div th:unless="${#lists.isEmpty(estateList)}">
+        <h2 class="text-center mt-3 mb-4">Ecco La Lista degli Immobili</h2>
+        <div class="row" th:each="e : ${estateList}">
+          <div class="col-3">
+            <div
+              id="carouselExampleControls"
+              class="carousel slide carousel-fade "
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner ">
+                <div
+                  th:if="${e.images.size()==0}"
+                  class="carousel-item mb-2 active"
+                >
+                  <img
+                    class="img-fluid border border-dark rounded-5"
+                    src="/img/Casa Stilizzata.jpg"
+                    alt="template casa"
+                  />
+                </div>
+                <div
+                  th:if="${e.images.size()!=0}"
+                  class="carousel-item mb-2 border border-dark rounded-3"
+                  th:each="img,iter : ${e.images}"
+                  th:classappend="${iter.index == 0 ? 'active' : ''}"
+                >
+                  <img
+                    th:src="@{|/estate/image/${img.getId()}/content|}"
+                    class="w-100"
+                    alt="Immagine immobile"
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-8">
+            <h2 class="titolo fw-bold" th:text="${e.adTitle}"></h2>
+            <div class="row">
+              <div class="col-2 border-start">
+                <i class="fa-solid fa-bath"></i>
+                <span th:text="${e.numBathrooms}"></span>
+              </div>
+              <div class="col-2 border-start">
+                <i class="fa-solid fa-chart-area"></i>
+                <span th:text="|${e.area} mt|"></span>
+              </div>
+              <div class="col-2 border-start">
+                <i class="fa-solid fa-door-open"></i>
+                <span th:text="${e.numSpaces}"></span>
+              </div>
+              <div class="col-6 border-start">
+                <h5>
+                  <span th:text="${e.getFormattedPrice(e.price)}"></span>
+                </h5>
+              </div>
+            </div>
+
+            <div class="row border-top mt-1">
+              <div class="col-10">
+                <h4
+                  th:text="|${e.type} Sito in: ${e.address} ${e.zipCode} ${e.city}|"
+                ></h4>
+              </div>
+            </div>
+            <div class="row d-flex">
+               <div class="col-8">
+                  <h5 class="border-top">Descrizione</h5>
+                  <p
+                    class="descrizione"
+                    th:text="${e.getSubstringedDescription()}"
+                  ></p>
+               </div>
+                <div class="col-1">
+                   <a th:href="@{|/estate/${e.id}|}" class="mb-2 mt-2 btn btn-info">
+                      Dettagli
+                   </a>
+                </div>
             
-         </div>
+            
+          </div>
+          <hr />
+        </div>
       </div>
+
       <footer>
          <th:block th:replace="fragment/fragment :: footer"></th:block>
       </footer>
       <script type="text/javascript" src="/estateList.js"></script>
    </body>
 </html>
+
