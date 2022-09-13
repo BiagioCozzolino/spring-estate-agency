@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,7 @@ public class HomeController {
 		return "/home/home";
 	}
 
+
 	@GetMapping("/admin")
 	public String adminHome(Model model) {
 		List<Agent> agentList = (List<Agent>) agentRepo.findAll();
@@ -45,19 +47,14 @@ public class HomeController {
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 		List<Estate> estateListForAdminHome = new ArrayList<Estate>();
 
+		List<Appointment> appList = (List<Appointment>) appRepo.findAll();
+		List<Appointment> appListForAdminHome = new ArrayList<Appointment>();
+		List<Estate> estateListTopTen = estateRepo.findTop10ByOrderByNumViews();
 
-		List<Appointment> appList= (List<Appointment>) appRepo.findAll();
-		List<Appointment> appListForAdminHome= new ArrayList<Appointment>();
-		List<Estate> estateListTopTen= estateRepo.findTop10ByOrderByNumViews();
-		
-		
-		for(Estate e: estateList)
-		{
-			daysDiff = Duration.between(e.getInsertionDate().atStartOfDay(),LocalDate.now().atStartOfDay()).toDays();
-			
-			if(daysDiff<=7)
-			{
+		for (Estate e : estateList) {
+			daysDiff = Duration.between(e.getInsertionDate().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
 
+			if (daysDiff <= 7) {
 
 				estateListForAdminHome.add(e);
 			}
@@ -70,7 +67,7 @@ public class HomeController {
 			}
 		}
 
-		// model.addAttribute("topTen", estateListTopTen);
+		model.addAttribute("topTen", estateListTopTen);
 
 		model.addAttribute("appList", appListForAdminHome);
 		model.addAttribute("estateList", estateListForAdminHome);
