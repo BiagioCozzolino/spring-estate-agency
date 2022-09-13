@@ -76,9 +76,8 @@
 									<i class="fa-solid fa-image"></i>
 								</a>
 							</td>					
-							<td>
-
-								<form
+							<td class="table-info">
+                              	<form
 									id="form-estate"
 									th:action="@{|/estate/admin/estateList/${e.id}|}"
 									method="POST"
@@ -97,13 +96,8 @@
 									</select>
 									<span><button type="submit" class="btn btn-danger ms-1" title="Conferma"><i class="fa-solid fa-check"></i></button></span>
 								  </div>
-								  
-								</form>
-
-
+								  </form>
 							</td> 
-
-
 						</tr>
 					</tbody>
 				</table>
