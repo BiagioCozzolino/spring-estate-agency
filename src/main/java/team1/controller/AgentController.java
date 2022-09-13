@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,8 @@ public class AgentController {
 
 	@Autowired
 	private AgentRepository agentRepo;
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@GetMapping
 	public String agentList(Model model) {
@@ -62,7 +65,7 @@ public class AgentController {
 			return "/admin/agentEdit";
 
 		else {
-
+			formAgent.setPassword(encoder.encode(formAgent.getPassword()));
 			agentRepo.save(formAgent);
 			return "redirect:/agent";
 
