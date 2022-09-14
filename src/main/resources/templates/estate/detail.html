@@ -12,8 +12,11 @@
 		<th:block th:replace="fragment/fragment :: navbar"></th:block>
 	</header>
 	<main>
-
+		
 		<div class="container w-50 my-5 text-center "> <!-- container più grande, per far venire tutto centrato-->
+			<th:block th:if="${successMessage != null && successMessage != ''}">
+	  		<div  class="alert alert-success" th:text="${successMessage}"></div>
+	  		</th:block>
 			<div class="row altezza-carosello">
 				
 				<div id="carouselForEstateImagesFade" class="carousel slide carousel-fade rounded-3" data-bs-ride="carousel"> <!-- carosello immagini-->
@@ -39,7 +42,7 @@
 			<div class="d-flex row">
 
 
-				<div id="EstateBaseData" class="d-flex col-3 pt-3 mx-5 px-5">
+				<div id="EstateBaseData" class="d-flex col-4 pt-3 ps-5">
 					<ul class="list-group list-group-flush mw-100">
 						<li class="list-group-item"><h5 th:text="|${estate.address}, ${estate.houseNumber} ${estate.zipCode} ${estate.city} ${estate.province}|"></h5></li>
 						<li class="list-group-item"><h3>Prezzo immobile</h3> <span><h3 th:text="|${estate.getFormattedPrice(estate.price)}|"></h3></span> </li>
@@ -47,7 +50,7 @@
 					</ul>
 				</div>
 
-				<div id="EstateComplementaryData" class="col-4 py-4  mx-5">
+				<div id="EstateComplementaryData" class="col-4 py-4">
 					<ul class="list-group">
 						<li class="list-group-item" th:text="|Tipo di immobile: ${estate.type}"></li>
 						<li class="list-group-item" th:text="|Piano: ${estate.floorNumber}|"></li>
@@ -67,15 +70,18 @@
 				</p>
 			</div>
 				</div>
-				<div id="agentCardData" class="col-3"> <!--card con dati dell'agente assegnato-->
+				<div id="agentCardData" class="col-4"> <!--card con dati dell'agente assegnato-->
 					<div class="text-center">
 						<h3>Agente di competenza</h3>
 						<div class="card row ">
 							<div class="d-flex" >
-								<div class="d-flex flex-column text-center" th:each="img : ${estate.agent.agentImage} ">	
-									<img th:if="${estate.agent.agentImage.size() == 0}" src="/img/agentDefault.jpg" class="dimensione-foto-agente img-fluid rounded-3 p-1 bg-dark" alt="Admin">
-									<img th:unless="${estate.agent.agentImage.size() == 0}" style="max-height: 200px;" th:src="@{|/image/${img.id}/content|}" class="dimensione-foto-agente img-fluid rounded-3">
-
+								<div class="d-flex flex-column text-center" >
+									<div th:if="${estate.agent.agentImage.size() == 0}">
+										<img  src="/img/agentDefault.jpg" class="dimensione-foto-agente img-fluid rounded-3 p-1 bg-dark" alt="Admin">
+									</div>
+									<div th:if="${estate.agent.agentImage.size() != 0}" th:each="img : ${estate.agent.agentImage}">
+										<img  th:src="@{|/image/${img.id}/content|}" class="dimensione-foto-agente img-fluid rounded-3">
+									</div>
 								</div>
 								<div class="m-5 text-center">
 									<h4 th:text="|${estate.agent.name} ${estate.agent.surname}|"></h4>
