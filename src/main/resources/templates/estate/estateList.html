@@ -209,6 +209,9 @@
     <hr />
     <div th:if="${#lists.isEmpty(estateList)}" class="text-center">
       <h1>Mi dispiace non ci sono ancora immobili nel catalogo.</h1>
+       <a href="/estate" class="mb-2 mt-2 btn btn-info">
+                      Torna alla lista completa
+                   </a>
     </div>
     <div class="container mb-2">
       <div th:unless="${#lists.isEmpty(estateList)}">
@@ -271,7 +274,18 @@
             </div>
           </div>
           <div class="col-8">
-            <h2 class="titolo fw-bold" th:text="${e.adTitle}"></h2>
+	          <div class="row d-flex">
+	            	<h2 class="titolo fw-bold col-9" th:text="${e.adTitle}"></h2>
+	          		<div class="col-2">
+	            		<p 
+	            			th:if="${e.getStatusValue(e.getStatus())==2 || e.getStatusValue(e.getStatus())==1}" 
+	            			class="badge rounded-pill fs-5" 
+	            			th:text="${e.getStatusValue(e.getStatus())==2 ? 'Venduto': 'Affittato'}"
+	            			th:classappend="${e.getStatusValue(e.getStatus())==2 ? 'bg-success' : 'bg-warning'}"
+	            		>
+	            		</p>
+	          		</div>
+	          </div> 
             <div class="row">
               <div class="col-2 border-start">
                 <i class="fa-solid fa-bath"></i>
