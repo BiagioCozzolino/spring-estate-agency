@@ -1,0 +1,43 @@
+#intro 
+{
+    background-image: url("/img/bg-img.jpg");
+    height: 100vh;
+
+  }
+
+  
+  .bigSentence
+  {
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 3px #000000;
+    font-size: 100px
+  }
+  
+  .nonImportantPart
+  {
+	color: rgb(255, 255, 255);
+    text-shadow: 3px 3px rgb(0, 0, 0);
+    font-size: 70px
+	}
+
+    .greenWord
+    {
+        color: rgb(0, 0, 0);
+    }
+
+    .greenButton
+    {
+        color: #dcecea;
+        background-color: #03d66b;
+        font-size: 30px;
+        margin-left:500px !important;
+		margin-top:50px !important;
+		transition:1s;
+    }
+    
+     .greenButton:hover{
+		background-color:#00173b !important;
+		color: #dcecea;
+		transition:1s;
+}
+

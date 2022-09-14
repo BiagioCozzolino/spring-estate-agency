@@ -10,9 +10,6 @@
       <thead>
          <th:block th:replace="fragment/fragment :: navbar"></th:block>
       </thead>
-       <th:block th:if="${successMessage != null && successMessage != ''}">
-  		<div  class="alert alert-success" th:text="${successMessage}"></div>
-  		</th:block>
       <h2 class="text-center fw-bold mt-3">Ricerca l'immobile per campi</h2>
       <div class="container d-flex justify-content-center p-3">
          <form action="/estate/search">

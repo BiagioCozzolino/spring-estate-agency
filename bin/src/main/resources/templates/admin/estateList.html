@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<th:block th:replace="fragment/fragment :: scr-head"></th:block>
+	<title>Immobili</title>
+</head>
+
+
+<div>
+	<div th:replace="fragment/fragment :: navbar"></div>
+	<div class="container">
+		<h1 class="text-center">Gestione Immobili Admin</h1>
+		<hr />
+		<div class="d-flex justify-content-center">
+		<a class="btn btn-primary mb-3 " href="/admin">Pannello Admin</a>
+
+			<a class="btn btn-success mb-3 mx-3" href="/estate/admin/estateList/edit">Crea nuovo Immobile</a>
+		</div>
+			<div class="container d-flex justify-content-center">
+			
+		<div th:if="${#lists.isEmpty(estateListAdmin)}">
+			<h1 class="font-family sans-serif">Spiacenti, non è disponibile una lista di immobili</h1>
+		</div>
+		
+		<div th:unless="${#lists.isEmpty(estateListAdmin)}">
+			<div class="text-light ">
+				<table class="table">
+					<thead class="bg-dark text-decoration-none fw-bold text-light">
+						<tr> 
+							<th  class=" table-dark">Indirizzo</th>
+							<th  class="table-dark"></th>
+							<th  class="table-dark">Numero Civico</th>
+							<th  class="table-dark">Piano</th>
+							<th  class="table-dark">Interno</th>							
+							<th  class="table-dark">Cap/Città/Provincia</th><th  class="table-dark">Prezzo</th>
+							<th  class="table-dark">Data di Pubblicazione</th>
+							<th  class="table-dark">Data di vendita/affitto</th>
+							<th  class="table-dark">Stato</th>
+
+							<th  class="table-dark">Agente</th>
+
+							<th  class="table-dark"></th>
+							<th  class="table-dark"></th>
+							<th  class="table-dark"></th>
+							<th class="table-dark">Cambia stato</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="e : ${estateListAdmin}">
+							<td colspan="2" class="table-info" th:text="${e.address}"></td>
+							<td class="table-info" th:text="${e.houseNumber}"></td>
+							<td class="table-info" th:text="${e.floorNumber}"></td>
+							<td class="table-info" th:text="${e.interior}"></td>							
+							<td class="table-info" th:text="|${e.zipCode} ${e.city} ${e.province}|"></td>							
+							<td  class="table-info" th:text="${e.getFormattedPrice(e.price)}"></td>
+							<td class="table-info" th:text="${e.getFormattedInsertionDate()}"></td>
+							<td class="table-info" th:text="${e.contractStart == null} ? '' : ${e.getFormattedContractStart()}"></td>
+							<td class="table-info" th:text="${e.status}"></td>
+							<td class="table-info" th:text="|${e.agent.name} ${e.agent.surname}|"></td>
+							<td class="table-info">
+							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-dark d-block mb-3  rounded-pill">
+								<i class="fa-solid fa-pencil"></i>
+							</a>
+							
+							</td>
+							<td class="table-info">
+							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-primary d-block mb-3  rounded-pill">
+								<i class="fa-solid fa-info"></i>
+							</a>
+							</td>
+
+							<td class="table-info">
+								<a type="button" th:href="@{|/estate/image/list/${e.id}|}" class="btn btn-warning d-block mb-3  rounded-pill">
+									<i class="fa-solid fa-image"></i>
+								</a>
+							</td>					
+							<td class="table-info">
+                              	<form
+									id="form-estate"
+									th:action="@{|/estate/admin/estateList/${e.id}|}"
+									method="POST"
+								>
+								<div class="d-flex form-floating has-validation">
+									<select
+									  name="status"
+									  id="status"
+									>
+									  <option value="">--Scegli un'opzione--</option>
+									  <option value="In vendita">In vendita</option>
+									  <option value="In affitto">In affitto</option>
+									  <option value="Venduto">Venduto</option>
+									  <option value="Affittato">Affittato</option>
+									  <option value="Annullato">Annullato</option>
+									</select>
+									<span><button type="submit" class="btn btn-danger ms-1" title="Conferma"><i class="fa-solid fa-check"></i></button></span>
+								  </div>
+								  </form>
+							</td> 
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	  </div>
+	</div>
+
+</div>
+</div>
+		<div th:replace="fragment/fragment :: footer"> </div>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+			crossorigin="anonymous"></script>
+</body>
+
+</html>
