@@ -3,7 +3,7 @@
 
 <head>
 	<th:block th:replace="fragment/fragment :: scr-head"></th:block>
-	<title>Users</title>
+	<title>Lista Agenti</title>
 
 </head>
 
@@ -14,10 +14,12 @@
 	</div>
 	<div th:unless="${#lists.isEmpty(agentList)}">
 		<div class="container">
-			<h1>Ecco tutti i nostri user</h1>
+		<div class="text-center mt-3">
+			<h1 >Gestione Agenti Immobiliari</h1>
+			<hr>
 			<a class="btn btn-primary mb-3" href="/admin">Pannello Admin</a>
 			<a class="btn btn-success mb-3 mx-3" href="/agent/edit">Crea nuovo Agente</a>
-
+		</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -25,7 +27,6 @@
 						<th scope="col" class="table-dark">Cognome</th>
 						<th scope="col" class="table-dark">E-Mail</th>
 						<th scope="col" class="table-dark">Numero di telefono</th>
-						<th scope="col" class="table-dark">Password</th>
 						<th scope="col" class="table-dark">Matricola agente</th>
 						<th scope="col" class="table-dark">Data assunzione</th>
 						<th scope="col" class="table-dark">Livello di Sicurezza</th>
@@ -38,24 +39,23 @@
 				</thead>
 				<tbody>
 					<tr th:each="a : ${agentList} ">
-						<td class="" th:text="${a.Name}"></td>
-						<td class="" th:text="${a.Surname}"></td>
-						<td class="" th:text="${a.Email}"></td>
-						<td class="" th:text="${a.Phone}"></td>
-						<td class="" th:text="${a.Password}"></td>
-						<td class="" th:text="${a.serialNumber}"></td>
-						<td class="" th:text="${a.getFormattedHiringDate()}"></td>
-						<td class="" th:text="${a.SecurityLevel}"></td>
-						<td class="">
+						<td class="table-info" th:text="${a.Name}"></td>
+						<td class="table-info" th:text="${a.Surname}"></td>
+						<td class="table-info" th:text="${a.Email}"></td>
+						<td class="table-info" th:text="${a.Phone}"></td>
+						<td class="table-info" th:text="${a.serialNumber}"></td>
+						<td class="table-info" th:text="${a.getFormattedHiringDate()}"></td>
+						<td class="table-info"  th:text="${a.SecurityLevel}"></td>
+						<td class="table-info">
                             <a class="btn btn-primary d-block mb-3  rounded-pill" title="Dettagli" th:href="@{|/agent/${a.getId()}|}"><i class="fa-solid fa-info"></i></a>
               			</td>
-						<td class="">
+						<td class="table-info">
              			 	<a class="btn btn-dark d-block mb-3 rounded-pill" title="Modifica" th:href="@{|/agent/edit/${a.getId()}|}"><i class="fa-solid fa-pencil"></i></a>
 						</td>
-						<td class="">
+						<td class="table-info">
               				<a class="btn btn-danger d-block mb-3 rounded-pill" width:"100%" title="Cancella"  onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
 						</td>
-						<td class="">
+						<td class="table-info">
               				<a class="btn btn-warning d-block mb-3  rounded-pill" title="Inserisci immagine" th:href="@{|/image/list/${a.getId()}|}"><i class="fa-solid fa-image"></i></a>
               			</td>
 					</tr>

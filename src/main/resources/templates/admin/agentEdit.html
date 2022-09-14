@@ -134,31 +134,7 @@
                 </ul>
               </div>
             </div>
-            
-            <div class="form-floating mt-3 has-validation">
-              <input
-                type="number"
-                class="form-control"
-                th:field="*{securityLevel}"
-                id="securityLevel"
-                th:errorClass="is-invalid"
-                placeholder="securityLevel"
-              />
-              <label for="floatingPassword">Livello di sicurezza agente</label>
-              <div
-                th:if="${#fields.hasErrors('securityLevel')}"
-                class="invalid-feedback"
-              >
-                <ul>
-                  <li
-                    th:each="err : ${#fields.errors('securityLevel')}"
-                    th:text="${err}"
-                  ></li>
-                </ul>
-              </div>
-            </div>
-
-
+           
             <div class="form-floating mb-3 mt-3 has-validation">
               <input
                 type="date"
@@ -181,6 +157,12 @@
                 </ul>
               </div>
             </div>
+            <hr>
+            <h3>Grado di sicurezza agente</h3>
+            <div class="form-check" th:each="r : ${roles}">
+				  <input class="form-check-input" th:field="*{roles}" type="radio" th:id="|roles_${r.id}|" th:value="${r.id}">
+				  <label class="form-check-label" th:for="|roles_${r.id}|" th:text="${r.name}"></label>
+				</div>
             <div>
               <button type="submit" class="btn btn-primary mt-3">Save</button>
               <a class="btn btn-primary mt-3" href="/agent">Cancel</a>

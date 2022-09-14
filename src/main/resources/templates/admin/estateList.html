@@ -60,19 +60,19 @@
 							<td class="table-info" th:text="${e.status}"></td>
 							<td class="table-info" th:text="|${e.agent.name} ${e.agent.surname}|"></td>
 							<td class="table-info">
-							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-primary btn-sm ">
+							<a type="button" th:href="@{|/estate/admin/estateList/edit/${e.id}|}" class="btn btn-dark d-block mb-3  rounded-pill">
 								<i class="fa-solid fa-pencil"></i>
 							</a>
 							
 							</td>
 							<td class="table-info">
-							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-primary btn-sm">
+							<a type="button" th:href="@{|/estate/${e.id}|}" class="btn btn-primary d-block mb-3  rounded-pill">
 								<i class="fa-solid fa-info"></i>
 							</a>
 							</td>
 
 							<td class="table-info">
-								<a type="button" th:href="@{|/estate/image/list/${e.id}|}" class="btn btn-light btn-sm">
+								<a type="button" th:href="@{|/estate/image/list/${e.id}|}" class="btn btn-warning d-block mb-3  rounded-pill">
 									<i class="fa-solid fa-image"></i>
 								</a>
 							</td>					

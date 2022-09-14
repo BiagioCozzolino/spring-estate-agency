@@ -53,32 +53,18 @@ public interface EstateRepository extends CrudRepository<Estate, Integer> {
 	// ricerca se ha o meno posto il giardino
 	public List<Estate> findByHasGardenOrderByAddressAsc(Boolean hasGarden);
 
-	
-	//filtro per indirizzo, numero civico, interno e CAP
-	
-	public Optional<Estate> findByAddressAndHouseNumberAndInteriorAndZipCode(String address, Integer houseNumber, Integer interior, String ZipCode);
+	// filtro per indirizzo, numero civico, interno e CAP
 
-	//filtro per pagina di ricerca
-	public List<Estate> findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrStatusIgnoreCaseOrderByAddressAsc
-	(
-			String address, 
-			String zipCode, 
-			String city, 
-			String province, 
-			Double priceHigher, 
-			Double priceLower, 
-			String energyClass, 
-			Integer numSpaces, 
-			Integer numBathrooms, 
-			Integer numBalconies, 
-			Boolean hasCarSpot, 
-			Boolean hasGarden, 
-			Integer areaHigher, 
-			Integer areaLower,
-			String status
-	);     
-	
-	//filtro top10
+	public Optional<Estate> findByAddressAndHouseNumberAndInteriorAndZipCode(String address, Integer houseNumber,
+			Integer interior, String ZipCode);
+
+	// filtro per pagina di ricerca
+	public List<Estate> findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrStatusIgnoreCaseOrderByAddressAsc(
+			String address, String zipCode, String city, String province, Double priceHigher, Double priceLower,
+			String energyClass, Integer numSpaces, Integer numBathrooms, Integer numBalconies, Boolean hasCarSpot,
+			Boolean hasGarden, Integer areaHigher, Integer areaLower, String status);
+
+	// filtro top10
 	public List<Estate> findTop10ByOrderByNumViewsDesc();
 
 }

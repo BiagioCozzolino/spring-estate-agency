@@ -14,10 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -65,9 +62,7 @@ public class Agent {
 	private LocalDate hiringDate;
 
 	// Livello di sicurezza per autenticazione
-	@NotNull
-	@Min(2)
-	@Max(3)
+
 	private Integer securityLevel;
 
 	@ManyToMany(fetch = FetchType.EAGER)

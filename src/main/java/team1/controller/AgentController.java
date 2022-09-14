@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import team1.model.Agent;
 import team1.repository.AgentRepository;
+import team1.repository.RoleRepository;
 
 @Controller
 @RequestMapping("/agent")
@@ -28,7 +28,7 @@ public class AgentController {
 	@Autowired
 	private AgentRepository agentRepo;
 	@Autowired
-	private PasswordEncoder encoder;
+	private RoleRepository roleRepo;
 
 	@GetMapping
 	public String agentList(Model model) {
@@ -53,6 +53,7 @@ public class AgentController {
 	@GetMapping("/edit")
 	public String agentForm(Model model) {
 		model.addAttribute("agent", new Agent());
+		model.addAttribute("roles", roleRepo.findAll());
 		return "admin/agentEdit";
 	}
 
@@ -65,7 +66,7 @@ public class AgentController {
 			return "/admin/agentEdit";
 
 		else {
-			formAgent.setPassword(encoder.encode(formAgent.getPassword()));
+			formAgent.setPassword("{noop}" + formAgent.getPassword());
 			agentRepo.save(formAgent);
 			return "redirect:/agent";
 
@@ -77,6 +78,7 @@ public class AgentController {
 		Optional<Agent> result = agentRepo.findById(agentId);
 		if (result.isPresent()) {
 			model.addAttribute("agent", result.get());
+			model.addAttribute("roles", roleRepo.findAll());
 			agentRepo.save(result.get());
 			return "admin/agentEdit";
 		} else {

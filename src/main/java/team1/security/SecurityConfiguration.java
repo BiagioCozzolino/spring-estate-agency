@@ -36,7 +36,7 @@ public class SecurityConfiguration {
 	// Quali ruoli hanno autorizzazione a quali aree
 	@Bean
 	SecurityFilterChain filteChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN").antMatchers("/agent/")
+		http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN").antMatchers("/agent")
 				.hasAnyAuthority("ADMIN").antMatchers("/agent/{id}").hasAnyAuthority("AGENT", "ADMIN")
 				.antMatchers("/appointment/appointmentListAdmin").hasAnyAuthority("ADMIN").antMatchers("/").permitAll()
 				.and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();

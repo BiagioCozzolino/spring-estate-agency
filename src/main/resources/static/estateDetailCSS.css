@@ -1,4 +1,14 @@
 #detailTitle
 {
-	font-size: 100px;
+	font-size: 75px;
+}
+
+.altezza-carosello{
+	max-height: 500px;
+	max-width: 1000px;
+	
+}
+.dimensione-foto-agente{
+	max-height: 300px;
+	
 }

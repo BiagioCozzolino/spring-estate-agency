@@ -49,7 +49,7 @@
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
-            <img width="300" class="logo" src="/img/logo.svg" alt="logo">
+            <img width="300" class="logo-login" src="/img/logo.svg" alt="logo">
               <span class="padding-bottom--15">Inserisci le credenziali del tuo account</span>
               <form id="stripe-login"
               th:action="@{/login}"
@@ -70,6 +70,9 @@
                   <input type="submit" name="submit" value="Continua">
                 </div>
               </form>
+              <div class="field padding-bottom--24">
+             <a href="/"> <input type="submit" name="submit" value="Torna alla Home">
+              </div>
             </div>
           </div>
           <div class="footer-link padding-top--24">

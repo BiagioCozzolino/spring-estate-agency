@@ -44,7 +44,7 @@
             </div>
           </div>
 
-          <div class="form-floating mb-3 mt-3 has-validation">
+          <div class="form mb-3 mt-3 has-validation">
             <textarea
               class="form-control"
               th:field="*{description}"
@@ -53,7 +53,7 @@
               placeholder="Descrizione immobile"
               rows="5"
             ></textarea>
-            <label for="floatingInput">Descrizione immobile</label>
+            
             <div
               th:if="${#fields.hasErrors('description')}"
               class="invalid-feedback"
@@ -77,7 +77,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Indirizzo"
               />
-              <label for="floatingInput">Indirizzo immobile</label>
+              <label class="ms-3" for="floatingInput"> Indirizzo immobile</label>
               <div
                 th:if="${#fields.hasErrors('address')}"
                 class="invalid-feedback"
@@ -101,7 +101,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Numero civico"
               />
-              <label for="floatingInput">Numero civico</label>
+              <label class="ms-3" for="floatingInput"> Numero civico</label>
               <div
                 th:if="${#fields.hasErrors('houseNumber')}"
                 class="invalid-feedback"
@@ -124,7 +124,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Piano"
               />
-              <label for="floatingInput">Piano</label>
+              <label class="ms-3" for="floatingInput"> Piano</label>
               <div
                 th:if="${#fields.hasErrors('floorNumber')}"
                 class="invalid-feedback"
@@ -148,7 +148,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Interno"
               />
-              <label for="floatingInput">Interno</label>
+              <label class="ms-3" for="floatingInput"> Interno</label>
               <div
                 th:if="${#fields.hasErrors('interior')}"
                 class="invalid-feedback"
@@ -172,7 +172,7 @@
                 placeholder="CAP"
                 maxlength="5"
               />
-              <label for="floatingInput">CAP</label>
+              <label class="ms-3" for="floatingInput"> CAP</label>
               <div
                 th:if="${#fields.hasErrors('zipCode')}"
                 class="invalid-feedback"
@@ -197,7 +197,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Città"
               />
-              <label for="floatingInput">Città</label>
+              <label class="ms-3" for="floatingInput"> Città</label>
               <div
                 th:if="${#fields.hasErrors('city')}"
                 class="invalid-feedback"
@@ -212,7 +212,7 @@
             </div>
 
             <div class="form-floating mb-3 mt-3 has-validation col-3 pt-3">
-              <span> <label for="province">Provincia</label> </span>
+              <span> <label for="province"> Provincia</label> </span>
 
               <select
                 name="province"
@@ -355,7 +355,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Superficie calpestabile"
               />
-              <label for="floatingInput">Superficie calpestabile</label>
+              <label class="ms-3" for="floatingInput">Superficie calpestabile</label>
               <div
                 th:if="${#fields.hasErrors('area')}"
                 class="invalid-feedback"
@@ -380,7 +380,7 @@
                 placeholder="Prezzo"
                 step=".01"
               />
-              <label for="floatingInput">Prezzo</label>
+              <label class="ms-3" for="floatingInput">Prezzo</label>
               <div
                 th:if="${#fields.hasErrors('price')}"
                 class="invalid-feedback"
@@ -402,7 +402,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Tipo"
               />
-              <label for="floatingInput">Tipo</label>
+              <label class="ms-3" for="floatingInput">Tipo</label>
               <div th:if="${#fields.hasErrors('type')}" class="invalid-feedback">
                 <ul>
                   <li
@@ -425,7 +425,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Data inserimento annuncio"
               />
-              <label for="floatingInput">Data inserimento annuncio</label>
+              <label class="ms-3" for="floatingInput">Data inserimento annuncio</label>
               <div
                 th:if="${#fields.hasErrors('insertionDate')}"
                 class="invalid-feedback"
@@ -447,7 +447,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Data inizio contratto"
               />
-              <label for="floatingInput">Data inizio contratto</label>
+              <label class="ms-3" for="floatingInput">Data inizio contratto</label>
               <div
                 th:if="${#fields.hasErrors('contractStart')}"
                 class="invalid-feedback"
@@ -541,7 +541,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Numero vani"
               />
-              <label for="floatingInput">Numero vani</label>
+              <label class="ms-3" for="floatingInput">Numero vani</label>
               <div
                 th:if="${#fields.hasErrors('numSpaces')}"
                 class="invalid-feedback"
@@ -565,7 +565,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Numero bagni"
               />
-              <label for="floatingInput">Numero bagni</label>
+              <label class="ms-3" for="floatingInput">Numero bagni</label>
               <div
                 th:if="${#fields.hasErrors('numBathrooms')}"
                 class="invalid-feedback"
@@ -589,7 +589,7 @@
                 th:errorClass="is-invalid"
                 placeholder="Numero balconi"
               />
-              <label for="floatingInput">Numero balconi</label>
+              <label class="ms-3" for="floatingInput">Numero balconi</label>
               <div
                 th:if="${#fields.hasErrors('numBalconies')}"
                 class="invalid-feedback"
@@ -605,8 +605,8 @@
   
             <div class="row col-3">
               <div class="form-floating mb-1 mt-3 has-validation">
-<div class="form-check form-switch">
-<input            class="form-check-input"
+			<div class="form-check form-switch">
+				<input class="form-check-input"
                   type="checkbox"
                   role="switch"
                   id="hasCarSpot"
@@ -616,7 +616,7 @@
                   checked
                 />
                 <span>
-                  <label for="hasCarSpot">L'immobile ha il posto auto?</label>
+                  <label class="ms-3" for="hasCarSpot">L'immobile ha il posto auto?</label>
                 </span></div>
                 <div
                   th:if="${#fields.hasErrors('hasCarSpot')}"

@@ -13,14 +13,13 @@
 	</header>
 	<main>
 
-		<div class="container w-75 my-5 text-center"> <!-- container più grande, per far venire tutto centrato-->
-			<h1 id="detailTitle" class="m-3" th:text="${estate.adTitle}"></h1>
-			<div class="row">
+		<div class="container w-50 my-5 text-center "> <!-- container più grande, per far venire tutto centrato-->
+			<div class="row altezza-carosello">
 				
 				<div id="carouselForEstateImagesFade" class="carousel slide carousel-fade rounded-3" data-bs-ride="carousel"> <!-- carosello immagini-->
 					<div class="carousel-inner rounded-3" >
 						<div th:each="img,iter : ${estate.images}" class="carousel-item " th:classappend="${iter.index == 0 ? 'active' : ''}">
-							<img th:src="@{|/estate/image/${img.id}/content|}" class="img-fluid w-100" alt="Immagine immobile">
+							<img th:src="@{|/estate/image/${img.id}/content|}" class="img-fluid w-100 altezza-carosello" alt="Immagine immobile">
 						</div>
 					</div>
 					<button class="carousel-control-prev text-light" type="button" data-bs-target="#carouselForEstateImagesFade" data-bs-slide="prev">
@@ -34,11 +33,8 @@
 				</div>
 				
 			</div>
-			<div class="text-center mt-3">
-				<p>
-					Se ti è piaciuto l'immobile, metti un bel <span><a class="btn btn-primary"><i class="fa-regular fa-thumbs-up "></i></a></span>
-				</p>
-			</div>
+			<h1 id="detailTitle" class="m-3" th:text="${estate.adTitle}"></h1>
+			
 		</div>
 			<div class="d-flex row">
 
@@ -64,27 +60,33 @@
 						<li class="list-group-item" th:if="${estate.hasCarSpot==true}">L'immobile è munito di posto auto</li>
 						<li class="list-group-item" th:if="${estate.hasGarden==true}">L'immobile presenta spazio esterno con giardino</li>
 					</ul>
+					<div class="text-center mt-3">
+			
+				<p>
+					<span><a class="btn btn-primary"><i class="fa-regular fa-thumbs-up "></i></a></span>
+				</p>
+			</div>
 				</div>
-				<div id="agentCardData" class="col-3 mt-4"> <!--card con dati dell'agente assegnato-->
+				<div id="agentCardData" class="col-3"> <!--card con dati dell'agente assegnato-->
 					<div class="text-center">
 						<h3>Agente di competenza</h3>
-						<div class="card p-3">
-							<div class="d-flex">
-								<div class="d-flex flex-column text-center">	
-									<img th:if="${estate.agent.agentImage.size() == 0}" src="/img/agentDefault.jpg" class="img-fluid rounded-3 p-1 bg-dark" alt="Admin">
-									<img th:unless="${estate.agent.agentImage.size() == 0}" th:src="@{|/image/${estate.agent.getId()}/content|}" class="img-fluid rounded-3">
+						<div class="card row ">
+							<div class="d-flex" >
+								<div class="d-flex flex-column text-center" th:each="img : ${estate.agent.agentImage} ">	
+									<img th:if="${estate.agent.agentImage.size() == 0}" src="/img/agentDefault.jpg" class="dimensione-foto-agente img-fluid rounded-3 p-1 bg-dark" alt="Admin">
+									<img th:unless="${estate.agent.agentImage.size() == 0}" style="max-height: 200px;" th:src="@{|/image/${img.id}/content|}" class="dimensione-foto-agente img-fluid rounded-3">
 
 								</div>
-						</div>
-								<div class="p-3">
-										<h4 th:text="|${estate.agent.name} ${estate.agent.surname}|"></h4>
-										<h7 th:text="${estate.agent.email}"></h3>
-								</div>
-								
+								<div class="m-5 text-center">
+									<h4 th:text="|${estate.agent.name} ${estate.agent.surname}|"></h4>
+									<h4 th:text="${estate.agent.email}"></h4>
+									<h4 th:text="|+39 ${estate.agent.phone}|"></h4>
+							</div>
+							</div>
 						</div>
 					</div>
 					<h3 class="mt-5">Vuoi avere più dettagli di questo immobile o vederlo da vicino?</h3>
-					<a class="btn btn-primary mb-3" th:href="@{|/appointment/edit/${estate.id}|}">Prenota un appuntamento</a>
+					<a class="btn btn-success mb-3" th:href="@{|/appointment/edit/${estate.id}|}">Prenota un appuntamento</a>
 				</div>
 			</div>
 
