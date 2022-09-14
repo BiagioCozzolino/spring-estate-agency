@@ -70,14 +70,14 @@
 				</p>
 			</div>
 				</div>
-				<div id="agentCardData" class="col-4"> <!--card con dati dell'agente assegnato-->
+				<div id="agentCardData" class="col-3 ms-5"> <!--card con dati dell'agente assegnato-->
 					<div class="text-center">
-						<h3>Agente di competenza</h3>
-						<div class="card row ">
+						<h3 class="mb-2">Agente di competenza</h3>
+						<div class="card row">
 							<div class="d-flex" >
 								<div class="d-flex flex-column text-center" >
 									<div th:if="${estate.agent.agentImage.size() == 0}">
-										<img  src="/img/agentDefault.jpg" class="dimensione-foto-agente img-fluid rounded-3 p-1 bg-dark" alt="Admin">
+										<img  src="/img/agentDefault.jpg" class="dimensione-foto-agente img-fluid rounded-3 mt-5 border border-dark" alt="Admin">
 									</div>
 									<div th:if="${estate.agent.agentImage.size() != 0}" th:each="img : ${estate.agent.agentImage}">
 										<img  th:src="@{|/image/${img.id}/content|}" class="dimensione-foto-agente img-fluid rounded-3">
@@ -86,7 +86,7 @@
 								<div class="m-5 text-center">
 									<h4 th:text="|${estate.agent.name} ${estate.agent.surname}|"></h4>
 									<h4 th:text="${estate.agent.email}"></h4>
-									<h4 th:text="|+39 ${estate.agent.phone}|"></h4>
+									<h4 th:text="|+39/${estate.agent.phone}|"></h4>
 							</div>
 							</div>
 						</div>

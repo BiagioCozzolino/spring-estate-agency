@@ -42,6 +42,7 @@ public class HomeController {
 		List<Agent> agentList = (List<Agent>) agentRepo.findAll();
 
 		long daysDiff = 8;
+		long daysDiffApp=15;
 		List<Estate> estateList = (List<Estate>) estateRepo.findAll();
 		List<Estate> estateListForAdminHome = new ArrayList<Estate>();
 
@@ -53,28 +54,24 @@ public class HomeController {
 		for (Estate e : estateList) {
 			daysDiff = Duration.between(e.getInsertionDate().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
 
-			if (daysDiff <= 7) {
-
 				if (daysDiff <= 7) {
 
 					estateListForAdminHome.add(e);
 				}
 			}
 			for (Appointment a : appList) {
-				daysDiff = Duration.between(LocalDate.now().atStartOfDay(), a.getDate().atStartOfDay()).toDays();
+				daysDiffApp = Duration.between(LocalDate.now().atStartOfDay(), a.getDate().atStartOfDay()).toDays();
 
-				if (daysDiff <= 14 && a.getStatus().equalsIgnoreCase("Da effettuare")) {
+				if (daysDiffApp <= 14 && a.getStatus().equalsIgnoreCase("Da effettuare")) {
 					appListForAdminHome.add(a);
 				}
 			}
 
 			model.addAttribute("topTen", estateListTopTen);
-
 			model.addAttribute("appList", appListForAdminHome);
 			model.addAttribute("estateList", estateListForAdminHome);
 			model.addAttribute("agentList", agentList);
-		}
-		return "/admin/adminHome";
+			return "/admin/adminHome";
 
 	}
 

@@ -1,6 +1,7 @@
 package team1.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -149,5 +150,11 @@ public class Appointment {
 		}
 
 		return res;
+	}
+	
+	public String getFormattedDate() {
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		return date.format(dateFormatter);
 	}
 }

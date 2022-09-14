@@ -43,7 +43,7 @@ public class AppointmentController {
 
 	@GetMapping("appointmentListAdmin")
 	public String appointmentListAdmin(Model model) {
-		List<Appointment> appointmentListAdmin = (List<Appointment>) appRepo.findAll();
+		List<Appointment> appointmentListAdmin = (List<Appointment>) appRepo.findAllByOrderByDateAscHourAsc();
 		model.addAttribute("appointmentListAdmin", appointmentListAdmin);
 		return "/admin/adminAppointmentList";
 	}
@@ -95,7 +95,7 @@ public class AppointmentController {
 			ra.addFlashAttribute(
 					"successMessage", 
 					"Appuntamento prenotato in data " + 
-					formAppointment.getDate() + 
+					formAppointment.getFormattedDate() + 
 					" alle ore " +
 					formAppointment.getHour()+
 					":00");
