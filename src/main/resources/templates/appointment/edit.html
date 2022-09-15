@@ -8,18 +8,22 @@
   <body>
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
 
-    <div class="container">
+    
    
       <h1 class="text-center my-4">Benvenuto nell'area appuntamenti</h1>
+      
+
       <form
         id="form-appointment"
         th:object="${appointment}"
         th:action="@{/appointment/edit}"
         method="POST"
       >
+            <div class="container">
+      <div class="row">
         <input type="hidden" th:field="*{id}" />
 
-        <div class="form-floating mb-3 mt-3 has-validation">
+        <div class="form-floating mb-3 mt-3 has-validation col-4">
           <h2 class="text-center">
             Stai prenotando un appuntamento per l'immobile:
           </h2>
@@ -38,7 +42,6 @@
           <select th:field="*{estate}" id="estate" style="visibility: hidden">
             <option th:value="${estate.id}"></option>
           </select>
-        </div>
         <div class="form-floating mb-3 mt-3 has-validation">
           <h3 class="text-center">L'agente che ti accompagnerà :</h3>
           <div class="card text-center">
@@ -77,6 +80,9 @@
             <option th:value="${estate.agent.id}"></option>
           </select>
         </div>
+        </div>
+        <!-- form prenotazione -->
+        <div class="col-5 ms-5 ps-5 mt-4 pt-4">
         <h2>Inserisci i tuoi dati</h2>
         <div class="form-floating mb-3 mt-3 has-validation">
           <input
@@ -204,8 +210,10 @@
           <button type="submit" class="btn btn-primary m-3" onclick="return confirm('Vuoi prenotare questo appuntamento?')">Conferma appuntamento</button>
           <a class="btn btn-danger m-3"  href="/estate">Torna Indietro</a>
         </div>
+        </div>
       </form>
     </div>
+      </div>
     <div th:replace="fragment/fragment :: footer"></div>
   </body>
 </html>

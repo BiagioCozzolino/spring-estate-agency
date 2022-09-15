@@ -38,7 +38,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="e : ${appointmentListAdmin}">
-							<td colspan="2" class="table-info" th:text="|${e.date} ${e.hour}:00|"></td>
+							<td colspan="2" class="table-info" th:text="|${e.getFormattedDate()} ${e.hour}:00|"></td>
 							<td colspan="2" class="table-info" th:text="|${e.agent.name} ${e.agent.surname}|"></td>
 							<td class="table-info" th:text="|${e.name} ${e.surname}|"></td>
 							<td class="table-info" th:text="${e.email}"></td>

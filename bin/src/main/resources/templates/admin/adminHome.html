@@ -74,7 +74,7 @@
     <tr th:each="a : ${appList} "> 
       <th class="table-info" scope="row" th:text="|${a.agent.name} ${a.agent.surname}|"></th>
       <th class="table-info" scope="row" th:text="|${a.name} ${a.surname}|"></th>
-      <th class="table-info" scope="row"  th:text="|${a.date} ${a.hour}:00|" ></th>
+      <th class="table-info" scope="row"  th:text="|${a.getFormattedDate()} ${a.hour}:00|" ></th>
       <th class="table-info" scope="row" th:text="${a.estate.address}"></th>
       <td class="table-info" scope="row" th:text="|${a.estate.zipCode} ${a.estate.city} ${a.estate.province}|"></td>
     </tr>
