@@ -147,7 +147,7 @@
 	               </div>                  
                </div>
             </div>
-          <div class="d-flex justify-content-end" > <button href="#" type="button" class=" btn btn-info" id="attivaFiltri">Filtri Avanzati</button> </div>
+          <div class="d-flex justify-content-end" > <button href="#" type="button" class=" btn btn-primary" id="attivaFiltri">Filtri Avanzati</button> </div>
 
             <div id="filtriAvanzati" style="display: none;">
 	            <div class="row d-flex my-4">
@@ -211,7 +211,7 @@
     </div>
     <div class="container mb-2">
       <div th:unless="${#lists.isEmpty(estateList)}">
-        <h2 class="text-center mt-3 mb-4">Ecco La Lista degli Immobili</h2>
+        <h2 class="text-center mt-3 mb-5">La lista dei nostri immobili</h2>
         <div class="row" th:each="e : ${estateList}">
           <div class="col-3">
             <div
@@ -243,30 +243,6 @@
                   />
                 </div>
               </div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
           <div class="col-8">
@@ -307,7 +283,7 @@
                   ></p>
                </div>
                 <div class="col-1">
-                   <a th:href="@{|/estate/${e.id}|}" class="mb-2 mt-2 btn btn-info">
+                   <a th:href="@{|/estate/${e.id}|}" class="mb-2 mt-2 btn btn-primary">
                       Dettagli
                    </a>
                 </div>
