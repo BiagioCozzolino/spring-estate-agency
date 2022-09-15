@@ -59,7 +59,7 @@
 						<li class="list-group-item" th:text="|Classe energetica: ${estate.energyClass}|"></li>
 						<li class="list-group-item" th:text="|Numero vani: ${estate.numSpaces}|"></li>
 						<li class="list-group-item" th:text="|Numero bagni: ${estate.numBathrooms}|"></li>
-						<li class="list-group-item" th:if=" ${estate.numBalconies}>0" th:text="|Numero balconi: ${estate.numBalconies}|" ></li>
+						<li class="list-group-item" th:if=" ${estate.numBalconies>0}" th:text="|Numero balconi: ${estate.numBalconies}|" ></li>
 						<li class="list-group-item" th:if="${estate.hasCarSpot==true}">L'immobile è munito di posto auto</li>
 						<li class="list-group-item" th:if="${estate.hasGarden==true}">L'immobile presenta spazio esterno con giardino</li>
 					</ul>
@@ -93,8 +93,10 @@
 							</div>
 						</div>
 					</div>
-					<h3 class="mt-5">Vuoi avere più dettagli di questo immobile o vederlo da vicino?</h3>
-					<a class="btn btn-success mb-3" th:href="@{|/appointment/edit/${estate.id}|}">Prenota un appuntamento</a>
+					<div th:if="${estate.getStatusValue(estate.getStatus())==4 || estate.getStatusValue(estate.getStatus())==3}">
+						<h3 class="mt-5">Vuoi avere più dettagli di questo immobile o vederlo da vicino?</h3>
+						<a class="btn btn-success mb-3" th:href="@{|/appointment/edit/${estate.id}|}">Prenota un appuntamento</a>
+					</div>	
 				</div>
 			</div>
 
