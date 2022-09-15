@@ -93,6 +93,15 @@
 							</div>
 						</div>
 					</div>
+					<div class="text-center">
+						<h1 
+	            			th:if="${estate.getStatusValue(estate.getStatus())==2 || estate.getStatusValue(estate.getStatus())==1}" 
+	            			class="badge rounded-pill mt-5 fs-1" 
+	            			th:text="${estate.getStatusValue(estate.getStatus())==2 ? 'Immobile venduto': 'Immobile affittato'}"
+	            			th:classappend="${estate.getStatusValue(estate.getStatus())==2 ? 'bg-success' : 'bg-warning'}"
+	            		>
+	            		</h1>
+					</div>
 					<div th:if="${estate.getStatusValue(estate.getStatus())==4 || estate.getStatusValue(estate.getStatus())==3}">
 						<h3 class="mt-5">Vuoi avere più dettagli di questo immobile o vederlo da vicino?</h3>
 						<a class="btn btn-success mb-3" th:href="@{|/appointment/edit/${estate.id}|}">Prenota un appuntamento</a>
