@@ -8,44 +8,82 @@
   <body>
     <th:block th:replace="fragment/fragment :: navbar"></th:block>
 
-    <div class="container">
+    
+   
       <h1 class="text-center my-4">Benvenuto nell'area appuntamenti</h1>
+      
+
       <form
         id="form-appointment"
         th:object="${appointment}"
-        th:action="@{|/appointment/edit/${id}|}"
+        th:action="@{/appointment/edit}"
         method="POST"
       >
+            <div class="container">
+      <div class="row">
         <input type="hidden" th:field="*{id}" />
-         <div class="form-floating mb-3 mt-3 has-validation">
-        <h2 class="text-center">Stai prenotando un appuntamento per l'immobile:</h2>
-        <h3 class="mt-3 text-center" th:text="${estate.adTitle}"></h3>
-        <h3 class="mt-3 text-center" th:text="|Indirizzo: ${estate.address} N°${estate.houseNumber} Piano ${estate.floorNumber} Interno N°${estate.interior} "|></h3>
-		<h3 class="mt-3 text-center" th:text="|Città: ${estate.city} (${estate.province}) CAP ${estate.zipCode}"|></h3>
 
-		<select th:field="*{estate}" id="estate" style="visibility: hidden;">
-  			<option th:value="${estate.id}"></option>
-		</select>
-		</div>
-		 <div class="form-floating mb-3 mt-3 has-validation ">
-		 <h3 class="text-center">L'agente che ti accompagnerà :</h3>
-		 <div class="card text-center">
-		<img th:if="${estate.agent.agentImage.size() == 0}" src="/img/agentDefault.jpg" style="max-width: 300px; max-height:600px;" class="card-img-top rounded-3 p-1 bg-dark" alt="Admin">
-               <div th:each="img : ${estate.agent.agentImage} ">
-               
-  			<img th:unless="${estate.agent.agentImage.size() == 0}" th:src="@{|/image/${img.id}/content|}" style="max-width: 300px; max-height:600px;" alt="Admin" class="rounded-3 p-1 bg-dark" >
-    	</div>
-  <div class="card-body">
-    <h5 class="card-title" th:text="|${estate.agent.name} ${estate.agent.surname}|"></h5>
-    <h6 class="card-title" th:text="|E-mail: ${estate.agent.email}|"></h6>
-    <h6 class="card-title" th:text="|Numero di Cellulare: ${estate.agent.phone}|"></h6>
-  </div>
-</div>
-		 <select th:field="*{agent}" id="agent" style="visibility: hidden;">
-  			<option th:value="${estate.agent.id}"></option>
-		</select>
-		 </div>
-		<h2> Inserisci i tuoi dati</h2>
+        <div class="form-floating mb-3 mt-3 has-validation col-4">
+          <h2 class="text-center">
+            Stai prenotando un appuntamento per l'immobile:
+          </h2>
+          <h3 class="mt-3 text-center" th:text="${estate.adTitle}"></h3>
+          <h3
+            class="mt-3 text-center"
+            th:text="|Indirizzo: ${estate.address} N°${estate.houseNumber} Piano ${estate.floorNumber} Interno N°${estate.interior} "
+            |
+          ></h3>
+          <h3
+            class="mt-3 text-center"
+            th:text="|Città: ${estate.city} (${estate.province}) CAP ${estate.zipCode}"
+            |
+          ></h3>
+
+          <select th:field="*{estate}" id="estate" style="visibility: hidden">
+            <option th:value="${estate.id}"></option>
+          </select>
+        <div class="form-floating mb-3 mt-3 has-validation">
+          <h3 class="text-center">L'agente che ti accompagnerà :</h3>
+          <div class="card text-center">
+            <img
+              th:if="${estate.agent.agentImage.size() == 0}"
+              src="/img/agentDefault.jpg"
+              style="max-width: 300px; max-height: 600px"
+              class="rounded-3 p-1 bg-dark mx-auto"
+              alt="Admin"
+            />
+            <div th:each="img : ${estate.agent.agentImage} ">
+              <img
+                th:unless="${estate.agent.agentImage.size() == 0}"
+                th:src="@{|/image/${img.id}/content|}"
+                style="max-width: 300px; max-height: 600px"
+                alt="Admin"
+                class="rounded-3 p-1 bg-dark"
+              />
+            </div>
+            <div class="card-body">
+              <h5
+                class="card-title"
+                th:text="|${estate.agent.name} ${estate.agent.surname}|"
+              ></h5>
+              <h6
+                class="card-title"
+                th:text="|E-mail: ${estate.agent.email}|"
+              ></h6>
+              <h6
+                class="card-title"
+                th:text="|Numero di Cellulare: ${estate.agent.phone}|"
+              ></h6>
+            </div>
+          </div>
+          <select th:field="*{agent}" id="agent" style="visibility: hidden">
+            <option th:value="${estate.agent.id}"></option>
+          </select>
+        </div>
+        </div>
+        <!-- form prenotazione -->
+        <div class="col-5 ms-5 ps-5 mt-4 pt-4">
+        <h2>Inserisci i tuoi dati</h2>
         <div class="form-floating mb-3 mt-3 has-validation">
           <input
             type="text"
@@ -79,7 +117,6 @@
             <ul>
               <li
                 th:each="err : ${#fields.errors('surname')}"
-
                 th:text="${err}"
               ></li>
             </ul>
@@ -105,7 +142,6 @@
           </div>
         </div>
 
-
         <div class="form-floating mt-3 has-validation">
           <input
             type="number"
@@ -116,13 +152,9 @@
             placeholder="phone"
           />
           <label for="floatingPassword"> Numero di telefono</label>
-          <div
-            th:if="${#fields.hasErrors('phone')}"
-            class="invalid-feedback"
-          >
+          <div th:if="${#fields.hasErrors('phone')}" class="invalid-feedback">
             <ul>
               <li
-
                 th:each="err : ${#fields.errors('phone')}"
                 th:text="${err}"
               ></li>
@@ -130,24 +162,19 @@
           </div>
         </div>
 
-        <hr>
-        <h2> Inserisci data e orario dell'appuntamento:</h2>
-        <h4>Inserire solo l'ora della prenotazione senza i minuti</h4>
+        <hr />
+        <h2>Inserisci data e orario dell'appuntamento:</h2>
         <div class="form-floating mt-3 has-validation">
           <input
-            type="datetime-local"
+            type="date"
             class="form-control"
             th:field="*{date}"
             id="date"
             th:errorClass="is-invalid"
             placeholder="date"
-
           />
           <label for="floatingPassword">Data Appuntamento</label>
-          <div
-            th:if="${#fields.hasErrors('date')}"
-            class="invalid-feedback"
-          >
+          <div th:if="${#fields.hasErrors('date')}" class="invalid-feedback">
             <ul>
               <li
                 th:each="err : ${#fields.errors('date')}"
@@ -156,13 +183,37 @@
             </ul>
           </div>
         </div>
-        <div>
-          <button type="submit" class="btn btn-primary mt-3">Save</button>
-          <a class="btn btn-primary mt-3" href="/agent">Cancel</a>
+        <div class="form-floating mt-3 has-validation">
+        <select  type="hour" id="hour" th:errorClass="is-invalid" class="form-control" placeholder="hour" aria-label="Default select example" th:field="*{hour}">
+  <option value="" selected>Seleziona l'orario della prenotazione</option>
+  <option value="8">08.00</option>
+  <option value="9">09.00</option>
+  <option value="10">10.00</option>
+  <option value="11">11.00</option>
+  <option value="12">12.00</option>
+  <option value="13">13.00</option>
+  <option value="15">15.00</option>
+  <option value="16">16.00</option>
+  <option value="17">17.00</option>
+  <option value="18">18.00</option>
+</select>
+	<div th:if="${#fields.hasErrors('hour')}" class="invalid-feedback">
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('hour')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
         </div>
-
+        <div>
+          <button type="submit" class="btn btn-primary m-3" onclick="return confirm('Vuoi prenotare questo appuntamento?')">Conferma appuntamento</button>
+          <a class="btn btn-danger m-3"  href="/estate">Torna Indietro</a>
+        </div>
+        </div>
       </form>
     </div>
+      </div>
     <div th:replace="fragment/fragment :: footer"></div>
   </body>
 </html>

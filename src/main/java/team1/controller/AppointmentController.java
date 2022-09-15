@@ -1,5 +1,6 @@
 package team1.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import team1.model.Agent;
 import team1.model.Appointment;
 import team1.model.Estate;
 import team1.repository.AppointmentRepository;
@@ -37,6 +41,13 @@ public class AppointmentController {
 		return "/appointment/successPage";
 	}
 
+	@GetMapping("appointmentListAdmin")
+	public String appointmentListAdmin(Model model) {
+		List<Appointment> appointmentListAdmin = (List<Appointment>) appRepo.findAllByOrderByDateAscHourAsc();
+		model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+		return "/admin/adminAppointmentList";
+	}
+
 	@GetMapping("/edit/{id}")
 	public String update(@PathVariable("id") Integer estateId, Model model) {
 		Optional<Estate> result = estateRepo.findById(estateId);
@@ -50,30 +61,63 @@ public class AppointmentController {
 
 	}
 
-	@PostMapping("/edit/{id}")
-	public String save(@PathVariable("id") Integer estateId, Model model,
-			@Valid @ModelAttribute("appointment") Appointment formAppointment, BindingResult br) {
-		Optional<Estate> result = estateRepo.findById(estateId);
-		boolean hasErrors = br.hasErrors();
+	@PostMapping("/edit")
+	public String save(Model model, @Valid @ModelAttribute("appointment") Appointment formAppointment,
+			BindingResult br, RedirectAttributes ra) {
+
+		Agent agent = formAppointment.getAgent();
+		List<Appointment> appList = agent.getAppointment();
+
 		boolean validDate = true;
-		if (formAppointment.getId() != null) {
-			Appointment appointmentOld = appRepo.findById(formAppointment.getId()).get();
-			if (appointmentOld.getDate().equals(formAppointment.getDate()))
-				validDate = false;
-		}
-		if (validDate) {
+		boolean hasErrors = br.hasErrors();
 
-			br.addError(new FieldError("appointment", "name", "L'orario o data selezionato è già presente"));
+		
+		for(Appointment a : appList)
+		{
+			if((a.getDate().equals(formAppointment.getDate()) && (a.getHour()== formAppointment.getHour())))
+			{
+				validDate=false;
+			}
+		}
+
+		if (!validDate) {
+			br.addError(new FieldError("appointment", "hour", "L'orario selezionato per tale data è già occupato."));
 			hasErrors = true;
-
 		}
-		if (hasErrors) {
-			return "redirect:/appointment/edit/" + result.get().getId();
+		if (hasErrors)
+
+		{
+			model.addAttribute("estate", formAppointment.getEstate());
+			model.addAttribute("appointment", formAppointment);
+			return "appointment/edit";
 		} else {
-
+			formAppointment.setStatus("Da effettuare");
+			ra.addFlashAttribute(
+					"successMessage", 
+					"Appuntamento prenotato in data " + 
+					formAppointment.getFormattedDate() + 
+					" alle ore " +
+					formAppointment.getHour()+
+					":00");
 			appRepo.save(formAppointment);
-			return "redirect:/appointment/success";
-
+			return "redirect:/estate/"+ formAppointment.getEstate().getId();
+			
 		}
+	}
+
+	@PostMapping("/appointmentListAdmin/{id}")
+	public String appointmentPartUpdate(@PathVariable("id") Integer appointmentId,
+			@RequestParam(name = "status") String status) {
+		Optional<Appointment> result = appRepo.findById(appointmentId);
+
+		if (result.isPresent()) {
+			result.get().setStatus(status);
+		}
+		try {
+			appRepo.save(result.get());
+		} catch (Exception e) {
+			return "/appointmentListAdmin";
+		}
+		return "redirect:/appointment/appointmentListAdmin";
 	}
 }

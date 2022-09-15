@@ -1,6 +1,7 @@
 package team1.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +21,12 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "Questo campo è obbligatorio")
+	private LocalDate date;
 
-	private LocalDateTime date;
+	@NotNull(message = "Questo campo è obbligatorio")
+	private Integer hour;
 
 	@NotEmpty(message = "Questo campo è obbligatorio")
 	@Column(nullable = false)
@@ -36,15 +40,17 @@ public class Appointment {
 	@Column(nullable = false)
 	private String email;
 
-	@NotNull(message = "Questo campo è obbligatorio")
+	@NotEmpty(message = "Questo campo è obbligatorio")
 	@Column(nullable = false)
-	private Integer phone;
+	private String phone;
 
 	@ManyToOne
 	private Agent agent;
 
 	@ManyToOne
 	private Estate estate;
+
+	private String status;
 
 	// Getter and Setters
 
@@ -56,12 +62,20 @@ public class Appointment {
 		this.id = id;
 	}
 
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	public Integer getHour() {
+		return hour;
+	}
+
+	public void setHour(Integer hour) {
+		this.hour = hour;
 	}
 
 	public String getName() {
@@ -88,11 +102,11 @@ public class Appointment {
 		this.email = email;
 	}
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -112,4 +126,35 @@ public class Appointment {
 		this.estate = estate;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getStatusValue(String status) {
+		Integer res = 0;
+
+		switch (status) {
+		case "Effettuato":
+			res = 2;
+			break;
+		case "Annullato":
+			res = 1;
+			break;
+		case "Da effettuare":
+			res = 0;
+			break;
+		}
+
+		return res;
+	}
+	
+	public String getFormattedDate() {
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		return date.format(dateFormatter);
+	}
 }

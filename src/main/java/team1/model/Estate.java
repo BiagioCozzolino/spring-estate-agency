@@ -375,4 +375,12 @@ public class Estate {
 
 		return df.format(price);
 	}
+	
+	public String getSubstringedDescription()
+	{
+		if(description.length()>200)
+			return description.substring(0, 199)+ "...";
+		else
+			return description;
+	}
 }

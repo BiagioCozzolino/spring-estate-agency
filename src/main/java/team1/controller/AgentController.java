@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import team1.model.Agent;
 import team1.repository.AgentRepository;
+import team1.repository.RoleRepository;
 
 @Controller
 @RequestMapping("/agent")
@@ -27,6 +27,8 @@ public class AgentController {
 
 	@Autowired
 	private AgentRepository agentRepo;
+	@Autowired
+	private RoleRepository roleRepo;
 
 	@GetMapping
 	public String agentList(Model model) {
@@ -51,29 +53,20 @@ public class AgentController {
 	@GetMapping("/edit")
 	public String agentForm(Model model) {
 		model.addAttribute("agent", new Agent());
+		model.addAttribute("roles", roleRepo.findAll());
 		return "admin/agentEdit";
 	}
 
 	@PostMapping("/edit")
 	public String save(@Valid @ModelAttribute("agent") Agent formAgent, BindingResult br) {
+
 		boolean hasErrors = br.hasErrors();
-		boolean validName = true;
-		if (formAgent.getId() != null) {
-			Agent agentOld = agentRepo.findById(formAgent.getId()).get();
-			if (agentOld.getName().equalsIgnoreCase(formAgent.getName()))
-				validName = false;
-		}
-		if (validName && agentRepo.countByName(formAgent.getName()) > 0) {
 
-			br.addError(new FieldError("agent", "name", "Hai già un agente con questo nome"));
-			hasErrors = true;
-
-		}
 		if (hasErrors)
 			return "/admin/agentEdit";
 
 		else {
-
+			formAgent.setPassword("{noop}" + formAgent.getPassword());
 			agentRepo.save(formAgent);
 			return "redirect:/agent";
 
@@ -85,6 +78,7 @@ public class AgentController {
 		Optional<Agent> result = agentRepo.findById(agentId);
 		if (result.isPresent()) {
 			model.addAttribute("agent", result.get());
+			model.addAttribute("roles", roleRepo.findAll());
 			agentRepo.save(result.get());
 			return "admin/agentEdit";
 		} else {
@@ -92,4 +86,6 @@ public class AgentController {
 		}
 
 	}
+	
+	
 }

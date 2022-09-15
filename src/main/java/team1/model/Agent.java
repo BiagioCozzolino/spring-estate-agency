@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -41,11 +41,11 @@ public class Agent {
 	private String surname;
 
 	@NotEmpty(message = "Questo campo è obbligatorio")
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	@NotEmpty(message = "Questo campo è obbligatorio")
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String phone;
 
 	@NotEmpty(message = "Questo campo è obbligatorio")
@@ -62,10 +62,11 @@ public class Agent {
 	private LocalDate hiringDate;
 
 	// Livello di sicurezza per autenticazione
-	@NotNull
-	@Min(2)
-	@Max(3)
+
 	private Integer securityLevel;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Role> roles;
 
 	private boolean hired = true;
 
@@ -159,6 +160,14 @@ public class Agent {
 		return hiringDate.format(dateFormatter);
 	}
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	public Integer getSecurityLevel() {
 		return securityLevel;
 	}
@@ -213,5 +222,14 @@ public class Agent {
 
 	public Integer getCountSoldAndRented() {
 		return getCountRented() + getCountSold();
+	}
+
+	public Integer getCountDoneAppointments() {
+		Integer res = 0;
+		for (Appointment a : appointment) {
+			if (a.getStatusValue(a.getStatus()) == 2)
+				res++;
+		}
+		return res;
 	}
 }
