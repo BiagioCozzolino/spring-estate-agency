@@ -59,10 +59,10 @@ public interface EstateRepository extends CrudRepository<Estate, Integer> {
 			Integer interior, String ZipCode);
 
 	// filtro per pagina di ricerca
-	public List<Estate> findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrStatusIgnoreCaseOrderByAddressAsc(
+	public List<Estate> findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrStatusIgnoreCaseOrTypeIgnoreCaseOrderByAddressAsc(
 			String address, String zipCode, String city, String province, Double priceHigher, Double priceLower,
 			String energyClass, Integer numSpaces, Integer numBathrooms, Integer numBalconies, Boolean hasCarSpot,
-			Boolean hasGarden, Integer areaHigher, Integer areaLower, String status);
+			Boolean hasGarden, Integer areaHigher, Integer areaLower, String status, String type);
 
 	// filtro top10
 	public List<Estate> findTop10ByOrderByNumViewsDesc();

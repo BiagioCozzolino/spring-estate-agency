@@ -94,7 +94,8 @@ public class HomeController {
 			@RequestParam(name = "queryHasGarden", required = false) Boolean queryHasGarden,
 			@RequestParam(name = "queryAreaHigher", required = false) Integer queryAreaHigher,
 			@RequestParam(name = "queryAreaLower", required = false) Integer queryAreaLower,
-			@RequestParam(name = "queryStatus", required = false) String queryStatus, Model model) {
+			@RequestParam(name = "queryStatus", required = false) String queryStatus,
+			@RequestParam(name = "queryType", required = false) String queryType, Model model) {
 		if (queryAddress != null && queryAddress.isEmpty()) {
 			queryAddress = null;
 		}
@@ -140,11 +141,14 @@ public class HomeController {
 		if (queryStatus != null && queryStatus.isEmpty()) {
 			queryStatus = null;
 		}
+		if (queryType != null && queryType.isEmpty()) {
+			queryType = null;
+		}
 		List<Estate> result = estateRepo
-				.findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrStatusIgnoreCaseOrderByAddressAsc(
+				.findByAddressContainingIgnoreCaseOrZipCodeOrCityContainingIgnoreCaseOrProvinceIgnoreCaseOrPriceGreaterThanEqualOrPriceLessThanEqualOrEnergyClassIgnoreCaseOrNumSpacesOrNumBathroomsOrNumBalconiesOrHasCarSpotOrHasGardenOrAreaGreaterThanEqualOrAreaLessThanEqualOrStatusIgnoreCaseOrTypeIgnoreCaseOrderByAddressAsc(
 						queryAddress, queryZipCode, queryCity, queryProvince, queryPriceHigher, queryPriceLower,
 						queryEnergyClass, queryNumSpaces, queryNumBathrooms, queryNumBalconies, queryHasCarSpot,
-						queryHasGarden, queryAreaHigher, queryAreaLower, queryStatus);
+						queryHasGarden, queryAreaHigher, queryAreaLower, queryStatus, queryType);
 
 		model.addAttribute("estateList", result);
 		return "/estate/estateList";
